@@ -1,0 +1,77 @@
+.meals-btn-container {
+    display: flex;
+    justify-content: flex-start;
+    padding: 2rem;
+    gap: 2rem;
+    width: 20vw;
+    margin: 10rem auto auto;
+}
+.edit-header {
+    width: 15%;
+}
+.editBtn {
+    display: flex;
+    justify-content: space-between;
+    width: 8vw;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 15rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    width: 100%;
+    color: #aaaaaa;
+    font-size: 2rem;
+    font-weight: bold;
+    align-self: end;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.meals-table {
+display: flex;
+    justify-content: center;
+}
+.meals {
+    width: 50%;
+    border-radius: 10px;
+}
