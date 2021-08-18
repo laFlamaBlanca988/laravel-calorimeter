@@ -21,7 +21,7 @@ Route::get('login', [SessionsController::class, 'index'])->name('login')->middle
 Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionsController::class, 'destroy'])->name('logout')->middleware('auth');
 
-Route::get('meals', [MealsController::class, 'index']);
+Route::get('meals', [MealsController::class, 'index'])->middleware('auth');
 Route::post('meals', [MealsController::class, 'store'])->middleware('auth');
 
 

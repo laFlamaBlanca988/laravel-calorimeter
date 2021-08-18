@@ -89,6 +89,7 @@ xhr.open('GET', 'meals', true);
 xhr.onload = function () {
     if(this.status == 200) {
         const data = JSON.parse(this.responseText);
+        console.log(data);
         modal.style.display = "none";
         let output = ``;
 

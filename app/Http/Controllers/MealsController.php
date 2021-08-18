@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meal;
+use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,11 @@ class MealsController extends Controller
 
     public function index(): JsonResponse
     {
-        $meals = Meal::all();
-        return response()->json($meals);
+        $meals = new Meal;
+        $userID = Auth::user()->id;
+        $latestMeal = $meals->getLatestMeal($userID);
+
+        return response()->json($latestMeal);
     }
 
     public function create(Request $request)
@@ -51,6 +55,7 @@ class MealsController extends Controller
                 'message' => 'Meal added successfully!',
             ]);
         }
+
     }
 
     public function edit($id): \Illuminate\Http\JsonResponse

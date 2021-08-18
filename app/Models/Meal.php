@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Meal extends Model
 {
     use HasFactory;
+
     protected $table = 'meals';
 
     protected $primaryKey = 'id';
@@ -38,12 +39,27 @@ class Meal extends Model
 
     public function getMealsForUser($userID): \Illuminate\Support\Collection
     {
-//       return ( DB::table('meals')->select('*')->where('userID','!=',$userID)->get());
-       return DB::table('meals')
+       return ( DB::table('meals')
+           ->select('*')
+           ->where('userID','=', $userID)
+           ->get());
+
+    }
+
+    public function filterMealsByDateAndTime($userID){
+        //       return DB::table('meals')
+//            ->select('*')
+//            ->where('userID', '=', $userID)
+//            ->orderByDesc('id')
+//            ->limit(2)
+//            ->get();
+    }
+
+    public function getLatestMeal($userID): \Illuminate\Support\Collection
+    {
+        return DB::table('meals')
             ->select('*')
             ->where('userID', '=', $userID)
-            ->orderByDesc('id')
-            ->limit(2)
             ->get();
     }
 

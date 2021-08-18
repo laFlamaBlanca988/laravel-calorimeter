@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meal;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
@@ -21,6 +22,5 @@ class WelcomeController extends Controller
 
     public function show($id): string
     {
-        return "hello";
     }
 }
