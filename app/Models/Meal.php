@@ -46,21 +46,18 @@ class Meal extends Model
 
     }
 
-    public function filterMealsByDateAndTime($userID){
-        //       return DB::table('meals')
-//            ->select('*')
-//            ->where('userID', '=', $userID)
-//            ->orderByDesc('id')
-//            ->limit(2)
-//            ->get();
-    }
-
     public function getLatestMeal($userID): \Illuminate\Support\Collection
     {
         return DB::table('meals')
             ->select('*')
             ->where('userID', '=', $userID)
+            ->orderBy('id', 'desc')
+            ->limit(1)
             ->get();
     }
 
+    public function deleteMeal($mealID): int
+    {
+      return DB::table('meals')->where('id', '=', $mealID)->delete();
+    }
 }

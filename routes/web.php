@@ -24,6 +24,6 @@ Route::post('logout', [SessionsController::class, 'destroy'])->name('logout')->m
 Route::get('meals', [MealsController::class, 'index'])->middleware('auth');
 Route::post('meals', [MealsController::class, 'store'])->middleware('auth');
 
-
+//Route::delete('welcome', [MealsController::class, 'destroy'])->middleware('auth');
 
 

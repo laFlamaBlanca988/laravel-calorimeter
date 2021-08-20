@@ -50,12 +50,12 @@ class MealsController extends Controller
             $meal->userID = Auth::user()->id;
 
             $meal->storeMeal($meal->title, $meal->cal_num, $meal->date, $meal->time, $meal->userID);
+
             return response()->json([
                 'status' => 200,
                 'message' => 'Meal added successfully!',
             ]);
         }
-
     }
 
     public function edit($id): \Illuminate\Http\JsonResponse
@@ -68,8 +68,11 @@ class MealsController extends Controller
         //
     }
 
-    public function destroy($id): \Illuminate\Http\JsonResponse
+    public function destroy(Meal $meal): JsonResponse
     {
+        $meals = new Meal;
+        $deletedMeal = $meals->deleteMeal($meal);
 
+        return response()->json($deletedMeal);
     }
 }
