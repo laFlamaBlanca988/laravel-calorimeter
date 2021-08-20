@@ -49,13 +49,10 @@
                         <button class="btn btn-danger btn-sm" type="submit"
                         >Edit meal
                         </button>
-                        <button data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" type="submit"
-                        >Delete
-                        </button>
+                        <input data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete" type="submit">
                     </td>
                 </tr>
             @endforeach
-
             </tbody>
         </table>
     </div>

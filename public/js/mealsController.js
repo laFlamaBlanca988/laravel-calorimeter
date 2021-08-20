@@ -1,19 +1,15 @@
 const deleteButtons = document.getElementsByClassName('deleteBtn');
-for (let i = 0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener('click', function (e) {
-        console.log(e.target.dataset.id)
-    })
-}
-
-// ADD MEAL MODAL
 const modal = document.getElementById("addMealModal");
 const btn = document.querySelector(".myBtn");
 const span = document.getElementsByClassName("close")[0];
+const addMealBtn = document.querySelector('.addMealBtn');
+let buttonID;
 
-btn.onclick = function () {
+// ADD MEAL MODAL
+if(btn) btn.onclick = function () {
     modal.style.display = "block";
 }
-span.onclick = function () {
+if(span) span.onclick = function () {
     modal.style.display = "none";
 }
 window.onclick = function (event) {
@@ -53,7 +49,7 @@ function loadMeals(e) {
     xhr.send();
 }
 // AJAX ADD MEAL
-document.querySelector('.addMealBtn').addEventListener('click', function (e) {
+if(addMealBtn) addMealBtn.addEventListener('click', function (e) {
     e.preventDefault();
     const title = document.querySelector('.title').value;
     const cal_num = document.querySelector('.cal_num').value;
@@ -94,6 +90,79 @@ document.querySelector('.addMealBtn').addEventListener('click', function (e) {
     xhr.send(JSON.stringify(data));
 
 });
+ for (let i = 0; i < deleteButtons.length; i++) {
+     deleteButtons[i].addEventListener('click', function (e) {
+         //e.preventDefault();
+         buttonID =this.dataset.id;
+         deleteMeals( buttonID );
+         // let xhr = new XMLHttpRequest();
+         // xhr.open('POST', '/meal/delete/'+buttonID, true);
+         // xhr.setRequestHeader('Content-Type', 'application/json');
+         // xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+         const data = buttonID;
+
+         // xhr.onload = function() {
+         //        console.log(data)
+         // }
+         // xhr.send(JSON.stringify(data));
+     })
+ }
+
+function deleteMeals( mealsID ) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/meal/delete');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    xhr.send('{"id":"'+mealsID+'"}');
+    xhr.onreadystatechange = function(){
+        if ( xhr.readyState === 4 ) {
+            if ( xhr.status === 200 ) {
+                var response = JSON.parse( xhr.responseText );
+                console.log( response );
+            } else {
+                console.log('jel radi ovo?');
+            }
+        }
+        else
+            console.log(xhr.readyState);
+
+    }
+
+
+    console.dir(xhr);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // for (let i = 0; i < deleteButtons.length; i++) {
+    //     deleteButtons[i].addEventListener('click', function () {
+    //        const data = {'buttonID': this.dataset.id}
+    //         fetch('meals', {
+    //             method: 'POST',
+    //             body: JSON.stringify(data),
+    //             headers: {'Content-Type': 'application-json',
+    //                 'X-CSRF-TOKEN': document.getElementsByName('csrf-token')[0].getAttribute('content')
+    //             }
+    //         }).then(res => {
+    //             if(res.ok) {
+    //                 console.log('Success')
+    //             } else {
+    //                 console.log('Not successful')
+    //             }
+    //         }).then(data => console.log(data))
+    //             .catch(error => console.log('error'))
+    //     })
+    // }
 
 // JQUERY AJAX ADD MEAL
 // $(document).ready(function (){

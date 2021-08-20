@@ -21,6 +21,11 @@ class Meal extends Model
         'time',
     ];
 
+
+    /**
+     * @var mixed
+     */
+
     public function storeMeal($title, $cal_num, $date, $time, $userID)
     {
         DB::table('meals')->insert([
