@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="meals-btn-container">
-        <button class="myBtn btn btn-danger">Add meal</button>
+        <button class="addMealOpenModal btn btn-danger">Add meal</button>
         <button class="myBtn btn btn-danger">Filter meals</button>
     </div>
     <div class="w-1/2 m-auto" id="success_message"></div>
-    <div id="addMealModal" class="modal">
+    <div id="mealModal" class="modal">
         <div class="modal-content">
             <form id="addNewMealForm">
                 <span class="close">&times;</span>
@@ -39,17 +39,17 @@
             </thead>
             <tbody>
             @foreach ($meals as $key => $meal)
-                <tr>
-                    <th scope="row">{{$key + 1}}</th>
-                    <td> {{$meal->title}} </td>
-                    <td> {{$meal->cal_num }}</td>
-                    <td> {{$meal->date}} </td>
-                    <td> {{$meal->time}} </td>
-                    <td class="editBtn">
-                        <button class="btn btn-danger btn-sm" type="submit"
+                <tr id="meal_{{$meal->id}}">
+                    <td class="item-id">{{$key + 1}}</td>
+                    <td class="item-title">{{ $meal->title }}</td>
+                    <td>{{ $meal->cal_num }}</td>
+                    <td>{{ $meal->date }}</td>
+                    <td>{{ $meal->time }}</td>
+                    <td class="editButtons">
+                        <button data-id="{{$meal->id}}" class="editBtn btn btn-danger btn-sm" type="submit"
                         >Edit meal
                         </button>
-                        <button data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete" type="submit">Delete</button>
+                        <button data-row = {{$key}} data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete" type="submit">Delete</button>
                     </td>
                 </tr>
             @endforeach

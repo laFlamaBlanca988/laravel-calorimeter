@@ -1,6 +1,7 @@
 const deleteButtons = document.getElementsByClassName('deleteBtn');
-const modal = document.getElementById("addMealModal");
-const btn = document.querySelector(".myBtn");
+const editButtons = document.getElementsByClassName('editBtn');
+const modal = document.getElementById("mealModal");
+const addBtn = document.querySelector(".addMealOpenModal");
 const span = document.getElementsByClassName("close")[0];
 const addMealBtn = document.querySelector('.addMealBtn');
 const table = document.querySelector('.meals');
@@ -8,29 +9,40 @@ const table = document.querySelector('.meals');
 let buttonID;
 
 // ADD MEAL MODAL
-if(btn) btn.onclick = function () {
-    modal.style.display = "block";
+if(addBtn) {
+    addBtn.onclick = function () {
+        modal.style.display = "block";
+    }
 }
-if(span) span.onclick = function () {
-    modal.style.display = "none";
+
+if(span) {
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
 }
-window.onclick = function (event) {
+
+window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 };
 
+// EDIT BUTTON LISTENER
+for (let i = 0; i < editButtons.length; i++) {
+    editButtons[i].addEventListener('click', function () {
+        //buttonID = this.dataset.id;
+        modal.style.display = "block";
+        //y.title.value = x.closest('tr').querySelector('.item-title').innerText
+    });
+}
+
 // DELETE BUTTON LISTENER
 for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', function (e) {
-        buttonID =this.dataset.id;
-        deleteMeals( buttonID );
-        removeRow(deleteButtons[[i]]);
+        buttonID = this.dataset.id;
+        deleteMeal( buttonID );
+        //removeRow(deleteButtons[[i]]);
     })
-}
-
-function removeRow(el){
-    el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
 }
 
 // AJAX LOAD MEALS
@@ -52,8 +64,8 @@ function loadMeals() {
         <td> ${meal.cal_num} </td>
         <td> ${meal.date} </td>
         <td> ${meal.time} </td>
-        <td class="editBtn">
-           <button class="btn btn-danger btn-sm" type="submit"
+        <td class="editButtons">
+           <button class="editBtn btn btn-danger btn-sm" type="submit"
            >Edit meal</button>
             <button  class="deleteBtn btn btn-danger btn-sm" type="submit"
             >Delete</button>
@@ -109,7 +121,13 @@ if(addMealBtn) addMealBtn.addEventListener('click', function (e) {
 
 });
 
-function deleteMeals( mealsID ) {
+// let newRow = document.createElement("tr");
+// newRow.id = "meal_"+ID;
+// newRow.innerHTML = '<td class="item-id">'+ID+'</td><td...........';
+// table...tbody... appedChild(newRow);
+
+// AJAX DELETE
+function deleteMeal( mealsID ) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/meal/delete');
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -118,8 +136,10 @@ function deleteMeals( mealsID ) {
     xhr.onreadystatechange = function(){
         if ( xhr.readyState === 4 ) {
             if ( xhr.status === 200 ) {
-                return  xhr.responseText;
-
+                // return  xhr.responseText;
+                console.log(table.children);
+                if( document.getElementById("meal_"+mealsID) !== null )
+                    document.getElementById("meal_"+mealsID).remove();
             } else {
                 console.log('There was a problem, please try again');
             }

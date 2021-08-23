@@ -53,14 +53,15 @@ class MealsController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => 'Meal added successfully!',
+                //'id' =>
+                'message' => 'Meal added successfully!'
             ]);
         }
     }
 
-    public function edit($id): \Illuminate\Http\JsonResponse
+    public function edit($id)
     {
-
+        return 'Hello';
     }
 
     public function update(Request $request, $id)
@@ -68,12 +69,17 @@ class MealsController extends Controller
         //
     }
 
-    public function destroy(Request $request): JsonResponse
+    public function destroy(Request $request): string
     {
         $meals = new Meal;
         $mealID= $request->json()->all();
-        $meals->deleteMeal($mealID);
+        if( $meals->deleteMeal($mealID) )
+            return '{"status": "success", "message": "Meal is succesfully deleted."}';
 
-        return response()->json($mealID);
+        return '{"status": "error", "message": "Something went wrong."}';
+
+
+        //return response()->json($mealID);
+
     }
 }

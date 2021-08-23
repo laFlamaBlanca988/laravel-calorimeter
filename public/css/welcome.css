@@ -9,7 +9,7 @@
 .edit-header {
     width: 15%;
 }
-.editBtn {
+.editButtons {
     display: flex;
     justify-content: space-between;
     width: 8vw;
