@@ -4,7 +4,7 @@
         <button class="myBtn btn btn-danger">Add meal</button>
         <button class="myBtn btn btn-danger">Filter meals</button>
     </div>
-    <div id="success_message"></div>
+    <div class="w-1/2 m-auto" id="success_message"></div>
     <div id="addMealModal" class="modal">
         <div class="modal-content">
             <form id="addNewMealForm">
@@ -49,7 +49,7 @@
                         <button class="btn btn-danger btn-sm" type="submit"
                         >Edit meal
                         </button>
-                        <input data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete" type="submit">
+                        <button data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete" type="submit">Delete</button>
                     </td>
                 </tr>
             @endforeach

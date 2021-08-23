@@ -3,6 +3,8 @@ const modal = document.getElementById("addMealModal");
 const btn = document.querySelector(".myBtn");
 const span = document.getElementsByClassName("close")[0];
 const addMealBtn = document.querySelector('.addMealBtn');
+const table = document.querySelector('.meals');
+
 let buttonID;
 
 // ADD MEAL MODAL
@@ -18,9 +20,23 @@ window.onclick = function (event) {
     }
 };
 
+// DELETE BUTTON LISTENER
+for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', function (e) {
+        buttonID =this.dataset.id;
+        deleteMeals( buttonID );
+        removeRow(deleteButtons[[i]]);
+    })
+}
+
+function removeRow(el){
+    el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
+}
+
 // AJAX LOAD MEALS
-function loadMeals(e) {
+function loadMeals() {
     let tableBody = document.querySelector('tbody');
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'meals', true);
     xhr.onload = function () {
@@ -32,14 +48,14 @@ function loadMeals(e) {
             let row = document.createElement('tr');
             row.innerHTML = `
         <th scope="row">${tableBody.children.length + 1}</th>
-        <td> ${meal.title} </td>
+        <td> ${meal.title}</td>
         <td> ${meal.cal_num} </td>
         <td> ${meal.date} </td>
         <td> ${meal.time} </td>
         <td class="editBtn">
            <button class="btn btn-danger btn-sm" type="submit"
            >Edit meal</button>
-            <button  class="btn btn-danger btn-sm" type="submit"
+            <button  class="deleteBtn btn btn-danger btn-sm" type="submit"
             >Delete</button>
         </td>
     `
@@ -48,6 +64,7 @@ function loadMeals(e) {
     }
     xhr.send();
 }
+
 // AJAX ADD MEAL
 if(addMealBtn) addMealBtn.addEventListener('click', function (e) {
     e.preventDefault();
@@ -72,6 +89,7 @@ if(addMealBtn) addMealBtn.addEventListener('click', function (e) {
             document.getElementById('saveForm_errList').classList.add('alert', 'alert-danger');
             document.getElementById('saveForm_errList').textContent = `All fields are required`;
 
+
         } else {
             const res = xhr.responseText;
             const resMessage = JSON.parse(res);
@@ -90,23 +108,6 @@ if(addMealBtn) addMealBtn.addEventListener('click', function (e) {
     xhr.send(JSON.stringify(data));
 
 });
- for (let i = 0; i < deleteButtons.length; i++) {
-     deleteButtons[i].addEventListener('click', function (e) {
-         //e.preventDefault();
-         buttonID =this.dataset.id;
-         deleteMeals( buttonID );
-         // let xhr = new XMLHttpRequest();
-         // xhr.open('POST', '/meal/delete/'+buttonID, true);
-         // xhr.setRequestHeader('Content-Type', 'application/json');
-         // xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-         const data = buttonID;
-
-         // xhr.onload = function() {
-         //        console.log(data)
-         // }
-         // xhr.send(JSON.stringify(data));
-     })
- }
 
 function deleteMeals( mealsID ) {
     let xhr = new XMLHttpRequest();
@@ -117,98 +118,11 @@ function deleteMeals( mealsID ) {
     xhr.onreadystatechange = function(){
         if ( xhr.readyState === 4 ) {
             if ( xhr.status === 200 ) {
-                var response = JSON.parse( xhr.responseText );
-                console.log( response );
+                return  xhr.responseText;
+
             } else {
-                console.log('jel radi ovo?');
+                console.log('There was a problem, please try again');
             }
         }
-        else
-            console.log(xhr.readyState);
-
     }
-
-
-    console.dir(xhr);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // for (let i = 0; i < deleteButtons.length; i++) {
-    //     deleteButtons[i].addEventListener('click', function () {
-    //        const data = {'buttonID': this.dataset.id}
-    //         fetch('meals', {
-    //             method: 'POST',
-    //             body: JSON.stringify(data),
-    //             headers: {'Content-Type': 'application-json',
-    //                 'X-CSRF-TOKEN': document.getElementsByName('csrf-token')[0].getAttribute('content')
-    //             }
-    //         }).then(res => {
-    //             if(res.ok) {
-    //                 console.log('Success')
-    //             } else {
-    //                 console.log('Not successful')
-    //             }
-    //         }).then(data => console.log(data))
-    //             .catch(error => console.log('error'))
-    //     })
-    // }
-
-// JQUERY AJAX ADD MEAL
-// $(document).ready(function (){
-//
-//     $(document).on('click', '.addMealBtn', function (e) {
-//         e.preventDefault();
-//         const data = {
-//             'title': $('.title').val(),
-//             'cal_num': $('.cal_num').val(),
-//             'date': $('.date').val(),
-//             'time': $('.time').val(),
-//         }
-//         $.ajaxSetup({
-//             headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             }
-//         });
-//
-//         $.ajax({
-//             type: "POST",
-//             url: "/meals",
-//             data: data,
-//             dataType: "json",
-//             success: function (response) {
-//                 if (response.status == 400){
-//                     $('#saveForm_errList').html("");
-//                     $('#saveForm_errList').addClass('alert alert-danger');
-//                     $.each(response.errors, function (key, err_values) {
-//                         $('#saveForm_errList').append(`<li>${err_values}</li>`);
-//                     })
-//                 }
-//                 else {
-//                     $('#saveForm_errList').html("");
-//                     $('#success_message').addClass('alert alert-success')
-//                     $('#success_message').text(response.message);
-//                     loadMeals();
-//                     setTimeout(function(){
-//
-//                         let successMsg = document.querySelector("#success_message");
-//
-//                         if (successMsg) {
-//                             successMsg.style.display = "none";
-//                         }
-//                     }, 2000);
-//                 }
-//             }
-//         })
-//     })
-// })
+ }

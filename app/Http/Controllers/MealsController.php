@@ -68,10 +68,12 @@ class MealsController extends Controller
         //
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {
+        $meals = new Meal;
         $mealID= $request->json()->all();
-        //dd($mealID);
-        return $mealID;
+        $meals->deleteMeal($mealID);
+
+        return response()->json($mealID);
     }
 }
