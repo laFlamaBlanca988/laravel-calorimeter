@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Meal extends Model
@@ -28,7 +29,7 @@ class Meal extends Model
 
     public function storeMeal($title, $cal_num, $date, $time, $userID)
     {
-        DB::table('meals')->insert([
+        return DB::table('meals')->insertGetId([
             'title' => $title,
             'cal_num' => $cal_num,
             'date' => $date,
@@ -63,6 +64,9 @@ class Meal extends Model
 
     public function deleteMeal($mealID): int
     {
-      return DB::table('meals')->where('id', '=', $mealID)->delete();
+      return DB::table('meals')
+          ->where('id', '=', $mealID)
+          ->where('userID', '=', Auth::user()->id)
+          ->delete();
     }
 }

@@ -42,14 +42,14 @@
                 <tr id="meal_{{$meal->id}}">
                     <td class="item-id">{{$key + 1}}</td>
                     <td class="item-title">{{ $meal->title }}</td>
-                    <td>{{ $meal->cal_num }}</td>
-                    <td>{{ $meal->date }}</td>
-                    <td>{{ $meal->time }}</td>
+                    <td class="item-cal_num">{{ $meal->cal_num }}</td>
+                    <td class="item-date">{{ $meal->date }}</td>
+                    <td class="item-time">{{ $meal->time }}</td>
                     <td class="editButtons">
                         <button data-id="{{$meal->id}}" class="editBtn btn btn-danger btn-sm" type="submit"
                         >Edit meal
                         </button>
-                        <button data-row = {{$key}} data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete" type="submit">Delete</button>
+                        <button data-row = {{$key}} data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete">Delete</button>
                     </td>
                 </tr>
             @endforeach

@@ -31,14 +31,14 @@ class MealsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:191',
-            'cal_num' => 'required|max:191',
-            'date' => 'required|max:191',
-            'time' => 'required|max:191',
+            'cal_num' => 'required|integer',
+            'date' => 'required|date',
+            'time' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
-                'errors' => $validator->messages(),
+                'errors' => $validator->messages()
             ]);
         } else {
             $meal = new Meal;
@@ -49,12 +49,19 @@ class MealsController extends Controller
             $meal->time = $request->input('time');
             $meal->userID = Auth::user()->id;
 
-            $meal->storeMeal($meal->title, $meal->cal_num, $meal->date, $meal->time, $meal->userID);
+            $newRowID = $meal->storeMeal($meal->title, $meal->cal_num, $meal->date, $meal->time, $meal->userID);
+
+            if( $newRowID ) {
+                return response()->json([
+                    'status' => 200,
+                    'id' => $newRowID,
+                    'message' => 'Meal added successfully!'
+                ]);
+            }
 
             return response()->json([
-                'status' => 200,
-                //'id' =>
-                'message' => 'Meal added successfully!'
+                'status' => 400,
+                'message' => 'Something went wrong. Please try again later.'
             ]);
         }
     }
@@ -69,17 +76,21 @@ class MealsController extends Controller
         //
     }
 
-    public function destroy(Request $request): string
+    public function destroy(Request $request): JsonResponse
     {
         $meals = new Meal;
         $mealID= $request->json()->all();
-        if( $meals->deleteMeal($mealID) )
-            return '{"status": "success", "message": "Meal is succesfully deleted."}';
+        if( $meals->deleteMeal($mealID) ) {
+            return response()->json([
+                'status' => '200',
+                'message' => "Meal is successfully deleted."
+            ]);
 
-        return '{"status": "error", "message": "Something went wrong."}';
-
-
-        //return response()->json($mealID);
-
+        } else {
+            return response()->json([
+                'status' => '400',
+                'message' => "Something went wrong. Please try again."
+            ]);
+        }
     }
-}
+};
