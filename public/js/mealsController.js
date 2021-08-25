@@ -101,8 +101,6 @@ if (addMealBtn) {
                     timeoutMessage();
                 }
             } else {
-                title = null;
-
                 // console.log(JSON.parse(xhr.responseText))
                 document.getElementById('saveForm_errList').classList.add('alert', 'alert-danger');
                 document.getElementById('saveForm_errList').textContent = `All fields are required`;
