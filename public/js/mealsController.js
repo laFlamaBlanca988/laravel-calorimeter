@@ -48,8 +48,6 @@ for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', function (e) {
         buttonID = this.dataset.id;
         deleteMeal(buttonID);
-        console.log('Hello');
-        //removeRow(deleteButtons[[i]]);
     })
 }
 
@@ -57,11 +55,10 @@ for (let i = 0; i < deleteButtons.length; i++) {
 if (addMealBtn) {
     addMealBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        const title = document.querySelector('.title').value;
+        let title = document.querySelector('.title').value;
         const cal_num = document.querySelector('.cal_num').value;
         const date = document.querySelector('.date').value;
         const time = document.querySelector('.time').value;
-
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'meals', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -100,9 +97,12 @@ if (addMealBtn) {
                     document.getElementById('saveForm_errList').value = "";
                     document.getElementById('success_message').classList.add('alert', 'alert-success');
                     document.getElementById('success_message').textContent = response.message;
+
                     timeoutMessage();
                 }
             } else {
+                title = null;
+
                 // console.log(JSON.parse(xhr.responseText))
                 document.getElementById('saveForm_errList').classList.add('alert', 'alert-danger');
                 document.getElementById('saveForm_errList').textContent = `All fields are required`;
