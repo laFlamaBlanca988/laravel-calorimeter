@@ -5,7 +5,9 @@
         <button class="myBtn btn btn-danger">Filter meals</button>
     </div>
     <div class="w-1/2 m-auto" id="success_message"></div>
-    <div id="mealModal" class="modal">
+
+{{--    ADD MEAL MODAL--}}
+    <div id="addMealModal" class="modal">
         <div class="modal-content">
             <form id="addNewMealForm">
                 <span class="close">&times;</span>
@@ -25,6 +27,32 @@
             </form>
         </div>
     </div>
+
+{{--    EDIT MEAL MODAL--}}
+    <div id="editMealModal" class="modal">
+        <div class="modal-content">
+            {{ method_field('PUT') }}
+
+            <form id="editMealForm">
+                <span class="close">&times;</span>
+                <label for="meal">Meal</label>
+                <input type="text" name="title" id="edit_title" class="title form-control" required>
+                <label>Calories</label>
+                <input type="number" name="calories" id="edit_calories" class="cal_num form-control" required>
+                <label>Date</label>
+                <input type="date" name="date"  id="edit_date" class="date form-control" required>
+                <label>Time</label>
+                <input type="time" name="time" id="edit_time" class="time form-control" required>
+                <div class="reg--form-buttons">
+                    <button type="click" class="editMealBtn btn btn-danger">Submit</button>
+                    <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
+                </div>
+                <ul id="saveForm_errList"></ul>
+            </form>
+        </div>
+    </div>
+
+{{--    MEALS TABLE--}}
     <div class="meals-table">
         <table class="meals table table-dark">
             <thead>
@@ -46,7 +74,7 @@
                     <td class="item-date">{{ $meal->date }}</td>
                     <td class="item-time">{{ $meal->time }}</td>
                     <td class="editButtons">
-                        <button data-id="{{$meal->id}}" class="editBtn btn btn-danger btn-sm" type="submit"
+                        <button data-id="{{$meal->id}}" class="editMealOpenBtn btn btn-danger btn-sm" type="submit"
                         >Edit meal
                         </button>
                         <button data-row = {{$key}} data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete">Delete</button>

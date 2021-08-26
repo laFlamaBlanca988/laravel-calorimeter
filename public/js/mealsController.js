@@ -1,17 +1,29 @@
-const deleteButtons = document.getElementsByClassName('deleteBtn');
-const editButtons = document.getElementsByClassName('editBtn');
-const modal = document.getElementById("mealModal");
+const modal = document.querySelector(".modal");
+const editModal = document.querySelector('#editMealModal');
+
 const addBtn = document.querySelector(".addMealOpenModal");
-const span = document.getElementsByClassName("close")[0];
 const addMealBtn = document.querySelector('.addMealBtn');
+const editButtons = document.getElementsByClassName('editMealOpenBtn');
+const editMealButton = document.querySelector('.editMealBtn');
+const deleteButtons = document.getElementsByClassName('deleteBtn');
+const span = document.getElementsByClassName("close")[0];
 const table = document.querySelector('.meals');
 let tableBody = document.querySelector('tbody');
 
+let titleEdit = document.querySelector('#edit_title');
+let caloriesEdit = document.querySelector('#edit_calories');
+let dateEdit = document.querySelector('#edit_date');
+let timeEdit = document.querySelector('#edit_time');
 let buttonID;
 
-// MODAL CONTROL
+
+// ADD MEAL MODAL CONTROL
 addBtn.addEventListener('click', function () {
     modal.style.display = 'block';
+    document.querySelector('.title').value = '';
+    document.querySelector('.cal_num').value = '';
+    document.querySelector('.date').value = '';
+    document.querySelector('.time').value = '';
 });
 
 span.addEventListener('click', function () {
@@ -24,41 +36,59 @@ window.addEventListener('click', function (e) {
     }
 });
 
-// TIMEOUT MESSAGE
-function timeoutMessage() {
-    setTimeout(function () {
-        let successMsg = document.querySelector("#success_message");
-        if (successMsg) {
-            successMsg.style.display = "none";
-        }
-    }, 2000);
-}
-
 // EDIT BUTTON LISTENER
 for (let i = 0; i < editButtons.length; i++) {
     editButtons[i].addEventListener('click', function () {
-        //buttonID = this.dataset.id;
-        modal.style.display = "block";
-        //y.title.value = x.closest('tr').querySelector('.item-title').innerText
+        editModal.style.display = "block";
+        let tr = this.closest('tr');
+        titleEdit.value = tr.children[1].innerText;
+        caloriesEdit.value = tr.children[2].innerText;
+        dateEdit.value = tr.children[3].innerText;
+        timeEdit.value = tr.children[4].innerText;
+        buttonID = this.dataset.id;
     });
 }
 
-// DELETE BUTTON LISTENER
-for (let i = 0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener('click', function (e) {
-        buttonID = this.dataset.id;
-        deleteMeal(buttonID);
-    })
-}
+editMealButton.addEventListener('click', function (e) {
+    e.preventDefault();
 
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'meal/edit', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    const data = {
+        'id': buttonID,
+        'title': titleEdit.value,
+        'cal_num': caloriesEdit.value,
+        'date': dateEdit.value,
+        'time': timeEdit.value,
+    };
+    editModal.style.display = 'none';
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const res = xhr.responseText;
+                const response = JSON.parse(res);
+                document.getElementById(`meal_${buttonID}`).children[1].textContent = data.title;
+                document.getElementById(`meal_${buttonID}`).children[2].textContent = data.cal_num;
+                document.getElementById(`meal_${buttonID}`).children[3].textContent = data.date;
+                document.getElementById(`meal_${buttonID}`).children[4].textContent = data.time;
+
+            }
+        }
+    }
+    xhr.send(JSON.stringify(data));
+
+});
 // AJAX ADD MEAL
 if (addMealBtn) {
     addMealBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        let title = document.querySelector('.title').value;
+        const title = document.querySelector('.title').value;
         const cal_num = document.querySelector('.cal_num').value;
         const date = document.querySelector('.date').value;
         const time = document.querySelector('.time').value;
+
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'meals', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -68,7 +98,8 @@ if (addMealBtn) {
             'cal_num': cal_num,
             'date': date,
             'time': time,
-        }
+        };
+
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
@@ -97,11 +128,9 @@ if (addMealBtn) {
                     document.getElementById('saveForm_errList').value = "";
                     document.getElementById('success_message').classList.add('alert', 'alert-success');
                     document.getElementById('success_message').textContent = response.message;
-
                     timeoutMessage();
                 }
             } else {
-                // console.log(JSON.parse(xhr.responseText))
                 document.getElementById('saveForm_errList').classList.add('alert', 'alert-danger');
                 document.getElementById('saveForm_errList').textContent = `All fields are required`;
             }
@@ -134,4 +163,22 @@ function deleteMeal(mealsID) {
             }
         }
     }
+}
+// TIMEOUT MESSAGE
+function timeoutMessage() {
+    setTimeout(function () {
+        let successMsg = document.querySelector("#success_message");
+        if (successMsg) {
+            successMsg.style.display = "none";
+        }
+    }, 2000);
+}
+
+
+// DELETE BUTTON LISTENER
+for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', function (e) {
+        buttonID = this.dataset.id;
+        deleteMeal(buttonID);
+    })
 }

@@ -12,7 +12,6 @@ use \Illuminate\Http\JsonResponse;
 
 class MealsController extends Controller
 {
-
     public function index(): JsonResponse
     {
         $meals = new Meal;
@@ -66,9 +65,44 @@ class MealsController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Request $request): JsonResponse
     {
-        return 'Hello';
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:191',
+            'cal_num' => 'required|integer',
+            'date' => 'required|date',
+            'time' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages()
+            ]);
+        } else {
+            $meal = new Meal;
+
+            $meal->title = $request->input('title');
+            $meal->cal_num = $request->input('cal_num');
+            $meal->date = $request->input('date');
+            $meal->time = $request->input('time');
+            $meal->userID = Auth::user()->id;
+            $mealID= $request->json()->get('id');
+
+            $editRowID = $meal->editMeal($mealID ,$meal->title, $meal->cal_num, $meal->date, $meal->time, $meal->userID);
+
+            if( $editRowID ) {
+                return response()->json([
+                    'status' => 200,
+                    'id' => $mealID,
+                    'message' => 'Meal edited successfully!'
+                ]);
+            }
+
+            return response()->json([
+                'status' => 400,
+                'message' => 'Something went wrong. Please try again later.'
+            ]);
+       }
     }
 
     public function update(Request $request, $id)

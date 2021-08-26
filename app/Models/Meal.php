@@ -69,4 +69,18 @@ class Meal extends Model
           ->where('userID', '=', Auth::user()->id)
           ->delete();
     }
+
+    public function editMeal ($id, $title, $cal_num, $date, $time, $userID): int
+    {
+        return DB::table('meals')
+            ->where('id', '=', $id)
+            ->update([
+            'title' => $title,
+            'cal_num' => $cal_num,
+            'date' => $date,
+            'time' => $time,
+            'userID' => $userID,
+        ]);
+
+    }
 }
