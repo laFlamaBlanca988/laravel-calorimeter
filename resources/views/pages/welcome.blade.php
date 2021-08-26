@@ -31,10 +31,8 @@
 {{--    EDIT MEAL MODAL--}}
     <div id="editMealModal" class="modal">
         <div class="modal-content">
-            {{ method_field('PUT') }}
-
             <form id="editMealForm">
-                <span class="close">&times;</span>
+                <span class="closeEdit close">&times;</span>
                 <label for="meal">Meal</label>
                 <input type="text" name="title" id="edit_title" class="title form-control" required>
                 <label>Calories</label>

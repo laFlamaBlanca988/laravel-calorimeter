@@ -1,14 +1,15 @@
 const modal = document.querySelector(".modal");
 const editModal = document.querySelector('#editMealModal');
+const spanEdit = document.querySelector('.closeEdit');
+const span = document.querySelector(".close");
+const table = document.querySelector('.meals');
+const tableBody = document.querySelector('tbody');
 
 const addBtn = document.querySelector(".addMealOpenModal");
 const addMealBtn = document.querySelector('.addMealBtn');
 const editButtons = document.getElementsByClassName('editMealOpenBtn');
 const editMealButton = document.querySelector('.editMealBtn');
 const deleteButtons = document.getElementsByClassName('deleteBtn');
-const span = document.getElementsByClassName("close")[0];
-const table = document.querySelector('.meals');
-let tableBody = document.querySelector('tbody');
 
 let titleEdit = document.querySelector('#edit_title');
 let caloriesEdit = document.querySelector('#edit_calories');
@@ -16,23 +17,33 @@ let dateEdit = document.querySelector('#edit_date');
 let timeEdit = document.querySelector('#edit_time');
 let buttonID;
 
-
 // ADD MEAL MODAL CONTROL
-addBtn.addEventListener('click', function () {
-    modal.style.display = 'block';
-    document.querySelector('.title').value = '';
-    document.querySelector('.cal_num').value = '';
-    document.querySelector('.date').value = '';
-    document.querySelector('.time').value = '';
-});
+if(addBtn) {
+    addBtn.addEventListener('click', function () {
+        modal.style.display = 'block';
+        document.querySelector('.title').value = '';
+        document.querySelector('.cal_num').value = '';
+        document.querySelector('.date').value = '';
+        document.querySelector('.time').value = '';
+    });
+}
 
-span.addEventListener('click', function () {
-    modal.style.display = "none";
-});
+if(span) {
+    span.addEventListener('click', function () {
+        modal.style.display = "none";
+    });
+}
+
+if(spanEdit) {
+    spanEdit.addEventListener('click', function() {
+        editModal.style.display = "none";
+    });
+}
 
 window.addEventListener('click', function (e) {
-    if (e.target == modal) {
+    if (e.target == modal || e.target == editModal) {
         modal.style.display = "none";
+        editModal.style.display = 'none';
     }
 });
 
@@ -49,37 +60,45 @@ for (let i = 0; i < editButtons.length; i++) {
     });
 }
 
-editMealButton.addEventListener('click', function (e) {
-    e.preventDefault();
+// DELETE BUTTON LISTENER
+for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', function (e) {
+        buttonID = this.dataset.id;
+        deleteMeal(buttonID);
+    });
+}
 
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'meal/edit', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-    const data = {
-        'id': buttonID,
-        'title': titleEdit.value,
-        'cal_num': caloriesEdit.value,
-        'date': dateEdit.value,
-        'time': timeEdit.value,
-    };
-    editModal.style.display = 'none';
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const res = xhr.responseText;
-                const response = JSON.parse(res);
-                document.getElementById(`meal_${buttonID}`).children[1].textContent = data.title;
-                document.getElementById(`meal_${buttonID}`).children[2].textContent = data.cal_num;
-                document.getElementById(`meal_${buttonID}`).children[3].textContent = data.date;
-                document.getElementById(`meal_${buttonID}`).children[4].textContent = data.time;
-
+if (editMealButton) {
+    editMealButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'meal/edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+        const data = {
+            'id': buttonID,
+            'title': titleEdit.value,
+            'cal_num': caloriesEdit.value,
+            'date': dateEdit.value,
+            'time': timeEdit.value,
+        };
+        editModal.style.display = 'none';
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const res = xhr.responseText;
+                    const response = JSON.parse(res);
+                    document.getElementById(`meal_${buttonID}`).children[1].textContent = data.title;
+                    document.getElementById(`meal_${buttonID}`).children[2].textContent = data.cal_num;
+                    document.getElementById(`meal_${buttonID}`).children[3].textContent = data.date;
+                    document.getElementById(`meal_${buttonID}`).children[4].textContent = data.time;
+                }
             }
         }
-    }
-    xhr.send(JSON.stringify(data));
+        xhr.send(JSON.stringify(data));
+    });
+}
 
-});
 // AJAX ADD MEAL
 if (addMealBtn) {
     addMealBtn.addEventListener('click', function (e) {
@@ -107,13 +126,13 @@ if (addMealBtn) {
                     const response = JSON.parse(res);
                     const mealID = response.id;
                     let newRow = document.createElement('tr');
-                    newRow.id = "meal_"+mealID;
+                    newRow.id = "meal_" + mealID;
                     newRow.innerHTML = `
-                 <td class="item-id">${ tableBody.children.length + 1}</td>
-                 <td class="item-title">${ data.title }</td>
-                 <td class="cal_num">${ data.cal_num }</td>
-                 <td class="item-date">${ data.date }</td>
-                 <td class="item-time">${ data.time }</td>
+                 <td class="item-id">${tableBody.children.length + 1}</td>
+                 <td class="item-title">${data.title}</td>
+                 <td class="cal_num">${data.cal_num}</td>
+                 <td class="item-date">${data.date}</td>
+                 <td class="item-time">${data.time}</td>
                  <td class="editButtons">
                     <button class="editBtn btn btn-danger btn-sm" type="submit"
                         >Edit meal</button>
@@ -121,7 +140,7 @@ if (addMealBtn) {
                         >Delete</button>
                 </td> `;
                     tableBody.appendChild(newRow);
-                    document.getElementById("delete_meal_"+mealID).addEventListener('click', function(){
+                    document.getElementById("delete_meal_" + mealID).addEventListener('click', function () {
                         deleteMeal(mealID);
                     });
                     modal.style.display = "none";
@@ -151,7 +170,6 @@ function deleteMeal(mealsID) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const res = JSON.parse(xhr.responseText);
-                console.log(res);
                 if (document.getElementById("meal_" + mealsID) !== null) {
                     document.getElementById("meal_" + mealsID).remove();
                     timeoutMessage();
@@ -172,13 +190,4 @@ function timeoutMessage() {
             successMsg.style.display = "none";
         }
     }, 2000);
-}
-
-
-// DELETE BUTTON LISTENER
-for (let i = 0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener('click', function (e) {
-        buttonID = this.dataset.id;
-        deleteMeal(buttonID);
-    })
 }
