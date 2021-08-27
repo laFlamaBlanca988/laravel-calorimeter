@@ -18,7 +18,7 @@ let timeEdit = document.querySelector('#edit_time');
 let buttonID;
 
 // ADD MEAL MODAL CONTROL
-if(addBtn) {
+if (addBtn) {
     addBtn.addEventListener('click', function () {
         modal.style.display = 'block';
         document.querySelector('.title').value = '';
@@ -28,14 +28,14 @@ if(addBtn) {
     });
 }
 
-if(span) {
+if (span) {
     span.addEventListener('click', function () {
         modal.style.display = "none";
     });
 }
 
-if(spanEdit) {
-    spanEdit.addEventListener('click', function() {
+if (spanEdit) {
+    spanEdit.addEventListener('click', function () {
         editModal.style.display = "none";
     });
 }
@@ -103,10 +103,10 @@ if (editMealButton) {
 if (addMealBtn) {
     addMealBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        const title = document.querySelector('.title').value;
-        const cal_num = document.querySelector('.cal_num').value;
-        const date = document.querySelector('.date').value;
-        const time = document.querySelector('.time').value;
+        let title = document.querySelector('.title').value;
+        let cal_num = document.querySelector('.cal_num').value;
+        let date = document.querySelector('.date').value;
+        let time = document.querySelector('.time').value;
 
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'meals', true);
@@ -120,10 +120,10 @@ if (addMealBtn) {
         };
 
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    const res = xhr.responseText;
-                    const response = JSON.parse(res);
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const res = xhr.responseText;
+                const response = JSON.parse(res);
+                if (response.status !== 400) {
                     const mealID = response.id;
                     let newRow = document.createElement('tr');
                     newRow.id = "meal_" + mealID;
@@ -149,14 +149,14 @@ if (addMealBtn) {
                     document.getElementById('success_message').textContent = response.message;
                     timeoutMessage();
                 }
-            } else {
+            }
+            if (!title || !cal_num || !date || !time) {
                 document.getElementById('saveForm_errList').classList.add('alert', 'alert-danger');
                 document.getElementById('saveForm_errList').textContent = `All fields are required`;
             }
         }
         xhr.send(JSON.stringify(data));
     });
-
 }
 
 // AJAX DELETE
@@ -172,9 +172,9 @@ function deleteMeal(mealsID) {
                 const res = JSON.parse(xhr.responseText);
                 if (document.getElementById("meal_" + mealsID) !== null) {
                     document.getElementById("meal_" + mealsID).remove();
-                    timeoutMessage();
                     document.getElementById('success_message').classList.add('alert', 'alert-success');
                     document.getElementById('success_message').textContent = res.message;
+                    timeoutMessage();
                 }
             } else {
                 console.log('There was a problem, please try again');
@@ -182,6 +182,7 @@ function deleteMeal(mealsID) {
         }
     }
 }
+
 // TIMEOUT MESSAGE
 function timeoutMessage() {
     setTimeout(function () {

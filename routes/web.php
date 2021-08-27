@@ -25,6 +25,5 @@ Route::get('meals', [MealsController::class, 'index'])->middleware('auth');
 Route::post('meals', [MealsController::class, 'store'])->middleware('auth');
 
 Route::post('/meal/delete', [MealsController::class, 'destroy']);
-//Route::get('mealID', [MealsController::class, 'destroy']);
 
 Route::post('/meal/edit', [MealsController::class, 'edit']);
