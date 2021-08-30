@@ -27,3 +27,5 @@ Route::post('meals', [MealsController::class, 'store'])->middleware('auth');
 Route::post('/meal/delete', [MealsController::class, 'destroy']);
 
 Route::post('/meal/edit', [MealsController::class, 'edit']);
+
+Route::get('/meal/lastWeek', [MealsController::class, 'getLastWeekData']);

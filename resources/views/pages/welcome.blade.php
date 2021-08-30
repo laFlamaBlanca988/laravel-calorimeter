@@ -2,7 +2,7 @@
 @section('content')
     <div class="meals-btn-container">
         <button class="addMealOpenModal btn btn-danger">Add meal</button>
-        <button class="myBtn btn btn-danger">Filter meals</button>
+        <button class="filterMealOpenModal myBtn btn btn-danger">Filter meals</button>
     </div>
     <div class="w-1/2 m-auto" id="success_message"></div>
 
@@ -46,6 +46,27 @@
                     <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
                 </div>
                 <ul id="saveForm_errList"></ul>
+            </form>
+        </div>
+    </div>
+
+{{--    FILTER MEAL MODAL--}}
+    <div id="filterMealModal" class="modal">
+        <div class="modal-content">
+            <h3 class="filterModalTitle">Filter meals</h3>
+            <div class="filterButtons">
+                <button class="lastWeekFilterButton">Last week</button>
+                <button class="lastMonthFilterButton"> Last month</button>
+            </div>
+            <h2 class="customFilterTitle">Custom filter:</h2>
+            <form id="filterMealForm">
+                <label for="from" class="form-label">From</label>
+                <input class="form-control" id="fromDate" name="fromDate" type="date" value="">
+                <input class="form-control" id="fromTime" name="fromTime" type="time" value="">
+
+                <label for="to" class="form-label">To</label>
+                <input class="form-control" id="toDate" name="toDate" type="date" value="">
+                <input class="form-control" id="toTime" name="toTime" type="time" value="">
             </form>
         </div>
     </div>

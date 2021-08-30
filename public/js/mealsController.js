@@ -1,5 +1,6 @@
 const modal = document.querySelector(".modal");
 const editModal = document.querySelector('#editMealModal');
+const filterModal = document.querySelector('#filterMealModal');
 const spanEdit = document.querySelector('.closeEdit');
 const span = document.querySelector(".close");
 const table = document.querySelector('.meals');
@@ -9,6 +10,9 @@ const addBtn = document.querySelector(".addMealOpenModal");
 const addMealBtn = document.querySelector('.addMealBtn');
 const editButtons = document.getElementsByClassName('editMealOpenBtn');
 const editMealButton = document.querySelector('.editMealBtn');
+const filterMealButton = document.querySelector('.filterMealOpenModal');
+const lastWeekFilterButton = document.querySelector('.lastWeekFilterButton');
+const lastMonthFilterButton = document.querySelector('.lastMonthFilterButton');
 const deleteButtons = document.getElementsByClassName('deleteBtn');
 
 let titleEdit = document.querySelector('#edit_title');
@@ -27,10 +31,16 @@ if (addBtn) {
         document.querySelector('.time').value = '';
     });
 }
-
+if (filterMealButton) {
+    filterMealButton.addEventListener('click', function () {
+        filterModal.style.display = 'block';
+    });
+}
 if (span) {
     span.addEventListener('click', function () {
         modal.style.display = "none";
+        editModal.style.display = "none";
+        filterModal.style.display = "none";
     });
 }
 
@@ -41,9 +51,10 @@ if (spanEdit) {
 }
 
 window.addEventListener('click', function (e) {
-    if (e.target == modal || e.target == editModal) {
+    if (e.target == modal || e.target == editModal || e.target == filterModal) {
         modal.style.display = "none";
         editModal.style.display = 'none';
+        filterModal.style.display = "none";
     }
 });
 
@@ -183,6 +194,42 @@ function deleteMeal(mealsID) {
     }
 }
 
+// AJAX FILTER LAST WEEK
+lastWeekFilterButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://calorimeter/meal/lastWeek', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            filterModal.style.display = 'none';
+            const res = JSON.parse(xhr.responseText);
+            let html = '';
+            res.forEach(data => {
+                html += `
+                <tr id=${data.id}>
+                     <td class="item-id">${res.length + 1}</td>
+                     <td class="item-title">${data.title}</td>
+                     <td class="cal_num">${data.cal_num}</td>
+                     <td class="item-date">${data.date}</td>
+                     <td class="item-time">${data.time}</td>
+                     <td class="editButtons">
+                        <button class="editBtn btn btn-danger btn-sm" type="submit"
+                            >Edit meal</button>
+                        <button id="delete_meal_${data.id}"  class="deleteBtn btn btn-danger btn-sm" type="submit"
+                            >Delete</button>
+                    </td>
+                </tr>`;
+            });
+            tableBody.innerHTML = html;
+        } else {
+            console.log('Bad request!')
+        }
+    }
+    xhr.send();
+})
 // TIMEOUT MESSAGE
 function timeoutMessage() {
     setTimeout(function () {

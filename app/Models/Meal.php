@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -82,5 +83,12 @@ class Meal extends Model
             'userID' => $userID,
         ]);
 
+    }
+
+    public function getLastWeekMeals (): \Illuminate\Support\Collection
+    {
+        return DB::table('meals')
+            ->whereDate('date', '>=', Carbon::today()->subDays(7))
+            ->get();
     }
 }

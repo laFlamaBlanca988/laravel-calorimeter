@@ -6,6 +6,7 @@ use App\Models\Meal;
 use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use \Illuminate\Http\JsonResponse;
@@ -19,11 +20,6 @@ class MealsController extends Controller
         $latestMeal = $meals->getLatestMeal($userID);
 
         return response()->json($latestMeal);
-    }
-
-    public function create(Request $request)
-    {
-
     }
 
     public function store(Request $request): JsonResponse
@@ -105,9 +101,11 @@ class MealsController extends Controller
        }
     }
 
-    public function update(Request $request, $id)
+    public function getLastWeekData(): JsonResponse
     {
-        //
+        $meals = new Meal;
+        $lastWeekMeals = $meals->getLastWeekMeals();
+        return response()->json($lastWeekMeals);
     }
 
     public function destroy(Request $request): JsonResponse
@@ -119,7 +117,6 @@ class MealsController extends Controller
                 'status' => '200',
                 'message' => "Meal is successfully deleted."
             ]);
-
         } else {
             return response()->json([
                 'status' => '400',
