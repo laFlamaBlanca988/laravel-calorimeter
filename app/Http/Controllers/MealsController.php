@@ -107,6 +107,12 @@ class MealsController extends Controller
         $lastWeekMeals = $meals->getLastWeekMeals();
         return response()->json($lastWeekMeals);
     }
+    public function getLastMonthData(): JsonResponse
+    {
+        $meals = new Meal;
+        $lastMonthMeals = $meals->getLastMonthMeals();
+        return response()->json($lastMonthMeals);
+    }
 
     public function destroy(Request $request): JsonResponse
     {

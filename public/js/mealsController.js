@@ -73,7 +73,7 @@ for (let i = 0; i < editButtons.length; i++) {
 
 // DELETE BUTTON LISTENER
 for (let i = 0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener('click', function (e) {
+    deleteButtons[i].addEventListener('click', function () {
         buttonID = this.dataset.id;
         deleteMeal(buttonID);
     });
@@ -145,7 +145,7 @@ if (addMealBtn) {
                  <td class="item-date">${data.date}</td>
                  <td class="item-time">${data.time}</td>
                  <td class="editButtons">
-                    <button class="editBtn btn btn-danger btn-sm" type="submit"
+                    <button data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm" type="submit"
                         >Edit meal</button>
                     <button id="delete_meal_${mealID}" class="deleteBtn btn btn-danger btn-sm" type="submit"
                         >Delete</button>
@@ -209,16 +209,53 @@ lastWeekFilterButton.addEventListener('click', function (e) {
             let html = '';
             res.forEach(data => {
                 html += `
-                <tr id=${data.id}>
+                <tr id="meal_${data.id}">
                      <td class="item-id">${res.length + 1}</td>
                      <td class="item-title">${data.title}</td>
                      <td class="cal_num">${data.cal_num}</td>
                      <td class="item-date">${data.date}</td>
                      <td class="item-time">${data.time}</td>
                      <td class="editButtons">
-                        <button class="editBtn btn btn-danger btn-sm" type="submit"
+                        <button  data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
-                        <button id="delete_meal_${data.id}"  class="deleteBtn btn btn-danger btn-sm" type="submit"
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn btn-danger btn-sm" type="submit"
+                            >Delete</button>
+                    </td>
+                </tr>`;
+            });
+            tableBody.innerHTML = html;
+        } else {
+            console.log('Bad request!')
+        }
+    }
+    xhr.send();
+})
+
+// AJAX FILTER LAST WEEK
+lastMonthFilterButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://calorimeter/meal/lastMonth', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            filterModal.style.display = 'none';
+            const res = JSON.parse(xhr.responseText);
+            let html = '';
+            res.forEach(data => {
+                html += `
+                <tr id="meal_${data.id}">
+                     <td class="item-id">${res.length + 1}</td>
+                     <td class="item-title">${data.title}</td>
+                     <td class="cal_num">${data.cal_num}</td>
+                     <td class="item-date">${data.date}</td>
+                     <td class="item-time">${data.time}</td>
+                     <td class="editButtons">
+                        <button  data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
+                            >Edit meal</button>
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
                     </td>
                 </tr>`;

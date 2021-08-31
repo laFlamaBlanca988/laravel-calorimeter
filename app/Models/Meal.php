@@ -91,4 +91,12 @@ class Meal extends Model
             ->whereDate('date', '>=', Carbon::today()->subDays(7))
             ->get();
     }
+    public function getLastMonthMeals (): \Illuminate\Support\Collection
+    {
+        return DB::table('meals')
+            ->whereDate('date', '>=', Carbon::today()->subMonths(1))
+            ->get();
+    }
+
+
 }

@@ -29,3 +29,4 @@ Route::post('/meal/delete', [MealsController::class, 'destroy']);
 Route::post('/meal/edit', [MealsController::class, 'edit']);
 
 Route::get('/meal/lastWeek', [MealsController::class, 'getLastWeekData']);
+Route::get('/meal/lastMonth', [MealsController::class, 'getLastMonthData']);
