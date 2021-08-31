@@ -203,7 +203,7 @@ function deleteMeal(mealsID) {
 lastWeekFilterButton.addEventListener('click', function (e) {
     e.preventDefault();
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://calorimeter/meal/lastWeek', true);
+    xhr.open('GET', 'meal/lastWeek', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
@@ -240,7 +240,7 @@ lastWeekFilterButton.addEventListener('click', function (e) {
 lastMonthFilterButton.addEventListener('click', function (e) {
     e.preventDefault();
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://calorimeter/meal/lastMonth', true);
+    xhr.open('GET', 'meal/lastMonth', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
@@ -276,7 +276,7 @@ lastMonthFilterButton.addEventListener('click', function (e) {
 dateFilterCustomButton.addEventListener('click', function (e) {
     e.preventDefault();
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://calorimeter/meal/customFilter', true);
+    xhr.open('POST', 'meal/customFilter', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
     const data = {
