@@ -30,3 +30,4 @@ Route::post('/meal/edit', [MealsController::class, 'edit']);
 
 Route::get('/meal/lastWeek', [MealsController::class, 'getLastWeekData']);
 Route::get('/meal/lastMonth', [MealsController::class, 'getLastMonthData']);
+Route::post('/meal/customFilter', [MealsController::class, 'getCustomFilterData']);

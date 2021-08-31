@@ -114,6 +114,15 @@ class MealsController extends Controller
         return response()->json($lastMonthMeals);
     }
 
+    public function getCustomFilterData(Request $request): JsonResponse
+    {
+        $meal = new Meal;
+        $meal->fromDate = $request->input('fromDate');
+        $meal->toDate = $request->input('toDate');
+        $customFilterMeals = $meal->getCustomFilterMeals($meal->fromDate, $meal->toDate);
+        return response()->json($customFilterMeals);
+    }
+
     public function destroy(Request $request): JsonResponse
     {
         $meals = new Meal;

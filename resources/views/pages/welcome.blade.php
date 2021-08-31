@@ -67,6 +67,8 @@
                 <label for="to" class="form-label">To</label>
                 <input class="form-control" id="toDate" name="toDate" type="date" value="">
                 <input class="form-control" id="toTime" name="toTime" type="time" value="">
+
+                <button class="dateFilterCustomButton btn btn-danger btn-sm">Submit</button>
             </form>
         </div>
     </div>

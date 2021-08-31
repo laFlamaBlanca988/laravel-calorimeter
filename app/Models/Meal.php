@@ -98,5 +98,12 @@ class Meal extends Model
             ->get();
     }
 
+    public function getCustomFilterMeals ($from, $to): \Illuminate\Support\Collection
+    {
+        return DB::table('meals')
+            ->whereBetween('date', [$from, $to])
+            ->get();
+    }
+
 
 }

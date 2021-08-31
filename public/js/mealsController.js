@@ -8,12 +8,17 @@ const tableBody = document.querySelector('tbody');
 
 const addBtn = document.querySelector(".addMealOpenModal");
 const addMealBtn = document.querySelector('.addMealBtn');
+
 const editButtons = document.getElementsByClassName('editMealOpenBtn');
 const editMealButton = document.querySelector('.editMealBtn');
+const deleteButtons = document.getElementsByClassName('deleteBtn');
+
 const filterMealButton = document.querySelector('.filterMealOpenModal');
 const lastWeekFilterButton = document.querySelector('.lastWeekFilterButton');
 const lastMonthFilterButton = document.querySelector('.lastMonthFilterButton');
-const deleteButtons = document.getElementsByClassName('deleteBtn');
+const dateFilterCustomButton = document.querySelector('.dateFilterCustomButton');
+const fromDateInput = document.getElementById('fromDate');
+const toDateInput = document.getElementById('toDate');
 
 let titleEdit = document.querySelector('#edit_title');
 let caloriesEdit = document.querySelector('#edit_calories');
@@ -218,7 +223,7 @@ lastWeekFilterButton.addEventListener('click', function (e) {
                      <td class="editButtons">
                         <button  data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
-                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn btn-danger btn-sm" type="submit"
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn                                         btn-danger btn-sm" type="submit"
                             >Delete</button>
                     </td>
                 </tr>`;
@@ -266,7 +271,44 @@ lastMonthFilterButton.addEventListener('click', function (e) {
         }
     }
     xhr.send();
-})
+});
+
+dateFilterCustomButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://calorimeter/meal/customFilter', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    const data = {
+        'fromDate': fromDateInput.value,
+        'toDate': toDateInput.value
+    };
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            filterModal.style.display = 'none';
+            const res = JSON.parse(xhr.responseText);
+            let html = '';
+            res.forEach(data => {
+                html += `
+                <tr id="meal_${data.id}">
+                     <td class="item-id">${res.length + 1}</td>
+                     <td class="item-title">${data.title}</td>
+                     <td class="cal_num">${data.cal_num}</td>
+                     <td class="item-date">${data.date}</td>
+                     <td class="item-time">${data.time}</td>
+                     <td class="editButtons">
+                        <button  data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
+                            >Edit meal</button>
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn btn-danger btn-sm" type="submit"
+                            >Delete</button>
+                    </td>
+                </tr>`;
+            });
+            tableBody.innerHTML = html;
+        }
+    }
+    xhr.send(JSON.stringify(data));
+});
 // TIMEOUT MESSAGE
 function timeoutMessage() {
     setTimeout(function () {
