@@ -114,14 +114,20 @@ class MealsController extends Controller
         return response()->json($lastMonthMeals);
     }
 
-    public function getCustomFilterData(Request $request): JsonResponse
-    {
-        $meal = new Meal;
-        $meal->fromDate = $request->input('fromDate');
-        $meal->toDate = $request->input('toDate');
-        $customFilterMeals = $meal->getCustomFilterMeals($meal->fromDate, $meal->toDate);
-        return response()->json($customFilterMeals);
-    }
+//    public function getCustomFilterData(Request $request): JsonResponse
+//    {
+//        $meal = new Meal;
+//        $meal->fromDate = $request->input('fromDate');
+//        $meal->toDate = $request->input('toDate');
+//        $mealFromDate = explode('T', $meal->fromDate)[0];
+//        $mealToDate = explode('T', $meal->toDate)[0];
+//        $mealFromTime = explode('T', $meal->fromDate)[1];
+//        $mealToTime = explode('T', $meal->toDate)[1];
+//
+//        $customFilterMeals = $meal->getCustomFilterMeals($meal->fromDate, $meal->toDate);
+////           dd($mealFromDate, $mealToDate,$mealFromTime, $mealToTime );
+//        return response()->json($customFilterMeals);
+//    }
 
     public function destroy(Request $request): JsonResponse
     {

@@ -1,7 +1,5 @@
 body {
-    min-height: 100vh;
-    background: transparent url("../img/asnim-ansari-SqYmTDQYMjo-unsplash.jpg");
-    background-size: 100%;
+    background: #ffffff;
 }
 .saveForm_errList {
     width: 30rem;

@@ -58,7 +58,7 @@
         <p>{{session('success')}}</p>
     </div>
     @endif
-<script src="{{asset('js/mealsController.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
+<script src="{{asset('js/mealsController.js')}}"></script>
 

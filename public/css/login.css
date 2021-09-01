@@ -2,7 +2,7 @@
     max-width: 30rem;
     margin: 5rem auto auto;
     position: relative;
-    background-color: rgba(255, 234, 188, 0.92);
+    background-color: rgba(254, 242, 231, 0.92);
     border-radius: 10px;
 }
 .login-form {
@@ -13,7 +13,7 @@
     justify-content: space-between;
     max-width: 30rem;
     border-radius: 10px;
-    box-shadow: hsl(45, 100%, 13%) 0 5px 15px;
+    box-shadow: hsl(0, 0%, 0%) 0 5px 15px;
 }
 .login-title {
     padding: 0.2rem 0;

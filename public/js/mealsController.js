@@ -64,18 +64,20 @@ window.addEventListener('click', function (e) {
 });
 
 // EDIT BUTTON LISTENER
-for (let i = 0; i < editButtons.length; i++) {
-    editButtons[i].addEventListener('click', function () {
-        editModal.style.display = "block";
-        let tr = this.closest('tr');
-        titleEdit.value = tr.children[1].innerText;
-        caloriesEdit.value = tr.children[2].innerText;
-        dateEdit.value = tr.children[3].innerText;
-        timeEdit.value = tr.children[4].innerText;
-        buttonID = this.dataset.id;
-    });
+    for (let i = 0; i < editButtons.length; i++) {
+        editButtons[i].addEventListener('click', function () {
+            buttonID = this.dataset.id;
+            editMeal(buttonID);
+        });
+    }
+function editMeal (mealID) {
+    editModal.style.display = "block";
+    let tr = this.closest('tr');
+    titleEdit.value = tr.children[1].innerText;
+    caloriesEdit.value = tr.children[2].innerText;
+    dateEdit.value = tr.children[3].innerText;
+    timeEdit.value = tr.children[4].innerText;
 }
-
 // DELETE BUTTON LISTENER
 for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', function () {
@@ -83,39 +85,8 @@ for (let i = 0; i < deleteButtons.length; i++) {
         deleteMeal(buttonID);
     });
 }
-
-if (editMealButton) {
-    editMealButton.addEventListener('click', function (e) {
-        e.preventDefault();
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'meal/edit', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-        const data = {
-            'id': buttonID,
-            'title': titleEdit.value,
-            'cal_num': caloriesEdit.value,
-            'date': dateEdit.value,
-            'time': timeEdit.value,
-        };
-        editModal.style.display = 'none';
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    const res = xhr.responseText;
-                    const response = JSON.parse(res);
-                    document.getElementById(`meal_${buttonID}`).children[1].textContent = data.title;
-                    document.getElementById(`meal_${buttonID}`).children[2].textContent = data.cal_num;
-                    document.getElementById(`meal_${buttonID}`).children[3].textContent = data.date;
-                    document.getElementById(`meal_${buttonID}`).children[4].textContent = data.time;
-                }
-            }
-        }
-        xhr.send(JSON.stringify(data));
-    });
-}
-
 // AJAX ADD MEAL
+
 if (addMealBtn) {
     addMealBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -148,9 +119,9 @@ if (addMealBtn) {
                  <td class="item-title">${data.title}</td>
                  <td class="cal_num">${data.cal_num}</td>
                  <td class="item-date">${data.date}</td>
-                 <td class="item-time">${data.time}</td>
+                 <td class="item-time">${data.time}:00</td>
                  <td class="editButtons">
-                    <button data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm" type="submit"
+                    <button id="edit_meal_${mealID}" data-id="${mealID}" class="editMealOpenBtn btn btn-danger btn-sm" type="submit"
                         >Edit meal</button>
                     <button id="delete_meal_${mealID}" class="deleteBtn btn btn-danger btn-sm" type="submit"
                         >Delete</button>
@@ -158,6 +129,9 @@ if (addMealBtn) {
                     tableBody.appendChild(newRow);
                     document.getElementById("delete_meal_" + mealID).addEventListener('click', function () {
                         deleteMeal(mealID);
+                    });
+                    document.getElementById("edit_meal_" + mealID).addEventListener('click', function () {
+                        editMeal(mealID);
                     });
                     modal.style.display = "none";
                     document.getElementById('saveForm_errList').value = "";
@@ -174,6 +148,35 @@ if (addMealBtn) {
         xhr.send(JSON.stringify(data));
     });
 }
+
+    editMealButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'meal/edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+        const data = {
+            'id': buttonID,
+            'title': titleEdit.value,
+            'cal_num': caloriesEdit.value,
+            'date': dateEdit.value,
+            'time': timeEdit.value,
+        };
+        editModal.style.display = 'none';
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const res = xhr.responseText;
+                    const response = JSON.parse(res);
+                    document.getElementById(`meal_${buttonID}`).children[1].textContent = data.title;
+                    document.getElementById(`meal_${buttonID}`).children[2].textContent = data.cal_num;
+                    document.getElementById(`meal_${buttonID}`).children[3].textContent = data.date;
+                    document.getElementById(`meal_${buttonID}`).children[4].textContent = data.time+":00";
+                }
+            }
+        }
+        xhr.send(JSON.stringify(data));
+    });
 
 // AJAX DELETE
 function deleteMeal(mealsID) {
@@ -221,7 +224,7 @@ lastWeekFilterButton.addEventListener('click', function (e) {
                      <td class="item-date">${data.date}</td>
                      <td class="item-time">${data.time}</td>
                      <td class="editButtons">
-                        <button  data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
+                        <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
                         <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn                                         btn-danger btn-sm" type="submit"
                             >Delete</button>
@@ -229,8 +232,8 @@ lastWeekFilterButton.addEventListener('click', function (e) {
                 </tr>`;
             });
             tableBody.innerHTML = html;
-        } else {
-            console.log('Bad request!')
+        } if (xhr.readyState !== 4 && xhr.status !== 200) {
+            console.log('There was a problem, please try again!')
         }
     }
     xhr.send();
@@ -258,16 +261,16 @@ lastMonthFilterButton.addEventListener('click', function (e) {
                      <td class="item-date">${data.date}</td>
                      <td class="item-time">${data.time}</td>
                      <td class="editButtons">
-                        <button  data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
-                            >Edit meal</button>
+                        <button data-id="${data.id}" onclick="editMeal(${data.id})" class="editMealOpenBtn btn btn-danger btn-sm">Edit meal</button>
                         <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
                     </td>
                 </tr>`;
             });
             tableBody.innerHTML = html;
-        } else {
-            console.log('Bad request!')
+
+        } if (xhr.readyState !== 4 && xhr.status !== 200) {
+            console.log('There was a problem, please try again!')
         }
     }
     xhr.send();
@@ -297,7 +300,7 @@ dateFilterCustomButton.addEventListener('click', function (e) {
                      <td class="item-date">${data.date}</td>
                      <td class="item-time">${data.time}</td>
                      <td class="editButtons">
-                        <button  data-id="${data.id}" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
+                        <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
                         <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
@@ -305,6 +308,8 @@ dateFilterCustomButton.addEventListener('click', function (e) {
                 </tr>`;
             });
             tableBody.innerHTML = html;
+        } if (xhr.readyState !== 4 && xhr.status !== 200) {
+            console.log('There was a problem, please try again!')
         }
     }
     xhr.send(JSON.stringify(data));

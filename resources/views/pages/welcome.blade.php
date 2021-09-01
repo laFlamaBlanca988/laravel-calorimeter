@@ -61,12 +61,10 @@
             <h2 class="customFilterTitle">Custom filter:</h2>
             <form id="filterMealForm">
                 <label for="from" class="form-label">From</label>
-                <input class="form-control" id="fromDate" name="fromDate" type="date" value="">
-                <input class="form-control" id="fromTime" name="fromTime" type="time" value="">
+                <input class="form-control" id="fromDate" name="fromDate" type="datetime-local" value="">
 
                 <label for="to" class="form-label">To</label>
-                <input class="form-control" id="toDate" name="toDate" type="date" value="">
-                <input class="form-control" id="toTime" name="toTime" type="time" value="">
+                <input class="form-control" id="toDate" name="toDate" type="datetime-local" value="">
 
                 <button class="dateFilterCustomButton btn btn-danger btn-sm">Submit</button>
             </form>
@@ -98,7 +96,7 @@
                         <button data-id="{{$meal->id}}" class="editMealOpenBtn btn btn-danger btn-sm" type="submit"
                         >Edit meal
                         </button>
-                        <button data-row = {{$key}} data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm" value="Delete">Delete</button>
+                        <button data-row = "{{$key}}" data-id="{{$meal->id}}" class="deleteBtn btn btn-danger btn-sm">Delete</button>
                     </td>
                 </tr>
             @endforeach

@@ -88,22 +88,24 @@ class Meal extends Model
     public function getLastWeekMeals (): \Illuminate\Support\Collection
     {
         return DB::table('meals')
-            ->whereDate('date', '>=', Carbon::today()->subDays(7))
+            ->whereDate('date', '>=', Carbon::now()->subDays(7))
+            ->whereDate('date', '<=', Carbon::now())
             ->get();
     }
+
     public function getLastMonthMeals (): \Illuminate\Support\Collection
     {
         return DB::table('meals')
-            ->whereDate('date', '>=', Carbon::today()->subMonths(1))
+            ->whereDate('date', '>=', Carbon::now()->subMonth(1))
+            ->whereDate('date', '<=', Carbon::now())
             ->get();
     }
 
-    public function getCustomFilterMeals ($from, $to): \Illuminate\Support\Collection
-    {
-        return DB::table('meals')
-            ->whereBetween('date', [$from, $to])
-            ->get();
-    }
-
-
+//    public function getCustomFilterMeals ($fromDate, $toDate): \Illuminate\Support\Collection
+//    {
+//        return DB::table('meals')
+//            ->whereBetween('date', [$fromDate, $toDate])
+//            //->whereBetween('time', [$fromTime, $toTime])
+//            ->get();
+//    }
 }

@@ -13,6 +13,7 @@
     display: flex;
     justify-content: space-between;
     width: 8vw;
+    border: none;
 }
 .modal {
     display: none;
@@ -73,7 +74,7 @@
 }
 .meals {
     width: 50%;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 .filterModalTitle {
     font-size: 2rem;
@@ -91,11 +92,11 @@
 }
 .lastWeekFilterButton,
 .lastMonthFilterButton {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin: auto;
     cursor: pointer;
     background: #dc3545;
     border-radius: 5px;
     color: white;
-    padding: 0.3rem;
+    padding: 0.5rem;
 }
