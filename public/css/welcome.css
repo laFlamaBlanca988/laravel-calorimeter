@@ -3,7 +3,7 @@
 }
 .cal-sum-text {
     font-size: 2rem;
-    margin: auto auto auto 75%;
+    margin: auto auto auto 76%;
     display: block;
     padding: 2rem;
     color: #dc3545;
@@ -24,7 +24,6 @@
     display: flex;
     justify-content: space-between;
     width: 8vw;
-
 }
 .modal {
     display: none;
@@ -86,7 +85,7 @@
 }
 .meals {
     width: 50%;
-    box-shadow: 3px 3px 3px 3px #888888
+    box-shadow: 3px 3px 3px 3px #888888;
 }
 
 .add-meal-button-container {

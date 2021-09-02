@@ -45,16 +45,19 @@ if (addBtn) {
         document.querySelector('.time').value = '';
     });
 }
+
 if (filterByDateButton) {
     filterByDateButton.addEventListener('click', function () {
         filterByDateModal.style.display = 'block';
     });
 }
+
 if (filterByTimeButton) {
     filterByTimeButton.addEventListener('click', function () {
         filterByTimeModal.style.display = 'block';
     });
 }
+
 if (span) {
     span.addEventListener('click', function () {
         addMealModal.style.display = "none";
@@ -88,6 +91,7 @@ window.addEventListener('click', function (e) {
             editMeal(buttonID);
         });
     }
+
 function editMeal (mealID) {
     editModal.style.display = "block";
     let tr =  document.getElementById(`meal_${mealID}`).closest('tr');
@@ -118,7 +122,7 @@ if (addMealBtn) {
         xhr.open('POST', 'meals', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-        const data = {
+        let data = {
             'title': title,
             'cal_num': cal_num,
             'date': date,
@@ -127,10 +131,10 @@ if (addMealBtn) {
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                const res = xhr.responseText;
-                const response = JSON.parse(res);
+                let res = xhr.responseText;
+                let response = JSON.parse(res);
                 if (response.status !== 400) {
-                    const mealID = response.id;
+                    let mealID = response.id;
                     let newRow = document.createElement('tr');
                     newRow.id = "meal_" + mealID;
                     newRow.innerHTML = `
@@ -176,7 +180,7 @@ if (addMealBtn) {
         xhr.open('POST', 'meal/edit', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-        const data = {
+        let data = {
             'id': buttonID,
             'title': titleEdit.value,
             'cal_num': caloriesEdit.value,
@@ -186,8 +190,8 @@ if (addMealBtn) {
         editModal.style.display = 'none';
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                    const res = xhr.responseText;
-                    const response = JSON.parse(res);
+                    let res = xhr.responseText;
+                    let response = JSON.parse(res);
                 getCalSum();
                 document.getElementById(`meal_${response.id}`).children[1].textContent = data.title;
                     document.getElementById(`meal_${response.id}`).children[2].textContent = data.cal_num;
@@ -208,7 +212,7 @@ function deleteMeal(mealsID) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                const res = JSON.parse(xhr.responseText);
+                let res = JSON.parse(xhr.responseText);
                 if (document.getElementById("meal_" + mealsID) !== null) {
                     document.getElementById("meal_" + mealsID).remove();
                     getCalSum();
@@ -234,7 +238,7 @@ lastWeekFilterButton.addEventListener('click', function (e) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             filterByDateModal.style.display = 'none';
-            const res = JSON.parse(xhr.responseText);
+            let res = JSON.parse(xhr.responseText);
             let html = '';
             res.lastWeekMeals.forEach(data => {
                 html += `
@@ -271,7 +275,7 @@ lastMonthFilterButton.addEventListener('click', function (e) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             filterByDateModal.style.display = 'none';
-            const res = JSON.parse(xhr.responseText);
+            let res = JSON.parse(xhr.responseText);
             let html = '';
             res.forEach(data => {
                 html += `
@@ -303,14 +307,14 @@ dateFilterSubmitButton.addEventListener('click', function (e) {
     xhr.open('POST', 'meal/dateFilter', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-    const data = {
+    let data = {
         'fromDate': fromDateInput.value,
         'toDate': toDateInput.value
     };
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             filterByDateModal.style.display = 'none';
-            const res = JSON.parse(xhr.responseText);
+            let res = JSON.parse(xhr.responseText);
             let html = '';
             res.forEach(data => {
                 html += `
@@ -342,14 +346,14 @@ timeFilterSubmitButton.addEventListener('click', function (e) {
     xhr.open('POST', 'meal/timeFilter', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-    const data = {
+    let data = {
         'fromTime': fromTimeInput.value,
         'toTime': toTimeInput.value
     };
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             filterByTimeModal.style.display = 'none';
-            const res = JSON.parse(xhr.responseText);
+            let res = JSON.parse(xhr.responseText);
             let html = '';
             res.forEach(data => {
                 html += `
@@ -395,7 +399,7 @@ function getCalSum() {
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            const res = JSON.parse(xhr.responseText);
+            let res = JSON.parse(xhr.responseText);
             document.querySelector('.cal-sum-text').textContent = `Calories amount: ${res}`;
         }
         if (xhr.readyState !== 4 && xhr.status !== 200) {

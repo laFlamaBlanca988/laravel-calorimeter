@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -25,10 +27,16 @@ class Meal extends Model
 
 
     /**
-     * @var mixed
+     *
+     * @param $title
+     * @param $cal_num
+     * @param $date
+     * @param $time
+     * @param $userID
+     * @return int
      */
 
-    public function storeMeal($title, $cal_num, $date, $time, $userID)
+    public function storeMeal($title, $cal_num, $date, $time, $userID): int
     {
         return DB::table('meals')->insertGetId([
             'title' => $title,
@@ -39,12 +47,12 @@ class Meal extends Model
         ]);
     }
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function getMealsForUser($userID): \Illuminate\Support\Collection
+    public function getMealsForUser($userID): Collection
     {
        return ( DB::table('meals')
            ->select('*')
@@ -53,7 +61,7 @@ class Meal extends Model
 
     }
 
-    public function getLatestMeal($userID): \Illuminate\Support\Collection
+    public function getLatestMeal($userID): Collection
     {
         return DB::table('meals')
             ->select('*')
@@ -84,7 +92,7 @@ class Meal extends Model
         ]);
     }
 
-    public function getLastWeekMeals ($userID): \Illuminate\Support\Collection
+    public function getLastWeekMeals ($userID): Collection
     {
         return DB::table('meals')
             ->where('userID', '=', $userID)
@@ -93,7 +101,7 @@ class Meal extends Model
             ->get();
     }
 
-    public function getLastMonthMeals ($userID): \Illuminate\Support\Collection
+    public function getLastMonthMeals ($userID): Collection
     {
         return DB::table('meals')
             ->where('userID', '=', $userID)
@@ -102,7 +110,7 @@ class Meal extends Model
             ->get();
     }
 
-    public function filterMealsByDate ($userID, $fromDate, $toDate): \Illuminate\Support\Collection
+    public function filterMealsByDate ($userID, $fromDate, $toDate): Collection
     {
         return DB::table('meals')
             ->where('userID', '=', $userID)
@@ -110,7 +118,7 @@ class Meal extends Model
             ->get();
     }
 
-    public function filterMealsByTime ($userID, $fromTime, $toTime): \Illuminate\Support\Collection
+    public function filterMealsByTime ($userID, $fromTime, $toTime): Collection
     {
         return DB::table('meals')
             ->where('userID', '=', $userID)
