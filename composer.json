@@ -13,7 +13,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "spatie/yaml-front-matter": "^2.0",
-        "yajra/laravel-datatables-oracle": "^9.18",
+        "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
