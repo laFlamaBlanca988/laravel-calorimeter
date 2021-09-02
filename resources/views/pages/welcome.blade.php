@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+    <div class="cal-sum">
+        <h3 class="cal-sum-text">Calories sum:</h3>
+    </div>
+
+
     <div class="meals-btn-container">
         <button class="addMealOpenModal btn btn-danger">Add meal</button>
         <button class="filterMealOpenModal myBtn btn btn-danger">Filter meals</button>

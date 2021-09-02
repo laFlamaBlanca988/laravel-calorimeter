@@ -1,24 +1,24 @@
-const modal = document.querySelector(".modal");
-const editModal = document.querySelector('#editMealModal');
-const filterModal = document.querySelector('#filterMealModal');
-const spanEdit = document.querySelector('.closeEdit');
-const span = document.querySelector(".close");
-const table = document.querySelector('.meals');
-const tableBody = document.querySelector('tbody');
+let modal = document.querySelector(".modal");
+let editModal = document.querySelector('#editMealModal');
+let filterModal = document.querySelector('#filterMealModal');
+let spanEdit = document.querySelector('.closeEdit');
+let span = document.querySelector(".close");
+let table = document.querySelector('.meals');
+let tableBody = document.querySelector('tbody');
 
-const addBtn = document.querySelector(".addMealOpenModal");
-const addMealBtn = document.querySelector('.addMealBtn');
+let addBtn = document.querySelector(".addMealOpenModal");
+let addMealBtn = document.querySelector('.addMealBtn');
 
-const editButtons = document.getElementsByClassName('editMealOpenBtn');
-const editMealButton = document.querySelector('.editMealBtn');
-const deleteButtons = document.getElementsByClassName('deleteBtn');
+let editButtons = document.getElementsByClassName('editMealOpenBtn');
+let editMealButton = document.querySelector('.editMealBtn');
+let deleteButtons = document.getElementsByClassName('deleteBtn');
 
-const filterMealButton = document.querySelector('.filterMealOpenModal');
-const lastWeekFilterButton = document.querySelector('.lastWeekFilterButton');
-const lastMonthFilterButton = document.querySelector('.lastMonthFilterButton');
-const dateFilterCustomButton = document.querySelector('.dateFilterCustomButton');
-const fromDateInput = document.getElementById('fromDate');
-const toDateInput = document.getElementById('toDate');
+let filterMealButton = document.querySelector('.filterMealOpenModal');
+let lastWeekFilterButton = document.querySelector('.lastWeekFilterButton');
+let lastMonthFilterButton = document.querySelector('.lastMonthFilterButton');
+let dateFilterCustomButton = document.querySelector('.dateFilterCustomButton');
+let fromDateInput = document.getElementById('fromDate');
+let toDateInput = document.getElementById('toDate');
 
 let titleEdit = document.querySelector('#edit_title');
 let caloriesEdit = document.querySelector('#edit_calories');
@@ -72,7 +72,7 @@ window.addEventListener('click', function (e) {
     }
 function editMeal (mealID) {
     editModal.style.display = "block";
-    let tr = this.closest('tr');
+    let tr =  document.getElementById(`meal_${mealID}`).closest('tr');
     titleEdit.value = tr.children[1].innerText;
     caloriesEdit.value = tr.children[2].innerText;
     dateEdit.value = tr.children[3].innerText;
@@ -127,10 +127,12 @@ if (addMealBtn) {
                         >Delete</button>
                 </td> `;
                     tableBody.appendChild(newRow);
+                    getCalSum();
                     document.getElementById("delete_meal_" + mealID).addEventListener('click', function () {
                         deleteMeal(mealID);
                     });
-                    document.getElementById("edit_meal_" + mealID).addEventListener('click', function () {
+                    newRow.children[1].textContent = data.title;
+                    newRow.addEventListener('click', function () {
                         editMeal(mealID);
                     });
                     modal.style.display = "none";
@@ -164,15 +166,14 @@ if (addMealBtn) {
         };
         editModal.style.display = 'none';
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
                     const res = xhr.responseText;
                     const response = JSON.parse(res);
-                    document.getElementById(`meal_${buttonID}`).children[1].textContent = data.title;
-                    document.getElementById(`meal_${buttonID}`).children[2].textContent = data.cal_num;
-                    document.getElementById(`meal_${buttonID}`).children[3].textContent = data.date;
-                    document.getElementById(`meal_${buttonID}`).children[4].textContent = data.time+":00";
-                }
+                getCalSum();
+                document.getElementById(`meal_${response.id}`).children[1].textContent = data.title;
+                    document.getElementById(`meal_${response.id}`).children[2].textContent = data.cal_num;
+                    document.getElementById(`meal_${response.id}`).children[3].textContent = data.date;
+                    document.getElementById(`meal_${response.id}`).children[4].textContent = data.time;
             }
         }
         xhr.send(JSON.stringify(data));
@@ -191,6 +192,7 @@ function deleteMeal(mealsID) {
                 const res = JSON.parse(xhr.responseText);
                 if (document.getElementById("meal_" + mealsID) !== null) {
                     document.getElementById("meal_" + mealsID).remove();
+                    getCalSum();
                     document.getElementById('success_message').classList.add('alert', 'alert-success');
                     document.getElementById('success_message').textContent = res.message;
                     timeoutMessage();
@@ -215,10 +217,10 @@ lastWeekFilterButton.addEventListener('click', function (e) {
             filterModal.style.display = 'none';
             const res = JSON.parse(xhr.responseText);
             let html = '';
-            res.forEach(data => {
+            res.lastWeekMeals.forEach(data => {
                 html += `
                 <tr id="meal_${data.id}">
-                     <td class="item-id">${res.length + 1}</td>
+                     <td class="item-id">${res.lastWeekMeals.length + 1}</td>
                      <td class="item-title">${data.title}</td>
                      <td class="cal_num">${data.cal_num}</td>
                      <td class="item-date">${data.date}</td>
@@ -322,4 +324,25 @@ function timeoutMessage() {
             successMsg.style.display = "none";
         }
     }, 2000);
+}
+
+window.addEventListener('load', getCalSum);
+
+function getCalSum() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'meal/calSum', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const res = JSON.parse(xhr.responseText);
+            document.querySelector('.cal-sum-text').textContent = `Calories amount: ${res}`;
+        }
+        if (xhr.readyState !== 4 && xhr.status !== 200) {
+            console.log('No answer from the backend, you stupid fuck!')
+        }
+    }
+    xhr.send();
 }

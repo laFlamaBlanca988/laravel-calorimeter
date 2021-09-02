@@ -18,7 +18,6 @@ class MealsController extends Controller
         $meals = new Meal;
         $userID = Auth::user()->id;
         $latestMeal = $meals->getLatestMeal($userID);
-
         return response()->json($latestMeal);
     }
 
@@ -104,8 +103,13 @@ class MealsController extends Controller
     public function getLastWeekData(): JsonResponse
     {
         $meals = new Meal;
-        $lastWeekMeals = $meals->getLastWeekMeals();
-        return response()->json($lastWeekMeals);
+        $userID = Auth::user()->id;
+        $calSum = $meals->getSumOfCalories($userID);
+        $lastWeekMeals = $meals->getLastWeekMeals($userID);
+        return response()->json([
+            'lastWeekMeals' => $lastWeekMeals,
+            'calSum' => $calSum
+            ]);
     }
     public function getLastMonthData(): JsonResponse
     {
@@ -144,5 +148,14 @@ class MealsController extends Controller
                 'message' => "Something went wrong. Please try again."
             ]);
         }
+    }
+
+    public function getCalSum(Request $request): JsonResponse
+    {
+        $meals = new Meal;
+        $userID = Auth::user()->id;
+
+        $calSum = $meals->getSumOfCalories($userID);
+      return  response()->json($calSum);
     }
 };
