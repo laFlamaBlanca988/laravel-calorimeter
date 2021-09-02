@@ -102,14 +102,19 @@ class Meal extends Model
             ->get();
     }
 
-//    public function getCustomFilterMeals ($fromDate, $toDate): \Illuminate\Support\Collection
-//    {
-//        return DB::table('meals')
-//            ->whereBetween('date', [$fromDate, $toDate])
-//            //->whereBetween('time', [$fromTime, $toTime])
-//            ->get();
-//    }
+    public function filterMealsByDate ($fromDate, $toDate): \Illuminate\Support\Collection
+    {
+        return DB::table('meals')
+            ->whereBetween('date', [$fromDate, $toDate])
+            ->get();
+    }
 
+    public function filterMealsByTime ($fromTime, $toTime): \Illuminate\Support\Collection
+    {
+        return DB::table('meals')
+            ->whereBetween('time', [$fromTime, $toTime])
+            ->get();
+    }
     public function getSumOfCalories($userID) {
       return  DB::table("meals")
           ->where('userID', '=', $userID)

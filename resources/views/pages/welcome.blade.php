@@ -1,13 +1,16 @@
 @extends('layouts.app')
 @section('content')
     <div class="cal-sum">
-        <h3 class="cal-sum-text">Calories sum:</h3>
+        <h3 class="cal-sum-text"></h3>
     </div>
 
 
     <div class="meals-btn-container">
         <button class="addMealOpenModal btn btn-danger">Add meal</button>
-        <button class="filterMealOpenModal myBtn btn btn-danger">Filter meals</button>
+        <button class="filterByDateOpenModal myBtn btn btn-danger">Filter by Date</button>
+        <button class="filterByTimeOpenModal myBtn btn btn-danger">Filter by Time</button>
+        <button class="lastWeekFilterButton myBtn btn btn-danger">Filter Last Week</button>
+        <button class="lastMonthFilterButton myBtn btn btn-danger">Filter Last Month</button>
     </div>
     <div class="w-1/2 m-auto" id="success_message"></div>
 
@@ -55,28 +58,39 @@
         </div>
     </div>
 
-{{--    FILTER MEAL MODAL--}}
-    <div id="filterMealModal" class="modal">
+{{--    FILTER BY DATE MODAL--}}
+    <div id="filterByDateModal" class="modal">
         <div class="modal-content">
-            <h3 class="filterModalTitle">Filter meals</h3>
-            <div class="filterButtons">
-                <button class="lastWeekFilterButton">Last week</button>
-                <button class="lastMonthFilterButton"> Last month</button>
-            </div>
-            <h2 class="customFilterTitle">Custom filter:</h2>
+            <h2 class="customFilterTitle">Filter By Date</h2>
             <form id="filterMealForm">
                 <label for="from" class="form-label">From</label>
-                <input class="form-control" id="fromDate" name="fromDate" type="datetime-local" value="">
+                <input class="form-control" id="fromDate" name="fromDate" type="date" value="">
 
                 <label for="to" class="form-label">To</label>
-                <input class="form-control" id="toDate" name="toDate" type="datetime-local" value="">
+                <input class="form-control" id="toDate" name="toDate" type="date" value="">
 
-                <button class="dateFilterCustomButton btn btn-danger btn-sm">Submit</button>
+                <button class="dateFilterSubmitButton btn btn-danger btn-sm">Submit</button>
             </form>
         </div>
     </div>
 
-{{--    MEALS TABLE--}}
+    {{--    FILTER BY TIME MODAL--}}
+    <div id="filterByTimeModal" class="modal">
+        <div class="modal-content">
+            <h2 class="customFilterTitle">Filter By Time</h2>
+            <form id="filterMealForm">
+                <label for="from" class="form-label">From</label>
+                <input class="form-control" id="fromTime" name="fromTime" type="time" value="">
+
+                <label for="to" class="form-label">To</label>
+                <input class="form-control" id="toTime" name="toTime" type="time" value="">
+
+                <button class="timeFilterSubmitButton btn btn-danger btn-sm">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    {{--    MEALS TABLE--}}
     <div class="meals-table">
         <table class="meals table table-dark">
             <thead>

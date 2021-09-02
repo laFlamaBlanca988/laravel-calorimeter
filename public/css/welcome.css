@@ -11,10 +11,10 @@
 }
 .meals-btn-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 2rem;
     gap: 2rem;
-    width: 20vw;
+    width: 50vw;
     margin: 10rem auto auto;
 }
 .edit-header {

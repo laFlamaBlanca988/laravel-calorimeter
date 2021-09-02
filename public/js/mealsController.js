@@ -1,6 +1,6 @@
-let modal = document.querySelector(".modal");
+let addMealModal = document.querySelector(".modal");
 let editModal = document.querySelector('#editMealModal');
-let filterModal = document.querySelector('#filterMealModal');
+
 let spanEdit = document.querySelector('.closeEdit');
 let span = document.querySelector(".close");
 let table = document.querySelector('.meals');
@@ -13,12 +13,21 @@ let editButtons = document.getElementsByClassName('editMealOpenBtn');
 let editMealButton = document.querySelector('.editMealBtn');
 let deleteButtons = document.getElementsByClassName('deleteBtn');
 
-let filterMealButton = document.querySelector('.filterMealOpenModal');
+let filterByDateModal = document.querySelector('#filterByDateModal');
+let filterByDateButton = document.querySelector('.filterByDateOpenModal');
+let filterByTimeModal = document.querySelector('#filterByTimeModal');
+let filterByTimeButton = document.querySelector('.filterByTimeOpenModal');
+
 let lastWeekFilterButton = document.querySelector('.lastWeekFilterButton');
 let lastMonthFilterButton = document.querySelector('.lastMonthFilterButton');
-let dateFilterCustomButton = document.querySelector('.dateFilterCustomButton');
+
+let dateFilterSubmitButton = document.querySelector('.dateFilterSubmitButton');
+let timeFilterSubmitButton = document.querySelector('.timeFilterSubmitButton');
+
 let fromDateInput = document.getElementById('fromDate');
 let toDateInput = document.getElementById('toDate');
+let fromTimeInput = document.getElementById('fromTime');
+let toTimeInput = document.getElementById('toTime');
 
 let titleEdit = document.querySelector('#edit_title');
 let caloriesEdit = document.querySelector('#edit_calories');
@@ -29,23 +38,30 @@ let buttonID;
 // ADD MEAL MODAL CONTROL
 if (addBtn) {
     addBtn.addEventListener('click', function () {
-        modal.style.display = 'block';
+        addMealModal.style.display = 'block';
         document.querySelector('.title').value = '';
         document.querySelector('.cal_num').value = '';
         document.querySelector('.date').value = '';
         document.querySelector('.time').value = '';
     });
 }
-if (filterMealButton) {
-    filterMealButton.addEventListener('click', function () {
-        filterModal.style.display = 'block';
+if (filterByDateButton) {
+    filterByDateButton.addEventListener('click', function () {
+        filterByDateModal.style.display = 'block';
+    });
+}
+if (filterByTimeButton) {
+    filterByTimeButton.addEventListener('click', function () {
+        filterByTimeModal.style.display = 'block';
     });
 }
 if (span) {
     span.addEventListener('click', function () {
-        modal.style.display = "none";
+        addMealModal.style.display = "none";
         editModal.style.display = "none";
-        filterModal.style.display = "none";
+        filterByDateModal.style.display = "none";
+        filterByTimeModal.style.display = "none";
+
     });
 }
 
@@ -56,10 +72,12 @@ if (spanEdit) {
 }
 
 window.addEventListener('click', function (e) {
-    if (e.target == modal || e.target == editModal || e.target == filterModal) {
-        modal.style.display = "none";
+    if (e.target == addMealModal || e.target == editModal || e.target == filterByDateModal || e.target == filterByTimeModal) {
+        addMealModal.style.display = "none";
         editModal.style.display = 'none';
-        filterModal.style.display = "none";
+        filterByDateModal.style.display = "none";
+        filterByTimeModal.style.display = "none";
+
     }
 });
 
@@ -78,6 +96,7 @@ function editMeal (mealID) {
     dateEdit.value = tr.children[3].innerText;
     timeEdit.value = tr.children[4].innerText;
 }
+
 // DELETE BUTTON LISTENER
 for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', function () {
@@ -85,8 +104,8 @@ for (let i = 0; i < deleteButtons.length; i++) {
         deleteMeal(buttonID);
     });
 }
-// AJAX ADD MEAL
 
+// AJAX ADD MEAL
 if (addMealBtn) {
     addMealBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -135,7 +154,7 @@ if (addMealBtn) {
                     newRow.addEventListener('click', function () {
                         editMeal(mealID);
                     });
-                    modal.style.display = "none";
+                    addMealModal.style.display = "none";
                     document.getElementById('saveForm_errList').value = "";
                     document.getElementById('success_message').classList.add('alert', 'alert-success');
                     document.getElementById('success_message').textContent = response.message;
@@ -214,7 +233,7 @@ lastWeekFilterButton.addEventListener('click', function (e) {
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            filterModal.style.display = 'none';
+            filterByDateModal.style.display = 'none';
             const res = JSON.parse(xhr.responseText);
             let html = '';
             res.lastWeekMeals.forEach(data => {
@@ -251,7 +270,7 @@ lastMonthFilterButton.addEventListener('click', function (e) {
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            filterModal.style.display = 'none';
+            filterByDateModal.style.display = 'none';
             const res = JSON.parse(xhr.responseText);
             let html = '';
             res.forEach(data => {
@@ -278,10 +297,10 @@ lastMonthFilterButton.addEventListener('click', function (e) {
     xhr.send();
 });
 
-dateFilterCustomButton.addEventListener('click', function (e) {
+dateFilterSubmitButton.addEventListener('click', function (e) {
     e.preventDefault();
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'meal/customFilter', true);
+    xhr.open('POST', 'meal/dateFilter', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
     const data = {
@@ -290,7 +309,46 @@ dateFilterCustomButton.addEventListener('click', function (e) {
     };
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            filterModal.style.display = 'none';
+            filterByDateModal.style.display = 'none';
+            const res = JSON.parse(xhr.responseText);
+            let html = '';
+            res.forEach(data => {
+                html += `
+                <tr id="meal_${data.id}">
+                     <td class="item-id">${res.length + 1}</td>
+                     <td class="item-title">${data.title}</td>
+                     <td class="cal_num">${data.cal_num}</td>
+                     <td class="item-date">${data.date}</td>
+                     <td class="item-time">${data.time}</td>
+                     <td class="editButtons">
+                        <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="editMealOpenBtn btn btn-danger btn-sm"  type="submit"
+                            >Edit meal</button>
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="deleteBtn btn btn-danger btn-sm" type="submit"
+                            >Delete</button>
+                    </td>
+                </tr>`;
+            });
+            tableBody.innerHTML = html;
+        } if (xhr.readyState !== 4 && xhr.status !== 200) {
+            console.log('There was a problem, please try again!')
+        }
+    }
+    xhr.send(JSON.stringify(data));
+});
+
+timeFilterSubmitButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'meal/timeFilter', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    const data = {
+        'fromTime': fromTimeInput.value,
+        'toTime': toTimeInput.value
+    };
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            filterByTimeModal.style.display = 'none';
             const res = JSON.parse(xhr.responseText);
             let html = '';
             res.forEach(data => {
