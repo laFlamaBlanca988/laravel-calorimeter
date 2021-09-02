@@ -82,7 +82,6 @@ class Meal extends Model
             'time' => $time,
             'userID' => $userID,
         ]);
-
     }
 
     public function getLastWeekMeals ($userID): \Illuminate\Support\Collection
@@ -94,27 +93,31 @@ class Meal extends Model
             ->get();
     }
 
-    public function getLastMonthMeals (): \Illuminate\Support\Collection
+    public function getLastMonthMeals ($userID): \Illuminate\Support\Collection
     {
         return DB::table('meals')
+            ->where('userID', '=', $userID)
             ->whereDate('date', '>=', Carbon::now()->subMonth(1))
             ->whereDate('date', '<=', Carbon::now())
             ->get();
     }
 
-    public function filterMealsByDate ($fromDate, $toDate): \Illuminate\Support\Collection
+    public function filterMealsByDate ($userID, $fromDate, $toDate): \Illuminate\Support\Collection
     {
         return DB::table('meals')
+            ->where('userID', '=', $userID)
             ->whereBetween('date', [$fromDate, $toDate])
             ->get();
     }
 
-    public function filterMealsByTime ($fromTime, $toTime): \Illuminate\Support\Collection
+    public function filterMealsByTime ($userID, $fromTime, $toTime): \Illuminate\Support\Collection
     {
         return DB::table('meals')
+            ->where('userID', '=', $userID)
             ->whereBetween('time', [$fromTime, $toTime])
             ->get();
     }
+
     public function getSumOfCalories($userID) {
       return  DB::table("meals")
           ->where('userID', '=', $userID)

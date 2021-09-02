@@ -15,7 +15,7 @@
     padding: 2rem;
     gap: 2rem;
     width: 50vw;
-    margin: 10rem auto auto;
+    margin: 3rem auto auto;
 }
 .edit-header {
     width: 15%;
@@ -24,7 +24,7 @@
     display: flex;
     justify-content: space-between;
     width: 8vw;
-    border: none;
+
 }
 .modal {
     display: none;
@@ -82,10 +82,19 @@
 .meals-table {
     display: flex;
     justify-content: center;
+    border-radius: 20px;
 }
 .meals {
     width: 50%;
-    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px #888888
+}
+
+.add-meal-button-container {
+    display: flex;
+    justify-content: center;
+}
+.addMealOpenModal {
+    /*background: black;*/
 }
 .filterModalTitle {
     font-size: 2rem;
@@ -102,12 +111,12 @@
     margin: 1rem;
 }
 .lastWeekFilterButton,
+.filterByDateOpenModal,
+.filterByTimeOpenModal,
 .lastMonthFilterButton {
-    font-size: 1.2rem;
     margin: auto;
     cursor: pointer;
     background: #dc3545;
     border-radius: 5px;
     color: white;
-    padding: 0.5rem;
 }

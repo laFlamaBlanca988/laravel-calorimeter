@@ -1,5 +1,9 @@
 let addMealModal = document.querySelector(".modal");
 let editModal = document.querySelector('#editMealModal');
+let filterByDateModal = document.querySelector('#filterByDateModal');
+let filterByDateButton = document.querySelector('.filterByDateOpenModal');
+let filterByTimeModal = document.querySelector('#filterByTimeModal');
+let filterByTimeButton = document.querySelector('.filterByTimeOpenModal');
 
 let spanEdit = document.querySelector('.closeEdit');
 let span = document.querySelector(".close");
@@ -13,10 +17,6 @@ let editButtons = document.getElementsByClassName('editMealOpenBtn');
 let editMealButton = document.querySelector('.editMealBtn');
 let deleteButtons = document.getElementsByClassName('deleteBtn');
 
-let filterByDateModal = document.querySelector('#filterByDateModal');
-let filterByDateButton = document.querySelector('.filterByDateOpenModal');
-let filterByTimeModal = document.querySelector('#filterByTimeModal');
-let filterByTimeButton = document.querySelector('.filterByTimeOpenModal');
 
 let lastWeekFilterButton = document.querySelector('.lastWeekFilterButton');
 let lastMonthFilterButton = document.querySelector('.lastMonthFilterButton');

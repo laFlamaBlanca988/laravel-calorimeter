@@ -4,9 +4,10 @@
         <h3 class="cal-sum-text"></h3>
     </div>
 
-
+<div class="add-meal-button-container">
+    <button class="addMealOpenModal btn btn-danger">Add meal</button>
+</div>
     <div class="meals-btn-container">
-        <button class="addMealOpenModal btn btn-danger">Add meal</button>
         <button class="filterByDateOpenModal myBtn btn btn-danger">Filter by Date</button>
         <button class="filterByTimeOpenModal myBtn btn btn-danger">Filter by Time</button>
         <button class="lastWeekFilterButton myBtn btn btn-danger">Filter Last Week</button>

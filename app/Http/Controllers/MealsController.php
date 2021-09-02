@@ -114,27 +114,30 @@ class MealsController extends Controller
     public function getLastMonthData(): JsonResponse
     {
         $meals = new Meal;
-        $lastMonthMeals = $meals->getLastMonthMeals();
+        $userID = Auth::user()->id;
+        $lastMonthMeals = $meals->getLastMonthMeals($userID);
         return response()->json($lastMonthMeals);
     }
 
     public function getMealsByDate(Request $request): JsonResponse
     {
         $meal = new Meal;
+        $userID = Auth::user()->id;
         $meal->fromDate = $request->input('fromDate');
         $meal->toDate = $request->input('toDate');
 
-        $customFilterMeals = $meal->filterMealsByDate($meal->fromDate, $meal->toDate);
+        $customFilterMeals = $meal->filterMealsByDate($userID, $meal->fromDate, $meal->toDate);
         return response()->json($customFilterMeals);
     }
 
     public function getMealsByTime(Request $request): JsonResponse
     {
         $meal = new Meal;
+        $userID = Auth::user()->id;
         $meal->fromTime= $request->input('fromTime');
         $meal->toTime = $request->input('toTime');
 
-        $mealsByTime = $meal->filterMealsByTime($meal->fromTime, $meal->toTime);
+        $mealsByTime = $meal->filterMealsByTime($userID, $meal->fromTime, $meal->toTime);
         return response()->json($mealsByTime);
     }
 
