@@ -10,6 +10,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use \Illuminate\Http\JsonResponse;
+use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
+use function PHPUnit\Framework\isEmpty;
 
 class MealsController extends Controller
 {
@@ -106,39 +108,55 @@ class MealsController extends Controller
         $userID = Auth::user()->id;
         $calSum = $meals->getSumOfCalories($userID);
         $lastWeekMeals = $meals->getLastWeekMeals($userID);
+        $totalCalories = 0;
+        foreach ($lastWeekMeals as $mealsData) {
+            $totalCalories += $mealsData->cal_num;
+        }
+
         return response()->json([
-            'lastWeekMeals' => $lastWeekMeals,
-            'calSum' => $calSum
-            ]);
+            'meals' => $lastWeekMeals,
+            "total_calories" => $totalCalories
+        ]);
     }
     public function getLastMonthData(): JsonResponse
     {
         $meals = new Meal;
         $userID = Auth::user()->id;
         $lastMonthMeals = $meals->getLastMonthMeals($userID);
-        return response()->json($lastMonthMeals);
+        $totalCalories = 0;
+        foreach ($lastMonthMeals as $mealsData) {
+            $totalCalories += $mealsData->cal_num;
+        }
+
+        return response()->json([
+            'meals' => $lastMonthMeals,
+            "total_calories" => $totalCalories
+        ]);
     }
 
-    public function getMealsByDate(Request $request): JsonResponse
+    public function getMealsByDateAndTime(Request $request): JsonResponse
     {
         $meal = new Meal;
         $userID = Auth::user()->id;
-        $meal->fromDate = $request->input('fromDate');
+
+        return response()->json( $meal->filterMealsByDateTimeRange($userID, $request->input('fromDate'), $request->input('toDate'), $request->input('fromTime'), $request->input('toTime') ) );
+
+
+
+
+
+
+        $fromDate = $request->input('fromDate');
         $meal->toDate = $request->input('toDate');
-
-        $customFilterMeals = $meal->filterMealsByDate($userID, $meal->fromDate, $meal->toDate);
-        return response()->json($customFilterMeals);
-    }
-
-    public function getMealsByTime(Request $request): JsonResponse
-    {
-        $meal = new Meal;
-        $userID = Auth::user()->id;
         $meal->fromTime= $request->input('fromTime');
         $meal->toTime = $request->input('toTime');
-
+//        dd($meal->toTime);
+        if(empty($meal->fromTime)){
+            dd(555);
+        }
+        $mealsByDate = $meal->filterMealsByDate($userID, $fromDate, $meal->toDate);
         $mealsByTime = $meal->filterMealsByTime($userID, $meal->fromTime, $meal->toTime);
-        return response()->json($mealsByTime);
+        return response()->json([$mealsByDate, $mealsByTime]);
     }
 
     public function destroy(Request $request): JsonResponse
@@ -158,12 +176,4 @@ class MealsController extends Controller
         }
     }
 
-    public function getCalSum(Request $request): JsonResponse
-    {
-        $meals = new Meal;
-        $userID = Auth::user()->id;
-
-        $calSum = $meals->getSumOfCalories($userID);
-      return  response()->json($calSum);
-    }
 };

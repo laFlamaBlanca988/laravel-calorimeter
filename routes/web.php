@@ -7,8 +7,6 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
-
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('guest');
 
@@ -30,8 +28,5 @@ Route::post('/meal/edit', [MealsController::class, 'edit']);
 
 Route::get('/meal/lastWeek', [MealsController::class, 'getLastWeekData']);
 Route::get('/meal/lastMonth', [MealsController::class, 'getLastMonthData']);
-Route::post('/meal/dateFilter', [MealsController::class, 'getMealsByDate']);
-Route::post('/meal/timeFilter', [MealsController::class, 'getMealsByTime']);
-
-Route::get('/meal/calSum', [MealsController::class, 'getCalSum']);
+Route::post('/meal/dateTimeFilter', [MealsController::class, 'getMealsByDateAndTime']);
 

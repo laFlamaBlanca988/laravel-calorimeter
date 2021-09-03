@@ -109,7 +109,7 @@ class Meal extends Model
             ->whereDate('date', '<=', Carbon::now())
             ->get();
     }
-
+/*
     public function filterMealsByDate ($userID, $fromDate, $toDate): Collection
     {
         return DB::table('meals')
@@ -124,6 +124,19 @@ class Meal extends Model
             ->where('userID', '=', $userID)
             ->whereBetween('time', [$fromTime, $toTime])
             ->get();
+    }
+*/
+    public function filterMealsByDateTimeRange( $userID, $dateFrom, $dateTo, $timeFrom, $timeTo ) {
+        $query = DB::table('meals')->where('userID', '=', $userID);
+
+        if( isset($dateFrom, $dateTo) && strlen($dateFrom) > 0 && strlen($dateTo) > 0 ) {
+            $query->whereBetween('date', [$dateFrom, $dateTo]);
+        }
+        if( isset($timeFrom, $timeTo) && strlen($timeFrom) > 0 && strlen($timeTo) > 0 ) {
+            $query->whereBetween('time', [$timeFrom, $timeTo]);
+        }
+
+        return $query->get();
     }
 
     public function getSumOfCalories($userID) {

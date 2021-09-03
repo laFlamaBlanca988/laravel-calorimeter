@@ -1,15 +1,33 @@
 @extends('layouts.app')
 @section('content')
-    <div class="cal-sum">
-        <h3 class="cal-sum-text"></h3>
-    </div>
+    <div>
 
+    </div>
+    <div class="cal-sum">
+        <h3 class="cal-sum-text">Calories amount: <span id="total_calories"></span></h3>
+    </div>
+<div class="page-container">
+    <div class="filterMealForm">
+    <form id="filterMealForm">
+        <label for="from" class="form-label">From Date</label>
+        <input class="form-control" id="fromDate" name="fromDate" type="date">
+        <label for="to" class="form-label">To Date</label>
+        <input class="form-control" id="toDate" name="toDate" type="date">
+
+        <label for="from" class="form-label">From Time</label>
+        <input class="form-control" id="fromTime" name="fromTime" type="time">
+        <label for="to" class="form-label">To Time</label>
+        <input class="form-control" id="toTime" name="toTime" type="time">
+
+        <div class="dateAndTimeFilterSubmitButton btn btn-danger btn-sm">Submit</div>
+        <div class="dateAndTimeFilterClearButton btn btn-danger btn-sm">Clear</div>
+    </form>
+    </div>
+<div class="all-meals">
 <div class="add-meal-button-container">
     <button class="addMealOpenModal btn btn-danger">Add meal</button>
 </div>
     <div class="meals-btn-container">
-        <button class="filterByDateOpenModal myBtn btn btn-danger">Filter by Date</button>
-        <button class="filterByTimeOpenModal myBtn btn btn-danger">Filter by Time</button>
         <button class="lastWeekFilterButton myBtn btn btn-danger">Filter Last Week</button>
         <button class="lastMonthFilterButton myBtn btn btn-danger">Filter Last Month</button>
     </div>
@@ -37,6 +55,15 @@
         </div>
     </div>
 
+{{--    DELETE CONFIRMATION MODAL--}}
+    <div id="delete_confirm_modal" class="modal deleteConfirmModal">
+        <div class="modal-content">
+           <h3>Are you sure you want to delete this meal?</h3>
+            <button id="confirm_delete" onclick="deleteMeal(buttonID)" class="delete-confirm-button btn btn-danger">Submit</button>
+            <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
+        </div>
+    </div>
+
 {{--    EDIT MEAL MODAL--}}
     <div id="editMealModal" class="modal">
         <div class="modal-content">
@@ -59,37 +86,8 @@
         </div>
     </div>
 
-{{--    FILTER BY DATE MODAL--}}
-    <div id="filterByDateModal" class="modal">
-        <div class="modal-content">
-            <h2 class="customFilterTitle">Filter By Date</h2>
-            <form id="filterMealForm">
-                <label for="from" class="form-label">From</label>
-                <input class="form-control" id="fromDate" name="fromDate" type="date" value="">
 
-                <label for="to" class="form-label">To</label>
-                <input class="form-control" id="toDate" name="toDate" type="date" value="">
 
-                <button class="dateFilterSubmitButton btn btn-danger btn-sm">Submit</button>
-            </form>
-        </div>
-    </div>
-
-    {{--    FILTER BY TIME MODAL--}}
-    <div id="filterByTimeModal" class="modal">
-        <div class="modal-content">
-            <h2 class="customFilterTitle">Filter By Time</h2>
-            <form id="filterMealForm">
-                <label for="from" class="form-label">From</label>
-                <input class="form-control" id="fromTime" name="fromTime" type="time" value="">
-
-                <label for="to" class="form-label">To</label>
-                <input class="form-control" id="toTime" name="toTime" type="time" value="">
-
-                <button class="timeFilterSubmitButton btn btn-danger btn-sm">Submit</button>
-            </form>
-        </div>
-    </div>
 
     {{--    MEALS TABLE--}}
     <div class="meals-table">
@@ -123,4 +121,6 @@
             </tbody>
         </table>
     </div>
+</div>
+</div>
 @endsection
