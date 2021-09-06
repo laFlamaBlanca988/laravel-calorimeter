@@ -1,4 +1,4 @@
-.login--form-wrapper {
+.login-form-wrapper {
     max-width: 30rem;
     margin: 5rem auto auto;
     position: relative;
@@ -30,7 +30,7 @@
     font-weight: 600;
     padding: 0.5rem 0;
 }
-.btn--sign-up {
+.btn-sign-up {
     background: transparent;
     border: none;
     color: black;
@@ -39,7 +39,7 @@
     margin: 0;
     text-decoration: none;
 }
-.btn--sign-up:hover {
+.btn-sign-up:hover {
     background: none;
     color: #127e00;
     border: none;

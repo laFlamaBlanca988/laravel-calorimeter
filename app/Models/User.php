@@ -6,6 +6,7 @@ use App\Models\Meal;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -34,5 +35,25 @@ class User extends Authenticatable
     public function meal(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Meal::class);
+    }
+
+    public function getUser($userID): \Illuminate\Support\Collection
+    {
+      return  DB::table('users')
+            ->where('id', '=', $userID)
+            ->get();
+    }
+
+    public function editUser ($userID, $name, $username, $email, $password): int
+    {
+        return DB::table('users')
+            ->where('id', '=', $userID)
+            ->update([
+                'name' => $name,
+                'username' => $username,
+                'email' => $email,
+                'password' => $password,
+                'id' => $userID,
+            ]);
     }
 };

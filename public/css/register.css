@@ -21,21 +21,21 @@
     font-weight: 600;
     padding: 0.5rem 0;
 }
-.reg--form-buttons {
+.reg-form-buttons {
     width: 100%;
     padding: 0;
     margin: 1rem 0;
     display: flex;
     justify-content: space-between;
  }
- .btn--reg-login {
+ .btn-reg-login {
     background: transparent;
     border: none;
     color: #dc3545;
     font-weight: 600;
     font-size: 1.1rem;
 }
-.btn--reg-login:hover {
+.btn-reg-login:hover {
     background: none;
     color: #da4b59;
     border: none;

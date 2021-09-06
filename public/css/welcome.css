@@ -9,7 +9,7 @@
     color: #dc3545;
     font-weight: 600;
 }
-.dateAndTimeFilterSubmitButton, .dateAndTimeFilterClearButton {
+.date-and-time-filter-submit-button, .date-and-time-filter-clear-button {
     margin-top: 20px;
 }
 .meals-btn-container {
@@ -22,11 +22,12 @@
 }
 .edit-header {
     width: 15%;
+    height: 3rem;
 }
-.editButtons {
+.edit-buttons {
     display: flex;
     justify-content: space-between;
-    width: 8vw;
+    width: 10rem;
 }
 .modal {
     display: none;
@@ -91,19 +92,20 @@
     box-shadow: 3px 3px 3px 3px #888888;
 }
 
+
 .add-meal-button-container {
     display: flex;
     justify-content: center;
 }
 
-.filterButtons {
+.filter-buttons {
     display: flex;
     justify-content: space-between;
     margin: 1rem;
 }
 
-.lastWeekFilterButton,
-.lastMonthFilterButton {
+.last-week-filter-button,
+.last-month-filter-button {
     margin: auto;
     cursor: pointer;
     background: #dc3545;
@@ -111,7 +113,7 @@
     color: white;
 }
 
-.filterMealForm {
+.filter-meal-form {
     padding: 2rem;
     width: 20%;
     margin: 5rem auto auto;
@@ -125,6 +127,6 @@
     margin: auto;
     width: 50%;
 }
-.dateFilterSubmitButton {
+.date-filter-submit-button {
     margin-top: 1rem;
 }

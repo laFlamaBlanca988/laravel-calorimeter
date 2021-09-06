@@ -39,13 +39,13 @@ class MealsController extends Controller
         } else {
             $meal = new Meal;
 
-            $meal->title = $request->input('title');
-            $meal->cal_num = $request->input('cal_num');
-            $meal->date = $request->input('date');
-            $meal->time = $request->input('time');
-            $meal->userID = Auth::user()->id;
+            $title = $request->input('title');
+            $cal_num = $request->input('cal_num');
+            $date = $request->input('date');
+            $time = $request->input('time');
+            $userID = Auth::user()->id;
 
-            $newRowID = $meal->storeMeal($meal->title, $meal->cal_num, $meal->date, $meal->time, $meal->userID);
+            $newRowID = $meal->storeMeal($title, $cal_num, $date, $time, $userID);
 
             if( $newRowID ) {
                 return response()->json([
@@ -78,14 +78,14 @@ class MealsController extends Controller
         } else {
             $meal = new Meal;
 
-            $meal->title = $request->input('title');
-            $meal->cal_num = $request->input('cal_num');
-            $meal->date = $request->input('date');
-            $meal->time = $request->input('time');
-            $meal->userID = Auth::user()->id;
+            $title = $request->input('title');
+            $cal_num = $request->input('cal_num');
+            $date = $request->input('date');
+            $time = $request->input('time');
+            $userID = Auth::user()->id;
             $mealID= $request->json()->get('id');
 
-            $editRowID = $meal->editMeal($mealID ,$meal->title, $meal->cal_num, $meal->date, $meal->time, $meal->userID);
+            $editRowID = $meal->editMeal($mealID ,$title, $cal_num, $date, $time, $userID);
 
             if( $editRowID ) {
                 return response()->json([
@@ -114,8 +114,8 @@ class MealsController extends Controller
         }
 
         return response()->json([
-            'meals' => $lastWeekMeals,
-            "total_calories" => $totalCalories
+            "meals" => $lastWeekMeals,
+            "totalCalories" => $totalCalories
         ]);
     }
     public function getLastMonthData(): JsonResponse
@@ -130,7 +130,7 @@ class MealsController extends Controller
 
         return response()->json([
             'meals' => $lastMonthMeals,
-            "total_calories" => $totalCalories
+            "totalCalories" => $totalCalories
         ]);
     }
 
@@ -138,25 +138,19 @@ class MealsController extends Controller
     {
         $meal = new Meal;
         $userID = Auth::user()->id;
-
-        return response()->json( $meal->filterMealsByDateTimeRange($userID, $request->input('fromDate'), $request->input('toDate'), $request->input('fromTime'), $request->input('toTime') ) );
-
-
-
-
-
-
-        $fromDate = $request->input('fromDate');
-        $meal->toDate = $request->input('toDate');
-        $meal->fromTime= $request->input('fromTime');
-        $meal->toTime = $request->input('toTime');
-//        dd($meal->toTime);
-        if(empty($meal->fromTime)){
-            dd(555);
+        $dateFrom =  $request->input('fromDate');
+        $dateTo =  $request->input('toDate');
+        $timeFrom =  $request->input('fromTime');
+        $timeTo =  $request->input('toTime');
+        $mealsFilterAll = $meal->filterMealsByDateTimeRange($userID, $dateFrom, $dateTo, $timeFrom, $timeTo);
+        $totalCalories = 0;
+        foreach ($mealsFilterAll as $mealsData) {
+            $totalCalories += $mealsData->cal_num;
         }
-        $mealsByDate = $meal->filterMealsByDate($userID, $fromDate, $meal->toDate);
-        $mealsByTime = $meal->filterMealsByTime($userID, $meal->fromTime, $meal->toTime);
-        return response()->json([$mealsByDate, $mealsByTime]);
+        return response()->json([
+            "mealsFilterAll" => $mealsFilterAll,
+            "totalCalories" => $totalCalories
+        ]);
     }
 
     public function destroy(Request $request): JsonResponse

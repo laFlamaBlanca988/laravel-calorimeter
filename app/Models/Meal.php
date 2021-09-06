@@ -58,7 +58,6 @@ class Meal extends Model
            ->select('*')
            ->where('userID','=', $userID)
            ->get());
-
     }
 
     public function getLatestMeal($userID): Collection
@@ -126,7 +125,8 @@ class Meal extends Model
             ->get();
     }
 */
-    public function filterMealsByDateTimeRange( $userID, $dateFrom, $dateTo, $timeFrom, $timeTo ) {
+    public function filterMealsByDateTimeRange( $userID, $dateFrom, $dateTo, $timeFrom, $timeTo ): Collection
+    {
         $query = DB::table('meals')->where('userID', '=', $userID);
 
         if( isset($dateFrom, $dateTo) && strlen($dateFrom) > 0 && strlen($dateTo) > 0 ) {
@@ -145,4 +145,5 @@ class Meal extends Model
           ->get()
           ->sum("cal_num");
     }
+
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="login--form-wrapper">
+    <div class="login-form-wrapper">
         <form method="POST" action="{{route('login')}}" class="login-form">
             @csrf
             <h4 class='login-title'>Sign In</h4>
@@ -15,7 +15,7 @@
             </div>
             <div class="login-buttons mb-3">
                 <button type="submit" name="submit" class="btn btn-danger">Submit</button>
-                <a href="{{"register"}}" class="btn--sign-up btn-danger">Sign Up?</a>
+                <a href="{{"register"}}" class="btn-sign-up btn-danger">Sign Up?</a>
             </div>
             @if($errors->any())
                 <ul class="b">

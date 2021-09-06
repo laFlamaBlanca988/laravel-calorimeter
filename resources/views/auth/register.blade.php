@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="register--form-wrapper">
+    <div class="register-form-wrapper">
         <form method="POST" action="{{ route('register') }}" class="reg-form">
             @csrf
             <div class='register-title'>
@@ -16,7 +16,7 @@
                    required>
             <label>Password</label>
             <input type="password" name="password" class="form-control"  required>
-            <div class="reg--form-buttons">
+            <div class="reg-form-buttons">
                 <button type="submit" name="submitUser" class=" btn btn-danger">Submit</button>
                 <a href={{route('home')}} type="submit" class="btn btn-dark">Dismiss</a>
             </div>

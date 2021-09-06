@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
@@ -29,14 +30,13 @@
         <div class="welcome">
 
                 <h3 class="welcome-name">Welcome, {{auth()->user()->name}}</h3>
-
+            <a href="user" class="settings-icon fa">&#xf013;</a>
             <form method="POST" class="form-logout" action="{{route('logout')}}" >
                 @csrf
                 @auth
                 <button class="btn btn-danger btn-lg" type="submit" name="logout">Log Out</button>
                     @endauth
             </form>
-
         </div>
         @endauth
 
@@ -58,7 +58,7 @@
         <p>{{session('success')}}</p>
     </div>
     @endif
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 <script src="{{asset('js/mealsController.js')}}"></script>
+<script src="{{asset('js/userController.js')}}"></script>
 
