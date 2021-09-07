@@ -32,5 +32,5 @@ Route::get('/meal/lastMonth', [MealsController::class, 'getLastMonthData']);
 Route::post('/meal/dateTimeFilter', [MealsController::class, 'getMealsByDateAndTime']);
 
 Route::get('user', [UsersController::class, 'index'])->middleware('auth');
-Route::post('userEdit', [UsersController::class, 'editUserControl'])->middleware('auth');
+Route::post('user', [UsersController::class, 'editUserControl'])->middleware('auth');
 

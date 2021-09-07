@@ -81,7 +81,6 @@
     text-decoration: none;
     cursor: pointer;
 }
-
 .meals-table {
     display: flex;
     justify-content: center;
@@ -91,7 +90,6 @@
     width: 100%;
     box-shadow: 3px 3px 3px 3px #888888;
 }
-
 
 .add-meal-button-container {
     display: flex;

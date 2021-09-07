@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/userEdit.css') }}">
+
 
     <title>Calorimeter</title>
 </head>
@@ -28,7 +30,6 @@
         <h1 class="logo">Calorimeter</h1>
         @auth
         <div class="welcome">
-
                 <h3 class="welcome-name">Welcome, {{auth()->user()->name}}</h3>
             <a href="user" class="settings-icon fa">&#xf013;</a>
             <form method="POST" class="form-logout" action="{{route('logout')}}" >
@@ -61,4 +62,5 @@
 </body>
 <script src="{{asset('js/mealsController.js')}}"></script>
 <script src="{{asset('js/userController.js')}}"></script>
+<script src="{{asset('js/main.js')}}"></script>
 

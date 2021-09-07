@@ -22,8 +22,8 @@ let dateAndTimeFilterClearButton = document.querySelector('.date-and-time-filter
 
 let fromDateInput = document.getElementById('from_date');
 let toDateInput = document.getElementById('to_date');
-let fromTimeInput = document.getElementById('from_time');
-let toTimeInput = document.getElementById('to_time');
+// let fromTimeInput = document.getElementById('from_time');
+// let toTimeInput = document.getElementById('to_time');
 let formWithDateAndTimeFilters = document.getElementById('filter_meal_form');
 
 let editMealID = document.getElementById('edit_id');
@@ -147,7 +147,7 @@ if (addMealBtn) {
                 </td> `;
                     tableBody.appendChild(newRow);
                     addMealModal.style.display = "none";
-                    document.getElementById('save_form_errList').value = "";
+                    document.getElementById('save_form_err_list').value = "";
                     document.getElementById('success_message').classList.add('alert', 'alert-success');
                     document.getElementById('success_message').textContent = response.message;
                     timeoutMessage();
@@ -186,6 +186,11 @@ if (editMealButton) {
                 document.getElementById(`meal_${editMealID.value}`).children[2].textContent = data.cal_num;
                 document.getElementById(`meal_${editMealID.value}`).children[3].textContent = data.date;
                 document.getElementById(`meal_${editMealID.value}`).children[4].textContent = data.time;
+                // if (!data.title|| !caloriesEdit || !dateEdit || !timeEdit) {
+                //     console.log(document.getElementById('edit_form_err_list'))
+                //     document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
+                //     document.getElementById('edit_form_err_list').textContent = `All fields are required`;
+                // }
             }
         }
         xhr.send(JSON.stringify(data));

@@ -1,0 +1,24 @@
+.user-edit-form-container {
+    margin: auto;
+    width: 50%;
+}
+.user-edit-form {
+    margin: 10rem auto;
+    padding: 1.5rem 1.5rem 0;
+    display: flex;
+    flex-direction: row ;
+    flex-wrap: wrap;
+    max-height: 50%;
+    max-width: 40rem;
+    border-radius: 10px;
+    background-color: rgba(234, 230, 219, 0.92);
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+.edit_user_success_message {
+    margin: auto auto 1rem;
+    width: 40rem;
+    background-color: #ffa1aa;
+}
+.user-edit-alert {
+    list-style: none;
+}

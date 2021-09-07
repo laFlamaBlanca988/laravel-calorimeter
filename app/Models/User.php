@@ -52,7 +52,7 @@ class User extends Authenticatable
                 'name' => $name,
                 'username' => $username,
                 'email' => $email,
-                'password' => $password,
+                'password' =>bcrypt($password),
                 'id' => $userID,
             ]);
     }

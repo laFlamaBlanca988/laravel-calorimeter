@@ -83,7 +83,7 @@
                     <button type="click" class="edit-meal-btn btn btn-danger">Submit</button>
                     <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
                 </div>
-                <ul id="save_form_errList"></ul>
+                <ul id="edit_form_err_list"></ul>
             </form>
         </div>
     </div>

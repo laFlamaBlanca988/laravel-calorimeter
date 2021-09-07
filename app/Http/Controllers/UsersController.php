@@ -15,9 +15,9 @@ class UsersController extends Controller
     {
         $user = new User;
         $userID = Auth::user()->id;
-        $currentUser =$user->getUser($userID);
+        $currentUser = $user->getUser($userID);
         return view('pages.user', [
-            'user' => $currentUser
+            'user' => $currentUser,
         ]);
     }
 
@@ -27,11 +27,14 @@ class UsersController extends Controller
             'name' => ['required', 'max:255'],
             'username' => ['required', 'max:255', 'min:3', Rule::unique('users', 'username')],
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
-            'password' => ['required', 'min:4', 'max:255']
+            'password' => ['required', 'min:4', 'max:255'],
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => 400, 'errors' => $validator->messages()]);
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
         } else {
             $user = new User;
             $userID = Auth::user()->id;
@@ -40,19 +43,18 @@ class UsersController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
 
-
             $editedUser = $user->editUser($userID, $name, $username, $email, $password);
 
-            if( $editedUser ) {
+            if ($editedUser) {
                 return response()->json([
                     'status' => 200,
-                    'message' => 'User edited successfully!'
+                    'message' => 'User edited successfully!',
                 ]);
             }
 
             return response()->json([
                 'status' => 400,
-                'message' => 'Something went wrong. Please try again later.'
+                'message' => 'Something went wrong. Please try again later.',
             ]);
         }
     }
