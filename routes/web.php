@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MealsController;
 use App\Http\Controllers\SessionsController;
@@ -12,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('guest');
 
 Route::get('welcome', [WelcomeController::class, 'index'])->middleware('auth');
+Route::get('admin', [AdminController::class, 'index'])->middleware('isAdmin');
 
 Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 
-Route::get('login', [SessionsController::class, 'index'])->name('login')->middleware('guest');
-Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
+Route::get('login', [SessionsController::class, 'index'])->name('login');
+Route::post('login', [SessionsController::class, 'store']);
 Route::post('logout', [SessionsController::class, 'destroy'])->name('logout')->middleware('auth');
 
 Route::get('meals', [MealsController::class, 'index'])->middleware('auth');

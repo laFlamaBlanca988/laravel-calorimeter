@@ -128,3 +128,13 @@
 .date-filter-submit-button {
     margin-top: 1rem;
 }
+
+.delete-modal-content {
+    width:25rem;
+}
+
+.delete-modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+}

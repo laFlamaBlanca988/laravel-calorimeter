@@ -1,0 +1,30 @@
+.sidebar {
+    /* don't forget to add all the previously mentioned styles here too */
+    background: #212529;
+    color: #fff;
+    width: 20rem;
+    height: 100vh;
+}
+
+.sidebar .sidebar-header {
+    padding: 1.2rem;
+}
+
+.sidebar ul.components {
+    padding: 0 0 1rem ;
+    list-style: none;
+}
+.sidebar ul.components a {
+    padding-left: 1.3rem;
+    font-size: 1.4rem;
+}
+.sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    cursor: pointer;
+}
+.sidebar ul li a:hover {
+    background: #dc3545;
+}
+

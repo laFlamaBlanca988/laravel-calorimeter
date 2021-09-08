@@ -56,4 +56,24 @@ class User extends Authenticatable
                 'id' => $userID,
             ]);
     }
+
+    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function run()
+    {
+        DB::table('users')->insert([
+            'role_id' => '1'
+        ]);
+
+        DB::table('users')->insert([
+            'role_id' => '2'
+        ]);
+
+        DB::table('users')->insert([
+            'role_id' => '3'
+        ]);
+    }
 };

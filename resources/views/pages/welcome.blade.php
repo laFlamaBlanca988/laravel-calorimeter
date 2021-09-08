@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-{{--<div class="total-calories">{{$totalCalories}}</div>--}}
 
     <div class="cal-sum">
         <h3 class="cal-sum-text">Calories amount: <span id="total_calories"></span></h3>
@@ -58,10 +57,12 @@
 
 {{--    DELETE CONFIRMATION MODAL--}}
     <div id="delete_confirm_modal" class="modal delete-confirm-modal">
-        <div class="modal-content">
-           <h3>Are you sure you want to delete this meal?</h3>
+        <div class="delete-modal-content modal-content">
+           <h4>Are you sure you want to delete this meal?</h4>
+            <div class="delete-modal-buttons">
             <button id="confirm_delete" onclick="deleteMeal(buttonID)" class="delete-confirm-button btn btn-danger">Submit</button>
             <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
+            </div>
         </div>
     </div>
 

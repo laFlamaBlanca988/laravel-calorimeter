@@ -108,23 +108,7 @@ class Meal extends Model
             ->whereDate('date', '<=', Carbon::now())
             ->get();
     }
-/*
-    public function filterMealsByDate ($userID, $fromDate, $toDate): Collection
-    {
-        return DB::table('meals')
-            ->where('userID', '=', $userID)
-            ->whereBetween('date', [$fromDate, $toDate])
-            ->get();
-    }
 
-    public function filterMealsByTime ($userID, $fromTime, $toTime): Collection
-    {
-        return DB::table('meals')
-            ->where('userID', '=', $userID)
-            ->whereBetween('time', [$fromTime, $toTime])
-            ->get();
-    }
-*/
     public function filterMealsByDateTimeRange( $userID, $dateFrom, $dateTo, $timeFrom, $timeTo ): Collection
     {
         $query = DB::table('meals')->where('userID', '=', $userID);

@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/userEdit.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
 
 
     <title>Calorimeter</title>

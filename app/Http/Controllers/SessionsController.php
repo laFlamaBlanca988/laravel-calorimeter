@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class SessionsController extends Controller
@@ -24,7 +25,11 @@ class SessionsController extends Controller
         ]);
 
         if (auth()->attempt($attributes)) {
-            return redirect('/welcome')->with('success', 'You are now logged in!');
+            if(Auth::user()->role_id === 3) {
+                return redirect('/welcome')->with('success', 'You are now logged in!');
+            } else {
+                return redirect('/admin')->with('success', 'You are now logged in!');
+            }
         }
 
         throw ValidationException::withMessages([

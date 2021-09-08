@@ -19,7 +19,7 @@
             <a href="welcome" class="btn btn-dark">Dismiss</a>
         </div>
             <ul class="user-edit-alert">
-                    <li id="user_edit_alert" class="text-red-500 text-xs"></li>
+                <ul id="user_edit_form_err_list"></ul>
             </ul>
     </form>
     </div>

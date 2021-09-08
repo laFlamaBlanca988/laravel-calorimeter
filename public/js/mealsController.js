@@ -34,6 +34,11 @@ let timeEdit = document.querySelector('#edit_time');
 let buttonID;
 let totalCalories = document.getElementById("total_calories");
 
+let title;
+let calories;
+let date;
+let time;
+
 if(toDateInput) {
     toDateInput.addEventListener('change', function () {
         if (fromDateInput.value > this.value) {
@@ -83,6 +88,10 @@ window.addEventListener('click', function (e) {
         editButtons[i].addEventListener('click', function () {
             buttonID = this.dataset.id;
             editMeal(buttonID);
+            title = titleEdit.value;
+            calories = caloriesEdit.value;
+            date = dateEdit.value;
+            time = timeEdit.value;
         });
     }
 
@@ -177,7 +186,6 @@ if (editMealButton) {
             'time': timeEdit.value,
         };
 
-        editModal.style.display = 'none';
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
@@ -186,11 +194,16 @@ if (editMealButton) {
                 document.getElementById(`meal_${editMealID.value}`).children[2].textContent = data.cal_num;
                 document.getElementById(`meal_${editMealID.value}`).children[3].textContent = data.date;
                 document.getElementById(`meal_${editMealID.value}`).children[4].textContent = data.time;
-                // if (!data.title|| !caloriesEdit || !dateEdit || !timeEdit) {
-                //     console.log(document.getElementById('edit_form_err_list'))
-                //     document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
-                //     document.getElementById('edit_form_err_list').textContent = `All fields are required`;
-                // }
+                    editModal.style.display = 'none';
+                if (!data.title || !data.cal_num|| !data.date || !data.time) {
+                    document.getElementById(`meal_${editMealID.value}`).children[1].textContent = title;
+                    document.getElementById(`meal_${editMealID.value}`).children[2].textContent = calories;
+                    document.getElementById(`meal_${editMealID.value}`).children[3].textContent = date;
+                    document.getElementById(`meal_${editMealID.value}`).children[4].textContent = time;
+                    document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
+                    document.getElementById('edit_form_err_list').textContent = `All fields are required`;
+                    editModal.style.display = 'block';
+                }
             }
         }
         xhr.send(JSON.stringify(data));

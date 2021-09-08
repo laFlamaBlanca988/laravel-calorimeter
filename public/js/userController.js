@@ -34,7 +34,9 @@ if(editUserSubmitButton) {
                     if(response.errors.name)
                         errorHTML += response.errors.name + '</br>';
                     document.getElementById('edit_user_success_message').style.display = 'none';
-                    document.getElementById("user_edit_alert").innerHTML = errorHTML;
+                    // document.getElementById("user_edit_form_err_list").innerHTML = errorHTML;
+                    document.getElementById('user_edit_form_err_list').classList.add('alert', 'alert-danger');
+                    document.getElementById('user_edit_form_err_list').textContent = `All fields are required`;
                 }
             }
         }
