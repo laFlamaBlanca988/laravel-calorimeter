@@ -1,15 +1,13 @@
+/*SIDEBAR*/
 .sidebar {
-    /* don't forget to add all the previously mentioned styles here too */
     background: #212529;
     color: #fff;
     width: 20rem;
     height: 100vh;
 }
-
 .sidebar .sidebar-header {
     padding: 1.2rem;
 }
-
 .sidebar ul.components {
     padding: 0 0 1rem ;
     list-style: none;
@@ -26,5 +24,76 @@
 }
 .sidebar ul li a:hover {
     background: #dc3545;
+    color: white;
+
+}
+.admin-users-button {
+    text-decoration: none;
+    color: white;
+}
+.users-meals-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
+/*USERS TABLE*/
+.users-table-container,
+.meals-table-container {
+    margin: 0 auto;
+    width: 40%;
+}
+.admin-users-table,
+.admin-meals-table {
+    margin-top: 20%;
+}
+
+.edit-users-table-header,
+.edit-meals-table-header{
+    width: 15%;
+    height: 3rem;
+}
+
+/*MEALS TABLE*/
+
+.edit-meals-table-header {
+    width: 15%;
+    height: 3rem;
+}
+
+.edit-meals-buttons,
+.edit-users-buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 10rem;
+}
+
+.hidden {
+    display: none;
+}
+.visible {
+    display: block;
+}
+
+/*EDIT USER MODAL*/
+.edit-user-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}

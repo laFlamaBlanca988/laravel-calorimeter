@@ -4,3 +4,7 @@ body {
 .save_form_errList {
     width: 30rem;
 }
+.custom-body-container {
+    display: flex;
+    padding: 0;
+}

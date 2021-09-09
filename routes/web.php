@@ -36,3 +36,5 @@ Route::post('/meal/dateTimeFilter', [MealsController::class, 'getMealsByDateAndT
 Route::get('user', [UsersController::class, 'index'])->middleware('auth');
 Route::post('user', [UsersController::class, 'editUserControl'])->middleware('auth');
 
+Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('auth');
+

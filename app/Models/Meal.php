@@ -33,9 +33,14 @@ class Meal extends Model
      * @param $date
      * @param $time
      * @param $userID
-     * @return int
+     * @return Collection
      */
 
+    public function getAllMeals(): Collection
+    {
+        return DB::table('meals')->get();
+
+    }
     public function storeMeal($title, $cal_num, $date, $time, $userID): int
     {
         return DB::table('meals')->insertGetId([

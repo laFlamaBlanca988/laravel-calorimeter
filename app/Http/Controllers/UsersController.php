@@ -38,6 +38,7 @@ class UsersController extends Controller
         } else {
             $user = new User;
             $userID = Auth::user()->id;
+            dd($userID);
             $name = $request->input('name');
             $username = $request->input('username');
             $email = $request->input('email');

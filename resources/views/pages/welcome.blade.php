@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="cal-sum">
         <h3 class="cal-sum-text">Calories amount: <span id="total_calories"></span></h3>
     </div>

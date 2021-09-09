@@ -27,7 +27,7 @@
     <title>Calorimeter</title>
 </head>
 <body>
-<header class="container-fluid">
+<header class="custom-header-container container-fluid">
     <nav class="navbar">
         <h1 class="logo">Calorimeter</h1>
         @auth
@@ -65,4 +65,5 @@
 <script src="{{asset('js/mealsController.js')}}"></script>
 <script src="{{asset('js/userController.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/adminController.js')}}"></script>
 

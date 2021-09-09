@@ -2,7 +2,6 @@
 @section('content')
     <div class="user-edit-form-container">
         <form id="user_edit_form" action="user" class="user-edit-form">
-
             <div class="edit_user_success_message" id="edit_user_success_message"></div>
             <label for="name">Name</label>
             <input id="user_name" type="text" name="name" class="form-control" value="{{$user[0]->name}}" required>

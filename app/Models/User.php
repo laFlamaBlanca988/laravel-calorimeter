@@ -37,6 +37,10 @@ class User extends Authenticatable
         return $this->hasMany(Meal::class);
     }
 
+    public function getAllUsers (): \Illuminate\Support\Collection
+    {
+        return DB::table('users')->get();
+    }
     public function getUser($userID): \Illuminate\Support\Collection
     {
       return  DB::table('users')
