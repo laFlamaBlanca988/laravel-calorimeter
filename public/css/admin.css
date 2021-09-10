@@ -41,13 +41,16 @@
 .users-table-container,
 .meals-table-container {
     margin: 0 auto;
-    width: 40%;
+    width: 50%;
 }
 .admin-users-table,
 .admin-meals-table {
     margin-top: 20%;
 }
-
+.user-meals-table-container {
+    margin: 0 auto;
+    width: 50%;
+}
 .edit-users-table-header,
 .edit-meals-table-header{
     width: 15%;
@@ -61,13 +64,21 @@
     height: 3rem;
 }
 
-.edit-meals-buttons,
 .edit-users-buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 20rem;
+    border: none;
+}
+.edit-meals-buttons {
     display: flex;
     justify-content: space-between;
     width: 10rem;
 }
-
+.admin-table-row-user,
+.admin-table-row-meals {
+    border-width: thin;
+}
 .hidden {
     display: none;
 }

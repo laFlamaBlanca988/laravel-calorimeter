@@ -41,6 +41,7 @@ class User extends Authenticatable
     {
         return DB::table('users')->get();
     }
+
     public function getUser($userID): \Illuminate\Support\Collection
     {
       return  DB::table('users')
@@ -58,6 +59,15 @@ class User extends Authenticatable
                 'email' => $email,
                 'password' =>bcrypt($password),
                 'id' => $userID,
+            ]);
+    }
+
+    public function editUserAccess ($userID, $roleID): int
+    {
+        return DB::table('users')
+            ->where('id', '=', $userID)
+            ->update([
+                'role_id' => $roleID,
             ]);
     }
 

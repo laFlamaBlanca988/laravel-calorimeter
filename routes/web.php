@@ -37,4 +37,7 @@ Route::get('user', [UsersController::class, 'index'])->middleware('auth');
 Route::post('user', [UsersController::class, 'editUserControl'])->middleware('auth');
 
 Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('auth');
+Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('auth');
+Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->middleware('auth');
+
 

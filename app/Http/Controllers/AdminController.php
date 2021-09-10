@@ -70,4 +70,35 @@ class AdminController extends Controller
             ]);
         }
     }
+
+    public function displayUserMeals(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $meal = new Meal;
+        $userID = $request->json()->get('id');
+        $userMeals = $meal->getMealsForUser($userID);
+        if($userMeals) {
+            return response()->json([
+                'status' => 200,
+                'userMeals' => $userMeals
+            ]);
+        }
+        return response()->json([
+            'status' => 400,
+            'message' => 'Something went wrong. Please try again later.',
+        ]);
+    }
+
+    public function updateUserAccess (Request $request): \Illuminate\Http\JsonResponse
+    {
+        $users = new User;
+        $userID = $request->json()->get('id');
+        $roleID = $request->input('name');
+        $user = $users->getUser($userID);
+        if($user) {
+            return response()->json([
+                'status' => 200,
+                'userMeals' => $user
+            ]);
+        }
+    }
 }

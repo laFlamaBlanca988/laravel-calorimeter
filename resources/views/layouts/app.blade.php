@@ -33,13 +33,20 @@
         @auth
         <div class="welcome">
                 <h3 class="welcome-name">Welcome, {{auth()->user()->name}}</h3>
-            <a href="user" class="settings-icon fa">&#xf013;</a>
-            <form method="POST" class="form-logout" action="{{route('logout')}}" >
-                @csrf
-                @auth
-                <button class="btn btn-danger btn-lg" type="submit" name="logout">Log Out</button>
+             @auth
+                    <div class="dropdown">
+                        <button class="drop-btn">{{auth()->user()->name}}</button>
+                        <div class="dropdown-content">
+                            <a href="user">{{auth()->user()->name}} settings</a>
+                            <a href="admin">Admin settings</a>
+                            <form method="POST" class="form-logout" action="{{route('logout')}}" >
+                                @csrf
+                                <button class="logout-btn">Logout</button>
+                            </form>
+                        </div>
+                    </div>
                     @endauth
-            </form>
+
         </div>
         @endauth
 

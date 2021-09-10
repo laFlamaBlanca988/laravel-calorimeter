@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                 @foreach ($usersAll as $key => $user)
-                    <tr id="user_{{$user->id}}">
+                    <tr class="admin-table-row-user" id="user_{{$user->id}}">
                         <td class="user-id">{{$key + 1}}</td>
                         <td class="user-name">{{ $user->name }}</td>
                         <td class="user-username">{{ $user->username }}</td>
@@ -40,6 +40,12 @@
                         <td class="edit-users-buttons">
                             <button data-id="{{$user->id}}" class="edit-user-open-btn btn btn-danger btn-sm" type="submit"
                             >Edit user
+                            </button>
+                            <button data-id="{{$user->id}}" class="edit-user-meals-open-btn btn btn-danger btn-sm" type="submit"
+                            >User meals
+                            </button>
+                            <button data-id="{{$user->id}}" class="edit-user-access-open-btn btn btn-danger btn-sm" type="submit"
+                            >Access
                             </button>
                             <button data-row = "{{$key}}" data-id="{{$user->id}}" class="delete-user-btn btn btn-danger btn-sm">Delete</button>
                         </td>
@@ -49,7 +55,7 @@
             </table>
         </div>
 
-        {{--    MEALS TABLE--}}
+        {{--  ALL MEALS TABLE--}}
         <div id="meals_table" class="hidden meals-table-container">
             <table class="admin-meals-table table table-dark">
                 <thead>
@@ -64,7 +70,7 @@
                 </thead>
                 <tbody>
                 @foreach ($mealsAll as $key => $meal)
-                    <tr id="meal_{{$meal->id}}">
+                    <tr class="admin-table-row-meals" id="meal_{{$meal->id}}">
                         <td class="item-id">{{$key + 1}}</td>
                         <td class="item-title">{{ $meal->title }}</td>
                         <td class="item-cal-num">{{ $meal->cal_num }}</td>
@@ -82,6 +88,24 @@
             </table>
     </div>
 
+            {{--  USER MEALS TABLE--}}
+            <div class="hidden user-meals-table-container">
+                <table class="admin-meals-table table table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Meal</th>
+                        <th scope="col">Calories</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th class="edit-meals-table-header" scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="user_meals_table_body">
+
+                    </tbody>
+                </table>
+            </div>
 
         {{--    DELETE CONFIRMATION MODAL--}}
         <div id="delete_confirm_modal" class="modal delete-confirm-modal">
@@ -154,5 +178,25 @@
             </form>
         </div>
     </div>
+
+{{--            USER ACCESS MODAL--}}
+            <div id="user_access_modal" class="modal">
+                <div class="modal-content">
+                    <form id="user_access_form" action="admin">
+                        <div class="user_access_success_message" id="user_access_success_message"></div>
+                        <label>For user:</label>
+                        <h3>{{$user->name}}</h3>
+                        <label for="userAccessEdit" class="form-label">Access Level</label>
+                        <select class="form-control" id="userAccessEdit" name="userAccessEdit">
+                            <option name="3" value="User">User</option>
+                            <option name="2" value="User Manager">User Manager</option>
+                            <option name="1" value="Admin">Admin</option></select>
+                        <div class="reg-form-buttons">
+                            <button name="submitUserAccess" class="user-access-submit-button btn btn-danger">Submit</button>
+                            <a href="admin" class="btn btn-dark">Dismiss</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
 @endsection

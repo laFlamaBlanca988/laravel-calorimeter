@@ -2,29 +2,40 @@ let adminUsersButton = document.getElementById('admin_users_button');
 let adminMealsButton = document.getElementById('admin_meals_button');
 let usersTable = document.getElementById('users_table');
 let mealsTable = document.getElementById('meals_table');
+let userMealsTable = document.querySelector('.user-meals-table-container');
+let userMealsTableBody = document.getElementById('user_meals_table_body');
 let editUserButtons = document.getElementsByClassName('edit-user-open-btn');
 let adminEditUserSubmitButton = document.querySelector('.admin-edit-user-submit');
 let editUserModal = document.getElementById('edit_user_modal');
+let userMealsButtons = document.getElementsByClassName('edit-user-meals-open-btn');
 let deleteUserModal = document.getElementById('delete_user_modal');
 let nameEdit = document.getElementById('user_name');
 let emailEdit = document.getElementById('user_email');
 let usernameEdit = document.getElementById('user_username');
 let passwordEdit = document.getElementById('user_password');
 let editUserID = document.getElementById('edit_user_id');
+let accessButtons = document.getElementsByClassName('edit-user-access-open-btn');
+let accessModal = document.getElementById('user_access_modal');
+let userAccessSubmitButton = document.querySelector('.user-access-submit-button');
+
 let displayUsers = function () {
     usersTable.style.display = 'block';
     mealsTable.style.display = 'none';
+    userMealsTable.style.display = 'none';
 }
 
 let displayMeals = function () {
     mealsTable.style.display = 'block';
     usersTable.style.display = 'none';
+    userMealsTable.style.display = 'none';
 }
 
+
 window.addEventListener('click', function (e) {
-    if (e.target == editUserModal || e.target == deleteUserModal) {
+    if (e.target == editUserModal || e.target == deleteUserModal || e.target == accessModal) {
         editUserModal.style.display = 'none';
         deleteUserModal.style.display = 'none';
+        accessModal.style.display = 'none';
     }
 });
 
@@ -36,7 +47,83 @@ for (let i = 0; i < editUserButtons.length; i++) {
         editUser(buttonID);
     });
 }
+for (let i = 0; i < userMealsButtons.length; i++) {
+    userMealsButtons[i].addEventListener('click', function () {
+        buttonID = this.dataset.id;
+        displayUserMeals(buttonID);
+    });
+}
+for (let i = 0; i < accessButtons.length; i++) {
+    accessButtons[i].addEventListener('click', function () {
+        buttonID = this.dataset.id;
+        accessModal.style.display = 'block';
+        updateUserAccess(buttonID)
+    });
+}
 
+function updateUserAccess (userID) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'adminUserAccess', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    let data = {
+        'id': userID,
+        'roleID': 1
+    };
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let res = xhr.responseText;
+            let response = JSON.parse(res);
+            console.log(response);
+        }
+    }
+    xhr.send(JSON.stringify(data));
+}
+
+
+
+
+function displayUserMeals (userID) {
+
+    let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'adminUserMeals', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+        let data = {
+            'id': userID,
+        };
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let res = xhr.responseText;
+                let response = JSON.parse(res);
+                let meals = response.userMeals;
+                let html = '';
+                meals.forEach((data, index) => {
+                    html += `
+                    <tr class="admin-table-row-user-meals">
+                            <td class="item-id">${data.id}</td>
+                            <td class="item-title">${data.title}</td>
+                            <td class="item-cal-num">${data.cal_num}</td>
+                            <td class="item-date">${data.date}</td>
+                            <td class="item-time">${data.time}</td>
+                            <td class="edit-meals-buttons">
+                                <button data-id="${data.id}" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
+                                >Edit meal
+                                </button>
+                                <button data-row = "${index}" data-id="${data.id}" class="delete-btn btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                    `
+                })
+                userMealsTableBody.innerHTML = html;
+                userMealsTable.style.display = 'block';
+                usersTable.style.display = 'none';
+            }
+        }
+        xhr.send(JSON.stringify(data));
+
+}
 function editUser (userID) {
     let currentTableRow =  document.getElementById(`user_${userID}`).closest('tr');
     editUserID.value = userID;
@@ -44,6 +131,7 @@ function editUser (userID) {
     usernameEdit.value = currentTableRow.children[2].innerText;
     emailEdit.value = currentTableRow.children[3].innerText;
 }
+
 
 if (adminEditUserSubmitButton) {
     adminEditUserSubmitButton.addEventListener('click', function (e) {
@@ -81,19 +169,9 @@ if (adminEditUserSubmitButton) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+if(userAccessSubmitButton) {
+    userAccessSubmitButton.addEventListener('click', updateUserAccess)
+}
 if(adminUsersButton){
     adminUsersButton.addEventListener('click', displayUsers);
 }
