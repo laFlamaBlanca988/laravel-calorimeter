@@ -71,6 +71,13 @@ class User extends Authenticatable
             ]);
     }
 
+    public function deleteUser($userID): int
+    {
+        return DB::table('users')
+            ->where('id', '=', $userID)
+            ->delete();
+    }
+
     public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Role::class);

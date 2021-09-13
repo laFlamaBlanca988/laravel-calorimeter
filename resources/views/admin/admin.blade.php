@@ -56,7 +56,9 @@
         </div>
 
         {{--  ALL MEALS TABLE--}}
-        <div id="meals_table" class="hidden meals-table-container">
+            <div class="w-1/2 m-auto" id="success_message"></div>
+
+            <div id="meals_table" class="hidden meals-table-container">
             <table class="admin-meals-table table table-dark">
                 <thead>
                 <tr>
@@ -193,10 +195,21 @@
                             <option name="3" value="3">User</option>
                         </select>
                         <div class="reg-form-buttons">
-                            <button onclick="updateUserAccess()" name="submitUserAccess" class="user-access-submit-button btn btn-danger">Submit</button>
+                            <button name="submitUserAccess" class="user-access-submit-button btn btn-danger">Submit</button>
                             <a href="admin" class="btn btn-dark">Dismiss</a>
                         </div>
                     </form>
+                </div>
+            </div>
+
+{{--            DELETE USER CONFIRMATION MODAL--}}
+            <div id="delete_user_confirm_modal" class="modal delete-user-confirm-modal">
+                <div class="delete-modal-content modal-content">
+                    <h4>Are you sure you want to delete this user?</h4>
+                    <div class="delete-modal-buttons">
+                        <button id="confirm_user_delete" class="delete-user-confirm-button btn btn-danger">Submit</button>
+                        <a href="admin" type="click" class="btn btn-dark">Dismiss</a>
+                    </div>
                 </div>
             </div>
 

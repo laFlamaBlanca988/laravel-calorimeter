@@ -39,5 +39,6 @@ Route::post('user', [UsersController::class, 'editUserControl'])->middleware('au
 Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('auth');
 Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('auth');
 Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->middleware('auth');
+Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('auth');
 
 

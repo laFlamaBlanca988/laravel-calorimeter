@@ -8,7 +8,6 @@ let editUserButtons = document.getElementsByClassName('edit-user-open-btn');
 let adminEditUserSubmitButton = document.querySelector('.admin-edit-user-submit');
 let editUserModal = document.getElementById('edit_user_modal');
 let userMealsButtons = document.getElementsByClassName('edit-user-meals-open-btn');
-let deleteUserModal = document.getElementById('delete_user_modal');
 let nameEdit = document.getElementById('user_name');
 let emailEdit = document.getElementById('user_email');
 let usernameEdit = document.getElementById('user_username');
@@ -17,7 +16,9 @@ let editUserID = document.getElementById('edit_user_id');
 let accessButtons = document.getElementsByClassName('edit-user-access-open-btn');
 let accessModal = document.getElementById('user_access_modal');
 let userAccessSubmitButton = document.querySelector('.user-access-submit-button');
-
+let deleteUserOpenModalButton = document.getElementsByClassName('delete-user-btn');
+let deleteUserModal = document.getElementById('delete_user_confirm_modal');
+let deleteUserSubmitButton = document.querySelector('.delete-user-confirm-button');
 let displayUsers = function () {
     usersTable.style.display = 'block';
     mealsTable.style.display = 'none';
@@ -57,6 +58,35 @@ for (let i = 0; i < accessButtons.length; i++) {
     accessButtons[i].addEventListener('click', function () {
         buttonID = this.dataset.id;
         accessModal.style.display = 'block';
+    });
+}
+
+for (let i = 0; i < deleteUserOpenModalButton.length; i++) {
+    deleteUserOpenModalButton[i].addEventListener('click', function () {
+        buttonID = this.dataset.id;
+        deleteUserModal.style.display = 'block';
+    });
+}
+if(deleteUserSubmitButton) {
+    deleteUserSubmitButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'adminUserDelete', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+        let data = {
+            'id': buttonID,
+        };
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let res = xhr.responseText;
+                let response = JSON.parse(res);
+                console.log(response);
+                document.getElementById("user_" + buttonID).remove();
+                deleteUserModal.style.display = 'none';
+            }
+        }
+        xhr.send(JSON.stringify(data));
     });
 }
 if (userAccessSubmitButton) {
@@ -172,9 +202,6 @@ if (adminEditUserSubmitButton) {
 }
 
 
-if (userAccessSubmitButton) {
-    userAccessSubmitButton.addEventListener('click', updateUserAccess)
-}
 if (adminUsersButton) {
     adminUsersButton.addEventListener('click', displayUsers);
 }
