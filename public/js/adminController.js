@@ -57,50 +57,52 @@ for (let i = 0; i < accessButtons.length; i++) {
     accessButtons[i].addEventListener('click', function () {
         buttonID = this.dataset.id;
         accessModal.style.display = 'block';
-        updateUserAccess(buttonID)
     });
 }
-
-function updateUserAccess (userID) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'adminUserAccess', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-    let data = {
-        'id': userID,
-        'roleID': 1
-    };
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            let res = xhr.responseText;
-            let response = JSON.parse(res);
-            console.log(response);
-        }
-    }
-    xhr.send(JSON.stringify(data));
-}
-
-
-
-
-function displayUserMeals (userID) {
-
-    let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'adminUserMeals', true);
+if (userAccessSubmitButton) {
+    userAccessSubmitButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        let select = document.getElementById('userAccessEdit');
+        let selectedAccess = select.options[select.selectedIndex].value;
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'adminUserAccess', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
         let data = {
-            'id': userID,
+            'id': buttonID,
+            'roleID': selectedAccess
         };
-
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
                 let response = JSON.parse(res);
-                let meals = response.userMeals;
-                let html = '';
-                meals.forEach((data, index) => {
-                    html += `
+                console.log(response);
+                accessModal.style.display = 'none';
+            }
+        }
+        xhr.send(JSON.stringify(data));
+    })
+}
+
+
+function displayUserMeals(userID) {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'adminUserMeals', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+    let data = {
+        'id': userID,
+    };
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let res = xhr.responseText;
+            let response = JSON.parse(res);
+            let meals = response.userMeals;
+            let html = '';
+            meals.forEach((data, index) => {
+                html += `
                     <tr class="admin-table-row-user-meals">
                             <td class="item-id">${data.id}</td>
                             <td class="item-title">${data.title}</td>
@@ -115,17 +117,18 @@ function displayUserMeals (userID) {
                             </td>
                         </tr>
                     `
-                })
-                userMealsTableBody.innerHTML = html;
-                userMealsTable.style.display = 'block';
-                usersTable.style.display = 'none';
-            }
+            })
+            userMealsTableBody.innerHTML = html;
+            userMealsTable.style.display = 'block';
+            usersTable.style.display = 'none';
         }
-        xhr.send(JSON.stringify(data));
+    }
+    xhr.send(JSON.stringify(data));
 
 }
-function editUser (userID) {
-    let currentTableRow =  document.getElementById(`user_${userID}`).closest('tr');
+
+function editUser(userID) {
+    let currentTableRow = document.getElementById(`user_${userID}`).closest('tr');
     editUserID.value = userID;
     nameEdit.value = currentTableRow.children[1].innerText;
     usernameEdit.value = currentTableRow.children[2].innerText;
@@ -157,7 +160,7 @@ if (adminEditUserSubmitButton) {
                 document.getElementById(`user_${editUserID.value}`).children[2].textContent = data.username;
                 document.getElementById(`user_${editUserID.value}`).children[3].textContent = data.email;
                 editUserModal.style.display = 'none';
-                if (!data.name || !data.username|| !data.email || !data.password) {
+                if (!data.name || !data.username || !data.email || !data.password) {
                     document.getElementById('admin_user_edit_form_err_list').classList.add('alert', 'alert-danger');
                     document.getElementById('admin_user_edit_form_err_list').textContent = `All fields are required`;
                     editUserModal.style.display = 'block';
@@ -169,12 +172,12 @@ if (adminEditUserSubmitButton) {
 }
 
 
-if(userAccessSubmitButton) {
+if (userAccessSubmitButton) {
     userAccessSubmitButton.addEventListener('click', updateUserAccess)
 }
-if(adminUsersButton){
+if (adminUsersButton) {
     adminUsersButton.addEventListener('click', displayUsers);
 }
-if(adminMealsButton) {
+if (adminMealsButton) {
     adminMealsButton.addEventListener('click', displayMeals);
 }

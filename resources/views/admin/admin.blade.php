@@ -183,16 +183,17 @@
             <div id="user_access_modal" class="modal">
                 <div class="modal-content">
                     <form id="user_access_form" action="admin">
+                        <input type="hidden" id="user_access_id" name="userID" value="">
                         <div class="user_access_success_message" id="user_access_success_message"></div>
-                        <label>For user:</label>
-                        <h3>{{$user->name}}</h3>
+                        <h3>Change access</h3>
                         <label for="userAccessEdit" class="form-label">Access Level</label>
                         <select class="form-control" id="userAccessEdit" name="userAccessEdit">
-                            <option name="3" value="User">User</option>
-                            <option name="2" value="User Manager">User Manager</option>
-                            <option name="1" value="Admin">Admin</option></select>
+                            <option name="1" value="1">Admin</option>
+                            <option name="2" value="2">User Manager</option>
+                            <option name="3" value="3">User</option>
+                        </select>
                         <div class="reg-form-buttons">
-                            <button name="submitUserAccess" class="user-access-submit-button btn btn-danger">Submit</button>
+                            <button onclick="updateUserAccess()" name="submitUserAccess" class="user-access-submit-button btn btn-danger">Submit</button>
                             <a href="admin" class="btn btn-dark">Dismiss</a>
                         </div>
                     </form>

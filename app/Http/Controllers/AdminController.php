@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Meal;
 use App\Models\User;
+use http\Env\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,10 +22,6 @@ class AdminController extends Controller
         $userID =  Auth::user()->id;
         $userMeals = $meals->getMealsForUser($userID);
         $mealsAll = $meals->getAllMeals();
-//        $totalCalories = 0;
-//        foreach ($userMeals as $mealsData) {
-//            $totalCalories += $mealsData->cal_num;
-//        }
         return view('admin.admin', [
             'meals' => $userMeals,
             'usersAll' => $usersAll,
@@ -31,7 +29,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function editUser(Request $request): \Illuminate\Http\JsonResponse
+    public function editUser(Request $request): JsonResponse
     {
 
         $validator = Validator::make($request->all(), [
@@ -71,7 +69,7 @@ class AdminController extends Controller
         }
     }
 
-    public function displayUserMeals(Request $request): \Illuminate\Http\JsonResponse
+    public function displayUserMeals(Request $request): JsonResponse
     {
         $meal = new Meal;
         $userID = $request->json()->get('id');
@@ -88,17 +86,29 @@ class AdminController extends Controller
         ]);
     }
 
-    public function updateUserAccess (Request $request): \Illuminate\Http\JsonResponse
+    public function updateUserAccess (Request $request): JsonResponse
     {
         $users = new User;
         $userID = $request->json()->get('id');
-        $roleID = $request->input('name');
-        $user = $users->getUser($userID);
-        if($user) {
+        $roleID = $request->json()->get('roleID');
+        $dbRoleID = $users->getUser($userID)[0]->role_id;
+        $accessEdit = $users->editUserAccess($userID, $roleID);
+        if($dbRoleID == $roleID) {
             return response()->json([
-                'status' => 200,
-                'userMeals' => $user
+                'status' => 400,
+                'message' => 'User already registered with given credentials'
             ]);
         }
+        if($accessEdit) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'User access edited successfully'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 400,
+            'message' => 'Something went wrong. Please try again later.',
+        ]);
     }
 }

@@ -25,14 +25,14 @@ class Role extends Model
 
         DB::table('roles')->insert([
             'role_id' => 2,
-            'role_name' => 'User',
-            'role_slug' => 'user',
+            'role_name' => 'Manager',
+            'role_slug' => 'manager',
         ]);
 
         DB::table('roles')->insert([
             'role_id' => 3,
-            'role_name' => 'Manager',
-            'role_slug' => 'manager',
+            'role_name' => 'User',
+            'role_slug' => 'User',
         ]);
     }
 }
