@@ -82,10 +82,12 @@ class AdminController extends Controller
     public function adminUserDelete(Request $request): JsonResponse
     {
         $user = new User;
+        $meal = new Meal;
         $userID = $request->json()->get('id');
-
+        $deletedMeals = $meal->deleteUserMeals($userID);
         $deletedUser = $user->deleteUser($userID);
-        if ($deletedUser) {
+
+        if ($deletedUser && $deletedMeals) {
             return response()->json([
                 'status' => 200,
                 'message' => 'User successfully deleted'

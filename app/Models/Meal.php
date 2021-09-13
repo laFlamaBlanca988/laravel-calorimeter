@@ -135,4 +135,10 @@ class Meal extends Model
           ->sum("cal_num");
     }
 
+    public function deleteUserMeals($userID): int
+    {
+        return DB::table('meals')
+            ->where('userID' , '=', $userID)->delete();
+    }
+
 }

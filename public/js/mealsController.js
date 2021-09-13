@@ -213,7 +213,6 @@ if (editMealButton) {
 function deleteMeal(mealsID) {
     deleteModal.style.display = 'block';
     deleteConfirmButton.addEventListener('click', function (){
-        deleteMeal(buttonID);
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/meal/delete');
     xhr.setRequestHeader('Content-Type', 'application/json');
