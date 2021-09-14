@@ -123,9 +123,8 @@ function displayUserMeals(userID) {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
     let data = {
-        'id': buttonID,
+        'id': userID,
     };
-    console.log(data)
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let res = xhr.responseText;
