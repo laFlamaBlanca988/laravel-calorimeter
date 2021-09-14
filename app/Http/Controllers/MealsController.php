@@ -83,10 +83,8 @@ class MealsController extends Controller
             $cal_num = $request->input('cal_num');
             $date = $request->input('date');
             $time = $request->input('time');
-            $userID = Auth::user()->id;
             $mealID= $request->json()->get('id');
-
-            $editRowID = $meal->editMeal($mealID ,$title, $cal_num, $date, $time, $userID);
+            $editRowID = $meal->editMeal($mealID ,$title, $cal_num, $date, $time);
 
             if( $editRowID ) {
                 return response()->json([
@@ -171,4 +169,14 @@ class MealsController extends Controller
         }
     }
 
+    public function editMealForSpecificUser(Request $request): JsonResponse {
+        $meals = new Meal;
+        $userID= $request->json()->get('userID');
+        $title = $request->input('title');
+        $cal_num = $request->input('cal_num');
+        $date = $request->input('date');
+        $time = $request->input('time');
+        dd(5);
+        $editedMeal = $meal->editUserMealsByUserID($userID, $title, $cal_num, $date, $time);
+    }
 };

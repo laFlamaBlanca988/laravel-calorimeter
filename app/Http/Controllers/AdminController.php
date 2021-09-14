@@ -57,9 +57,15 @@ class AdminController extends Controller
         $userID = $request->json()->get('id');
         $userMeals = $meal->getMealsForUser($userID);
         if ($userMeals) {
-            return response()->json(['status' => 200, 'userMeals' => $userMeals]);
+            return response()->json([
+                'status' => 200,
+                'userMeals' => $userMeals
+            ]);
         }
-        return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.',]);
+        return response()->json([
+            'status' => 400,
+            'message' => 'Something went wrong. Please try again later.'
+            ]);
     }
 
     public function updateUserAccess(Request $request): JsonResponse

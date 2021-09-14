@@ -83,7 +83,7 @@ class Meal extends Model
           ->delete();
     }
 
-    public function editMeal ($id, $title, $cal_num, $date, $time, $userID): int
+    public function editMeal ($id, $title, $cal_num, $date, $time): int
     {
         return DB::table('meals')
             ->where('id', '=', $id)
@@ -92,7 +92,6 @@ class Meal extends Model
             'cal_num' => $cal_num,
             'date' => $date,
             'time' => $time,
-            'userID' => $userID,
         ]);
     }
 
