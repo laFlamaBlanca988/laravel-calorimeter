@@ -56,10 +56,10 @@
         </div>
 
         {{--  ALL MEALS TABLE--}}
-            <div class="w-1/2 m-auto" id="success_message"></div>
 
             <div id="meals_table" class="hidden meals-table-container">
-            <table class="admin-meals-table table table-dark">
+                <div class="w-1/2 m-auto" id="success_message"></div>
+                <table class="admin-meals-table table table-dark">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -82,7 +82,7 @@
                             <button data-id="{{$meal->id}}" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                             >Edit meal
                             </button>
-                            <button data-row = "{{$key}}" data-id="{{$meal->id}}" class="delete-btn btn btn-danger btn-sm">Delete</button>
+                            <button data-row ="{{$key}}" data-id="{{$meal->id}}" class="delete-btn btn btn-danger btn-sm">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -104,17 +104,16 @@
                     </tr>
                     </thead>
                     <tbody id="user_meals_table_body">
-
                     </tbody>
                 </table>
             </div>
 
-        {{--    DELETE CONFIRMATION MODAL--}}
+        {{--    DELETE MEAL CONFIRMATION MODAL--}}
         <div id="delete_confirm_modal" class="modal delete-confirm-modal">
             <div class="delete-modal-content modal-content">
                 <h4>Are you sure you want to delete this meal?</h4>
                 <div class="delete-modal-buttons">
-                    <button id="confirm_delete" onclick="deleteMeal(buttonID)" class="delete-confirm-button btn btn-danger">Submit</button>
+                    <button id="confirm_delete" class="delete-confirm-button btn btn-danger">Submit</button>
                     <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
                 </div>
             </div>

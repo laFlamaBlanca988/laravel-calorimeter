@@ -32,7 +32,7 @@
         <h1 class="logo">Calorimeter</h1>
         @auth
         <div class="welcome">
-                <h3 class="welcome-name">Welcome, {{auth()->user()->name}}</h3>
+                <h3 class="welcome-name">Welcome, </h3>
              @auth
                     <div class="dropdown">
                         <button class="drop-btn">{{auth()->user()->name}}</button>
