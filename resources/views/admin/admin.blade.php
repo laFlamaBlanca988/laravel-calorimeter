@@ -109,15 +109,16 @@
             </div>
 
         {{--    DELETE MEAL CONFIRMATION MODAL--}}
-        <div id="delete_confirm_modal" class="modal delete-confirm-modal">
-            <div class="delete-modal-content modal-content">
-                <h4>Are you sure you want to delete this meal?</h4>
-                <div class="delete-modal-buttons">
-                    <button id="confirm_delete" class="delete-confirm-button btn btn-danger">Submit</button>
-                    <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
-                </div>
+            <div id="delete_confirm_modal" class="modal delete-confirm-modal">
+                <form class="delete-modal-content modal-content">
+                    <input type="hidden" id="delete_id" value="">
+                    <h4>Are you sure you want to delete this meal?</h4>
+                    <div class="delete-modal-buttons">
+                        <button id="confirm_delete"  class="delete-confirm-button btn btn-danger">Submit</button>
+                        <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
+                    </div>
+                </form>
             </div>
-        </div>
 
         {{--    EDIT MEAL MODAL--}}
         <div id="edit_meal_modal" class="modal">

@@ -48,12 +48,14 @@ for (let i = 0; i < editUserButtons.length; i++) {
         editUser(buttonID);
     });
 }
+
 for (let i = 0; i < userMealsButtons.length; i++) {
     userMealsButtons[i].addEventListener('click', function () {
         buttonID = this.dataset.id;
         displayUserMeals(buttonID);
     });
 }
+
 for (let i = 0; i < accessButtons.length; i++) {
     accessButtons[i].addEventListener('click', function () {
         buttonID = this.dataset.id;
@@ -114,9 +116,7 @@ if (userAccessSubmitButton) {
     })
 }
 
-
 function displayUserMeals(userID) {
-
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'adminUserMeals', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -133,7 +133,7 @@ function displayUserMeals(userID) {
             let html = '';
             meals.forEach((data, index) => {
                 html += `
-                    <tr class="admin-table-row-user-meals">
+                    <tr id="meal_${data.id}">
                             <td class="item-id">${data.id}</td>
                             <td class="item-title">${data.title}</td>
                             <td class="item-cal-num">${data.cal_num}</td>

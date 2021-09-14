@@ -27,6 +27,7 @@ let toDateInput = document.getElementById('to_date');
 let formWithDateAndTimeFilters = document.getElementById('filter_meal_form');
 
 let editMealID = document.getElementById('edit_id');
+let deleteMealID = document.getElementById('delete_id');
 let titleEdit = document.querySelector('#edit_title');
 let caloriesEdit = document.querySelector('#edit_calories');
 let dateEdit = document.querySelector('#edit_date');
@@ -39,7 +40,7 @@ let calories;
 let date;
 let time;
 
-if(toDateInput) {
+if (toDateInput) {
     toDateInput.addEventListener('change', function () {
         if (fromDateInput.value > this.value) {
             document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
@@ -84,20 +85,20 @@ window.addEventListener('click', function (e) {
 });
 
 // EDIT BUTTON LISTENER
-    for (let i = 0; i < editButtons.length; i++) {
-        editButtons[i].addEventListener('click', function () {
-            buttonID = this.dataset.id;
-            editMeal(buttonID);
-            title = titleEdit.value;
-            calories = caloriesEdit.value;
-            date = dateEdit.value;
-            time = timeEdit.value;
-        });
-    }
+for (let i = 0; i < editButtons.length; i++) {
+    editButtons[i].addEventListener('click', function () {
+        buttonID = this.dataset.id;
+        editMeal(buttonID);
+        title = titleEdit.value;
+        calories = caloriesEdit.value;
+        date = dateEdit.value;
+        time = timeEdit.value;
+    });
+}
 
-function editMeal (mealID) {
+function editMeal(mealID) {
     editModal.style.display = "block";
-    let currentTableRow =  document.getElementById(`meal_${mealID}`).closest('tr');
+    let currentTableRow = document.getElementById(`meal_${mealID}`).closest('tr');
     editMealID.value = mealID;
     titleEdit.value = currentTableRow.children[1].innerText;
     caloriesEdit.value = currentTableRow.children[2].innerText;
@@ -109,9 +110,13 @@ function editMeal (mealID) {
 for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', function () {
         buttonID = this.dataset.id;
-        deleteModal.style.display = 'block';
         deleteMeal(buttonID);
     });
+}
+
+function deleteMeal(mealID) {
+    deleteModal.style.display = 'block';
+    deleteMealID.value = mealID;
 }
 
 // AJAX ADD MEAL
@@ -194,8 +199,8 @@ if (editMealButton) {
                 document.getElementById(`meal_${editMealID.value}`).children[2].textContent = data.cal_num;
                 document.getElementById(`meal_${editMealID.value}`).children[3].textContent = data.date;
                 document.getElementById(`meal_${editMealID.value}`).children[4].textContent = data.time;
-                    editModal.style.display = 'none';
-                if (!data.title || !data.cal_num|| !data.date || !data.time) {
+                editModal.style.display = 'none';
+                if (!data.title || !data.cal_num || !data.date || !data.time) {
                     document.getElementById(`meal_${editMealID.value}`).children[1].textContent = title;
                     document.getElementById(`meal_${editMealID.value}`).children[2].textContent = calories;
                     document.getElementById(`meal_${editMealID.value}`).children[3].textContent = date;
@@ -210,21 +215,22 @@ if (editMealButton) {
     });
 }
 // AJAX DELETE
-function deleteMeal(mealsID) {
-    deleteModal.style.display = 'block';
-    deleteConfirmButton.addEventListener('click', function (){
+
+deleteConfirmButton.addEventListener('click', function (e) {
+    e.preventDefault();
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/meal/delete');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-    xhr.send('{"id":"' + mealsID + '"}');
-
+let data = {
+    'id': deleteMealID.value
+}
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 let res = JSON.parse(xhr.responseText);
-                if (document.getElementById("meal_" + mealsID) !== null) {
-                    document.getElementById("meal_" + mealsID).remove();
+                if (document.getElementById("meal_" + deleteMealID.value) !== null) {
+                    document.getElementById("meal_" + deleteMealID.value).remove();
                     deleteModal.style.display = "none";
                     document.getElementById('success_message').classList.add('alert', 'alert-success');
                     document.getElementById('success_message').textContent = res.message;
@@ -235,11 +241,12 @@ function deleteMeal(mealsID) {
             }
         }
     }
-    });
-}
+    xhr.send(JSON.stringify(data));
+});
+
 
 // AJAX FILTER LAST WEEK
-if(lastWeekFilterButton) {
+if (lastWeekFilterButton) {
     lastWeekFilterButton.addEventListener('click', function (e) {
         e.preventDefault();
         let xhr = new XMLHttpRequest();
@@ -279,7 +286,7 @@ if(lastWeekFilterButton) {
     })
 }
 // AJAX FILTER LAST WEEK
-if(lastMonthFilterButton) {
+if (lastMonthFilterButton) {
     lastMonthFilterButton.addEventListener('click', function (e) {
         e.preventDefault();
         let xhr = new XMLHttpRequest();
@@ -318,13 +325,13 @@ if(lastMonthFilterButton) {
         xhr.send();
     });
 }
-if(dateAndTimeFilterClearButton) {
+if (dateAndTimeFilterClearButton) {
     dateAndTimeFilterClearButton.addEventListener('click', function () {
         document.getElementById('filter_meal_form').reset();
         dateAndTimeFilterSubmitButton.click();
     });
 }
-if(dateAndTimeFilterSubmitButton) {
+if (dateAndTimeFilterSubmitButton) {
     dateAndTimeFilterSubmitButton.addEventListener('click', function (e) {
         e.preventDefault();
         let xhr = new XMLHttpRequest();
@@ -369,6 +376,7 @@ if(dateAndTimeFilterSubmitButton) {
         xhr.send(JSON.stringify(data));
     });
 }
+
 // TIMEOUT MESSAGE
 function timeoutMessage() {
     setTimeout(function () {

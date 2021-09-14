@@ -3,6 +3,7 @@
     <div class="cal-sum">
         <h3 class="cal-sum-text">Calories amount: <span id="total_calories"></span></h3>
     </div>
+
 <div class="page-container">
     <div class="filter-meal-form">
     <form id="filter_meal_form">
@@ -54,15 +55,16 @@
         </div>
     </div>
 
-{{--    DELETE CONFIRMATION MODAL--}}
+{{--    DELETE MEAL CONFIRMATION MODAL--}}
     <div id="delete_confirm_modal" class="modal delete-confirm-modal">
-        <div class="delete-modal-content modal-content">
-           <h4>Are you sure you want to delete this meal?</h4>
+        <form class="delete-modal-content modal-content">
+            <input type="hidden" id="delete_id" value="">
+            <h4>Are you sure you want to delete this meal?</h4>
             <div class="delete-modal-buttons">
-            <button id="confirm_delete" onclick="deleteMeal(buttonID)" class="delete-confirm-button btn btn-danger">Submit</button>
+            <button id="confirm_delete"  class="delete-confirm-button btn btn-danger">Submit</button>
             <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
             </div>
-        </div>
+        </form>
     </div>
 
 {{--    EDIT MEAL MODAL--}}
