@@ -79,7 +79,6 @@ class Meal extends Model
     {
       return DB::table('meals')
           ->where('id', '=', $mealID)
-          ->where('userID', '=', Auth::user()->id)
           ->delete();
     }
 

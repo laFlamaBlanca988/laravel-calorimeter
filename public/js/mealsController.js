@@ -216,34 +216,35 @@ if (editMealButton) {
 }
 // AJAX DELETE
 
-deleteConfirmButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/meal/delete');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-let data = {
-    'id': deleteMealID.value
-}
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                let res = JSON.parse(xhr.responseText);
-                if (document.getElementById("meal_" + deleteMealID.value) !== null) {
-                    document.getElementById("meal_" + deleteMealID.value).remove();
-                    deleteModal.style.display = "none";
-                    document.getElementById('success_message').classList.add('alert', 'alert-success');
-                    document.getElementById('success_message').textContent = res.message;
-                    timeoutMessage();
+if(deleteConfirmButton) {
+    deleteConfirmButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/meal/delete');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+        let data = {
+            'id': deleteMealID.value
+        }
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    let res = JSON.parse(xhr.responseText);
+                    if (document.getElementById("meal_" + deleteMealID.value) !== null) {
+                        document.getElementById("meal_" + deleteMealID.value).remove();
+                        deleteModal.style.display = "none";
+                        document.getElementById('success_message').classList.add('alert', 'alert-success');
+                        document.getElementById('success_message').textContent = res.message;
+                        timeoutMessage();
+                    }
+                } else {
+                    console.log('There was a problem, please try again');
                 }
-            } else {
-                console.log('There was a problem, please try again');
             }
         }
-    }
-    xhr.send(JSON.stringify(data));
-});
-
+        xhr.send(JSON.stringify(data));
+    });
+}
 
 // AJAX FILTER LAST WEEK
 if (lastWeekFilterButton) {

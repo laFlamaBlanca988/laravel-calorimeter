@@ -90,6 +90,7 @@ class MealsController extends Controller
                 return response()->json([
                     'status' => 200,
                     'id' => $mealID,
+                    'title' => $title,
                     'message' => 'Meal edited successfully!'
                 ]);
             }
@@ -167,16 +168,5 @@ class MealsController extends Controller
                 'message' => "Something went wrong. Please try again."
             ]);
         }
-    }
-
-    public function editMealForSpecificUser(Request $request): JsonResponse {
-        $meals = new Meal;
-        $userID= $request->json()->get('userID');
-        $title = $request->input('title');
-        $cal_num = $request->input('cal_num');
-        $date = $request->input('date');
-        $time = $request->input('time');
-        dd(5);
-        $editedMeal = $meal->editUserMealsByUserID($userID, $title, $cal_num, $date, $time);
     }
 };

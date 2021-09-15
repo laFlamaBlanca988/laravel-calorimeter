@@ -42,4 +42,3 @@ Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->mi
 Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('auth');
 Route::post('adminMealsDelete', [AdminController::class, 'adminMealDelete'])->middleware('auth');
 
-

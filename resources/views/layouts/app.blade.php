@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Calorimeter</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!-- Fonts -->
@@ -64,7 +65,7 @@
 @yield('content')
 
 @if(session()->has('success'))
-    <div class="fixed right-0 bg-blue-500 text-white py-2 px-4 rounded-xl bottom-3 right-3">
+    <div class="logged-in-message fixed right-0 bg-blue-500 text-white py-2 px-4 rounded-xl bottom-3 right-3">
         <p>{{session('success')}}</p>
     </div>
     @endif

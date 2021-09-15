@@ -114,7 +114,7 @@
                     <td class="item-cal-num">{{ $meal->cal_num }}</td>
                     <td class="item-date">{{ $meal->date }}</td>
                     <td class="item-time">{{ $meal->time }}</td>
-                    <td class="edit-buttons">
+                    <td class="edit-meals-buttons">
                         <button data-id="{{$meal->id}}" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                         >Edit meal
                         </button>
