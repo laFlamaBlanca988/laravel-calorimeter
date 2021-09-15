@@ -74,8 +74,6 @@
     display: flex;
     justify-content: space-between;
     width: 10rem;
-    border: none;
-
 }
 .admin-table-row-user,
 .admin-table-row-meals {

@@ -153,7 +153,7 @@ if (addMealBtn) {
                  <td class="cal_num">${data.cal_num}</td>
                  <td class="item-date">${data.date}</td>
                  <td class="item-time">${data.time}:00</td>
-                 <td class="edit-buttons">
+                 <td class="edit-meals-buttons">
                     <button id="edit_meal_${mealID}" onclick="editMeal(${mealID})" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                         >Edit meal</button>
                     <button id="delete_meal_${mealID}" onclick="deleteMeal(${mealID})" class="delete-btn btn btn-danger btn-sm" type="submit"
