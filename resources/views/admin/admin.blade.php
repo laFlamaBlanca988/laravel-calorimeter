@@ -31,7 +31,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($usersAll as $key => $user)
+                @foreach ($users as $key => $user)
                     <tr class="admin-table-row-user" id="user_{{$user->id}}">
                         <td class="user-id">{{$key + 1}}</td>
                         <td class="user-name">{{ $user->name }}</td>
@@ -67,11 +67,11 @@
                     <th scope="col">Calories</th>
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
-                    <th class="edit-meals-table-header" scope="col"></th>
+                    <th class="edit-meals-table-header" scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($mealsAll as $key => $meal)
+                @foreach ($meals as $key => $meal)
                     <tr class="admin-table-row-meals" id="meal_{{$meal->id}}">
                         <td class="item-id">{{$key + 1}}</td>
                         <td class="item-title">{{ $meal->title }}</td>
@@ -79,7 +79,7 @@
                         <td class="item-date">{{ $meal->date }}</td>
                         <td class="item-time">{{ $meal->time }}</td>
                         <td class="edit-meals-buttons">
-                            <button data-id="{{$meal->id}}" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
+                            <button data-id="{{$meal->id}}"  class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                             >Edit meal
                             </button>
                             <button data-row ="{{$key}}" data-id="{{$meal->id}}" class="delete-btn btn btn-danger btn-sm">Delete</button>
@@ -146,9 +146,9 @@
     {{--    DELETE USER MODAL--}}
     <div id="delete_user_modal" class="modal delete-confirm-modal">
         <div class="delete-modal-content modal-content">
-            <h4>Are you sure you want to delete this meal?</h4>
+            <h4>Are you sure you want to delete this user?</h4>
             <div class="delete-modal-buttons">
-                <button id="confirm_user_delete" onclick="deleteUser(buttonID)" class="delete-confirm-button btn btn-danger">Submit</button>
+                <button id="confirm_user_delete" class="delete-confirm-button btn btn-danger">Submit</button>
                 <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
             </div>
         </div>

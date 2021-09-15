@@ -154,7 +154,7 @@ if (addMealBtn) {
                  <td class="item-date">${data.date}</td>
                  <td class="item-time">${data.time}:00</td>
                  <td class="edit-buttons">
-                    <button id="edit_meal_${mealID}" onclick="editMeal(${mealID})" class="edit-meal-btn btn btn-danger btn-sm" type="submit"
+                    <button id="edit_meal_${mealID}" onclick="editMeal(${mealID})" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                         >Edit meal</button>
                     <button id="delete_meal_${mealID}" onclick="deleteMeal(${mealID})" class="delete-btn btn btn-danger btn-sm" type="submit"
                         >Delete</button>
@@ -200,6 +200,7 @@ if (editMealButton) {
                 document.getElementById(`meal_${editMealID.value}`).children[3].textContent = data.date;
                 document.getElementById(`meal_${editMealID.value}`).children[4].textContent = data.time;
                 editModal.style.display = 'none';
+                displayUserMeals(buttonID);
                 if (!data.title || !data.cal_num || !data.date || !data.time) {
                     document.getElementById(`meal_${editMealID.value}`).children[1].textContent = title;
                     document.getElementById(`meal_${editMealID.value}`).children[2].textContent = calories;
@@ -233,6 +234,7 @@ if(deleteConfirmButton) {
                     if (document.getElementById("meal_" + deleteMealID.value) !== null) {
                         document.getElementById("meal_" + deleteMealID.value).remove();
                         deleteModal.style.display = "none";
+                        displayUserMeals(buttonID);
                         document.getElementById('success_message').classList.add('alert', 'alert-success');
                         document.getElementById('success_message').textContent = res.message;
                         timeoutMessage();

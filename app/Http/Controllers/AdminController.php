@@ -22,7 +22,7 @@ class AdminController extends Controller
         $userID = Auth::user()->id;
         $userMeals = $meals->getMealsForUser($userID);
         $mealsAll = $meals->getAllMeals();
-        return view('admin.admin', ['meals' => $userMeals, 'usersAll' => $usersAll, 'mealsAll' => $mealsAll]);
+        return view('admin.admin', ['userMeals' => $userMeals, 'users' => $usersAll, 'meals' => $mealsAll]);
     }
 
     public function editUser(Request $request): JsonResponse

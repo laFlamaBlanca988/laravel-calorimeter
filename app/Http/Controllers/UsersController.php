@@ -25,7 +25,7 @@ class UsersController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'max:255'],
-            'username' => ['required', 'max:255', 'min:3', Rule::unique('users', 'username')],
+            'username' => ['required', 'max:255', 'min:3'],
             'email' => ['required', 'email', 'max:255'],
             'password' => ['required', 'min:4', 'max:255'],
         ]);
@@ -38,7 +38,6 @@ class UsersController extends Controller
         } else {
             $user = new User;
             $userID = Auth::user()->id;
-            dd($userID);
             $name = $request->input('name');
             $username = $request->input('username');
             $email = $request->input('email');

@@ -78,7 +78,6 @@ class MealsController extends Controller
             ]);
         } else {
             $meal = new Meal;
-
             $title = $request->input('title');
             $cal_num = $request->input('cal_num');
             $date = $request->input('date');

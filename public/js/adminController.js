@@ -133,8 +133,8 @@ function displayUserMeals(userID) {
             let html = '';
             meals.forEach((data, index) => {
                 html += `
-                    <tr id="meal_${data.id}">
-                            <td class="item-userID">${data.userID}</td>
+                    <tr class="admin-table-row-meals" id="meal_${data.id}">
+                            <td class="item-id">${data.id}</td>
                             <td class="item-title">${data.title}</td>
                             <td class="item-cal-num">${data.cal_num}</td>
                             <td class="item-date">${data.date}</td>
