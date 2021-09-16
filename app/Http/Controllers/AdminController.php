@@ -24,7 +24,6 @@ class AdminController extends Controller
         $mealsAll = $meals->getAllMeals();
         return view('admin.admin', ['userMeals' => $userMeals, 'users' => $usersAll, 'meals' => $mealsAll]);
     }
-
     public function editUser(Request $request): JsonResponse
     {
 
@@ -104,5 +103,18 @@ class AdminController extends Controller
             'message' => 'Something went wrong. Please try again later.'
         ]);
 
+    }
+
+    public function fetchAllMeals(Request $request): string
+    {
+        if($request->ajax()){
+            $meal = new Meal;
+            $meals = $meal->getAllMeals();
+            return view('pages.adminMealsPagination', compact('meals'))->render();
+        }
+        return response()->json([
+            'status' => 400,
+            'message' => 'Something went wrong. Please try again later.'
+        ]);
     }
 }

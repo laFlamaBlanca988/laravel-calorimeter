@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('guest');
 
 Route::get('welcome', [WelcomeController::class, 'index'])->middleware('auth');
+Route::get('welcome/fetch_data', [WelcomeController::class, 'fetch_data']);
+
 Route::get('admin', [AdminController::class, 'index'])->middleware('isAdmin');
+Route::get('admin/meals', [AdminController::class, 'fetchAllMeals']);
 
 Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');

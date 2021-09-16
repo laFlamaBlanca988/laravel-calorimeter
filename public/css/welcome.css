@@ -83,8 +83,13 @@
 }
 .meals-table {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     border-radius: 20px;
+}
+.pagination-buttons {
+    display: flex;
+    justify-content: space-between;
 }
 .meals {
     width: 100%;

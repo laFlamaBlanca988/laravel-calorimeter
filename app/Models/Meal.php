@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,14 +34,15 @@ class Meal extends Model
      * @param $date
      * @param $time
      * @param $userID
-     * @return Collection
+     * @return LengthAwarePaginator
      */
 
-    public function getAllMeals(): Collection
+    public function getAllMeals(): LengthAwarePaginator
     {
-        return DB::table('meals')->get();
-
+        return DB::table('meals')
+            ->paginate(5);
     }
+
     public function storeMeal($title, $cal_num, $date, $time, $userID): int
     {
         return DB::table('meals')->insertGetId([
@@ -57,12 +59,12 @@ class Meal extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getMealsForUser($userID): Collection
+    public function getMealsForUser($userID): LengthAwarePaginator
     {
-       return ( DB::table('meals')
+       return  DB::table('meals')
            ->select('*')
            ->where('userID','=', $userID)
-           ->get());
+           ->paginate(2);
     }
 
     public function getLatestMeal($userID): Collection
