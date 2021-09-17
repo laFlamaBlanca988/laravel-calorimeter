@@ -6,11 +6,11 @@
     font-weight: 600;
 }
 .reg-form {
-    margin: 10rem auto;
-    padding: 1.5rem 1.5rem 0;
     display: flex;
     flex-direction: row ;
     flex-wrap: wrap;
+    margin: 10rem auto;
+    padding: 1.5rem 1.5rem 0;
     max-width: 40rem;
     border-radius: 10px;
     background-color: rgba(234, 230, 219, 0.92);
@@ -18,15 +18,15 @@
 }
 
 .reg-form label {
-    font-weight: 600;
     padding: 0.5rem 0;
+    font-weight: 600;
 }
 .reg-form-buttons {
-    width: 100%;
-    padding: 0;
-    margin: 1rem 0;
     display: flex;
     justify-content: space-between;
+    margin: 1rem 0;
+    padding: 0;
+    width: 100%;
  }
  .btn-reg-login {
     background: transparent;
@@ -41,6 +41,6 @@
     border: none;
 }
 ul.b {
-    list-style-type: square;
     padding-left: 1rem;
+    list-style-type: square;
 }

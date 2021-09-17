@@ -10,11 +10,11 @@
     background: #212529;
 }
 .logo {
+    text-align: center;
     padding-left: 3rem;
     color: #dc3545;
     font-size: 3rem;
     font-weight: 600;
-    text-align: center;
     cursor: pointer;
 }
 .welcome {
@@ -24,10 +24,9 @@
     width: 18rem;
 }
 .welcome-name {
-    color: white;
     padding-top: 0.7rem;
     font-size: 1.5rem;
-
+    color: white;
 }
 .auth-buttons {
     display: flex;
@@ -38,56 +37,33 @@
 .welcome-register-btn {
     background-color: #000000;
 }
-.settings-icon {
-    color: white;
-    font-size:24px;
-    cursor: pointer;
-    padding-top: 14px;
-    margin-right: 30px;
-    text-decoration: none;
-}
-
-
-
-
-
-
-
 .drop-btn {
+    margin-right: 2rem;
+    padding: 16px;
     background-color: #dc3545;
     color: white;
-    padding: 16px;
-    margin-right: 2rem;
     font-size: 16px;
     border: none;
-    cursor: pointer;
     border-radius: 2px;
+    cursor: pointer;
 }
-
-/*.dropdown {*/
-/*    position: relative;*/
-/*    display: inline-block;*/
-/*}*/
-
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 1;
     right: 2rem;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     border-radius: 2px;
+    z-index: 1;
 }
-
 .dropdown-content a {
-    color: black;
+    display: block;
     padding: 12px 16px;
     height: 3rem;
+    color: black;
     text-decoration: none;
-    display: block;
 }
-
 .dropdown-content a:hover {
     background-color: #f1f1f1
 }
@@ -102,13 +78,13 @@
 }
 .logout-btn {
     width: 100%;
-    color: black;
     padding: 12px 16px;
     height: 3rem;
+    text-align: left;
     text-decoration: none;
     border: none;
     background: #f9f9f9;
-    text-align: left;
+    color: black;
 }
 .logout-btn:hover {
     background-color: #f1f1f1;

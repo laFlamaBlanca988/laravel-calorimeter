@@ -1,42 +1,42 @@
 .login-form-wrapper {
-    max-width: 30rem;
-    margin: 5rem auto auto;
     position: relative;
+    margin: 5rem auto auto;
+    max-width: 30rem;
     background-color: rgba(254, 242, 231, 0.92);
     border-radius: 10px;
 }
 .login-form {
-    margin: 10rem auto auto;
-    padding: 1.5rem 1.5rem 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 10rem auto auto;
+    padding: 1.5rem 1.5rem 0.5rem;
     max-width: 30rem;
     border-radius: 10px;
     box-shadow: hsl(0, 0%, 0%) 0 5px 15px;
 }
 .login-title {
     padding: 0.2rem 0;
+    text-align: center;
     font-weight: 700;
     font-size: 1.5rem;
-    text-align: center;
 }
 .login-logo {
-    text-align: center;
     margin: 3rem auto auto;
+    text-align: center;
     font-size: 3rem;
 }
 .login-form label {
-    font-weight: 600;
     padding: 0.5rem 0;
+    font-weight: 600;
 }
 .btn-sign-up {
+    margin: 0;
     background: transparent;
     border: none;
     color: black;
     font-weight: 600;
     font-size: 1.3rem;
-    margin: 0;
     text-decoration: none;
 }
 .btn-sign-up:hover {

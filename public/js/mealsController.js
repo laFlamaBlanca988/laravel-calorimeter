@@ -46,7 +46,7 @@ if (toDateInput) {
             document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
             document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
             document.getElementById('filter_meal_form').reset();
-            // dateAndTimeFilterSubmitButton.click();
+            dateAndTimeFilterSubmitButton.click();
         }
     });
 }

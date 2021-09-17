@@ -2,10 +2,10 @@
     display: flex;
 }
 .cal-sum-text {
-    visibility: hidden;
-    font-size: 2rem;
     margin: auto auto auto 76%;
     padding: 2rem;
+    visibility: hidden;
+    font-size: 2rem;
     color: #dc3545;
     font-weight: 600;
 }
@@ -15,10 +15,10 @@
 .meals-btn-container {
     display: flex;
     justify-content: center;
-    padding: 2rem;
     gap: 2rem;
-    width: 50vw;
     margin: auto;
+    padding: 2rem;
+    width: 50vw;
 }
 .edit-header {
     width: 15%;
@@ -32,24 +32,25 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
     padding-top: 15rem;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1;
 }
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
+
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
     width: 30%;
+    border: 1px solid #888;
+    background-color: #fefefe;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
@@ -69,16 +70,16 @@
 /* The Close Button */
 .close {
     width: 100%;
-    color: #aaaaaa;
+    align-self: end;
     font-size: 2rem;
     font-weight: bold;
-    align-self: end;
+    color: #aaaaaa;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
     text-decoration: none;
+    color: #000;
     cursor: pointer;
 }
 .meals-table {
@@ -95,31 +96,28 @@
     width: 100%;
     box-shadow: 3px 3px 3px 3px #888888;
 }
-
 .add-meal-button-container {
     display: flex;
     justify-content: center;
 }
-
 .filter-buttons {
     display: flex;
     justify-content: space-between;
     margin: 1rem;
 }
-
 .last-week-filter-button,
 .last-month-filter-button {
     margin: auto;
-    cursor: pointer;
     background: #dc3545;
     border-radius: 5px;
     color: white;
+    cursor: pointer;
 }
 
 .filter-meal-form {
+    margin: 5rem auto auto;
     padding: 2rem;
     width: 20%;
-    margin: 5rem auto auto;
     box-shadow: 3px 3px 3px 3px #888888;
     border-radius: 5px;
 }
@@ -133,11 +131,9 @@
 .date-filter-submit-button {
     margin-top: 1rem;
 }
-
 .delete-modal-content {
     width:25rem;
 }
-
 .delete-modal-buttons {
     display: flex;
     justify-content: space-between;
