@@ -5,6 +5,7 @@ let mealsTable = document.getElementById('meals_table');
 let userMealsTable = document.querySelector('.user-meals-table-container');
 let userMealsTableBody = document.getElementById('user_meals_table_body');
 let editUserButtons = document.getElementsByClassName('edit-user-open-btn');
+let adminMealsTable = document.querySelector('.admin-meals-table');
 let adminEditUserSubmitButton = document.querySelector('.admin-edit-user-submit');
 let editUserModal = document.getElementById('edit_user_modal');
 let userMealsButtons = document.getElementsByClassName('edit-user-meals-open-btn');
@@ -84,7 +85,6 @@ if(deleteUserSubmitButton) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
                 let response = JSON.parse(res);
-                console.log(response);
                 document.getElementById("user_" + buttonID).remove();
                 deleteUserModal.style.display = 'none';
             }
@@ -109,7 +109,6 @@ if (userAccessSubmitButton) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
                 let response = JSON.parse(res);
-                console.log(response);
                 accessModal.style.display = 'none';
             }
         }
@@ -148,9 +147,15 @@ function displayUserMeals(userID) {
                         </tr>
                     `
             });
-            userMealsTableBody.innerHTML = html;
-            userMealsTable.style.display = 'block';
-            usersTable.style.display = 'none';
+            if(userMealsTableBody) {
+                userMealsTableBody.innerHTML = html;
+            }
+            if(userMealsTable) {
+                userMealsTable.style.display = 'block';
+            }
+            if(usersTable) {
+                usersTable.style.display = 'none';
+            }
         }
     }
     xhr.send(JSON.stringify(data));
