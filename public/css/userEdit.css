@@ -20,5 +20,11 @@
     background-color: #ffa1aa;
 }
 .user-edit-alert {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.admin-user-edit-error-alert {
+    margin: auto;
     list-style: none;
 }

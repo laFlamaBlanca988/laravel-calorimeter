@@ -21,7 +21,7 @@
                 <button data-id="{{$meal->id}}" onclick="editMeal({{$meal->id}})" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                 >Edit meal
                 </button>
-                <button data-row ="{{$key}}" onclick="editMeal({{$meal->id}})" data-id="{{$meal->id}}" class="delete-btn btn btn-danger btn-sm">Delete</button>
+                <button data-row ="{{$key}}" onclick="deleteMeal({{$meal->id}})" data-id="{{$meal->id}}" class="delete-btn btn btn-danger btn-sm">Delete</button>
             </td>
         </tr>
     @endforeach

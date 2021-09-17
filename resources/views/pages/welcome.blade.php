@@ -19,7 +19,7 @@
 
         <div class="date-and-time-filter-submit-button btn btn-danger btn-sm">Submit</div>
         <div class="date-and-time-filter-clear-button btn btn-danger btn-sm">Clear</div>
-        <ul id="date_time_form_err_list"></ul>
+        <ul id="date_time_form_err_list" class="date-time-error-alert"></ul>
     </form>
     </div>
 

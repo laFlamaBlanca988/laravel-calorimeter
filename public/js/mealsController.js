@@ -22,8 +22,8 @@ let dateAndTimeFilterClearButton = document.querySelector('.date-and-time-filter
 
 let fromDateInput = document.getElementById('from_date');
 let toDateInput = document.getElementById('to_date');
-// let fromTimeInput = document.getElementById('from_time');
-// let toTimeInput = document.getElementById('to_time');
+let fromTimeInput = document.getElementById('from_time');
+let toTimeInput = document.getElementById('to_time');
 let formWithDateAndTimeFilters = document.getElementById('filter_meal_form');
 
 let editMealID = document.getElementById('edit_id');
@@ -46,7 +46,17 @@ if (toDateInput) {
             document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
             document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
             document.getElementById('filter_meal_form').reset();
-            dateAndTimeFilterSubmitButton.click();
+            // dateAndTimeFilterSubmitButton.click();
+        }
+    });
+}
+if (toTimeInput) {
+    toTimeInput.addEventListener('change', function () {
+        if (fromTimeInput.value > this.value) {
+            document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
+            document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
+            document.getElementById('filter_meal_form').reset();
+            // dateAndTimeFilterSubmitButton.click();
         }
     });
 }
@@ -350,7 +360,6 @@ if (dateAndTimeFilterSubmitButton) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = JSON.parse(xhr.responseText);
-                console.log(res)
                 let html = '';
                 res.mealsFilterAll.forEach(data => {
                     html += `

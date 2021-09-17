@@ -129,7 +129,7 @@ function displayUserMeals(userID) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let res = xhr.responseText;
             let response = JSON.parse(res);
-            let meals = response.userMeals;
+            let meals = response.userMeals.data;
             let html = '';
             meals.forEach((data, index) => {
                 html += `
@@ -168,6 +168,11 @@ function editUser(userID) {
 if (adminEditUserSubmitButton) {
     adminEditUserSubmitButton.addEventListener('click', function (e) {
         e.preventDefault();
+        let id = document.getElementById(`user_${editUserID.value}`).children[0].textContent;
+        let name = document.getElementById(`user_${editUserID.value}`).children[1].textContent;
+        let email = document.getElementById(`user_${editUserID.value}`).children[2].textContent;
+        let username = document.getElementById(`user_${editUserID.value}`).children[3].textContent;
+
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'adminUserEdit', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -189,9 +194,13 @@ if (adminEditUserSubmitButton) {
                 document.getElementById(`user_${editUserID.value}`).children[2].textContent = data.username;
                 document.getElementById(`user_${editUserID.value}`).children[3].textContent = data.email;
                 editUserModal.style.display = 'none';
-                if (!data.name || !data.username || !data.email || !data.password) {
+                if (response.errors) {
                     document.getElementById('admin_user_edit_form_err_list').classList.add('alert', 'alert-danger');
                     document.getElementById('admin_user_edit_form_err_list').textContent = `All fields are required`;
+                    document.getElementById(`user_${editUserID.value}`).children[0].textContent = id;
+                    document.getElementById(`user_${editUserID.value}`).children[1].textContent = name;
+                    document.getElementById(`user_${editUserID.value}`).children[2].textContent = email;
+                    document.getElementById(`user_${editUserID.value}`).children[3].textContent = username;
                     editUserModal.style.display = 'block';
                 }
             }

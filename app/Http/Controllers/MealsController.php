@@ -89,7 +89,6 @@ class MealsController extends Controller
                 return response()->json([
                     'status' => 200,
                     'id' => $mealID,
-                    'title' => $title,
                     'message' => 'Meal edited successfully!'
                 ]);
             }

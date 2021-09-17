@@ -147,7 +147,7 @@
                     <a href="admin" class="btn btn-dark">Dismiss</a>
                 </div>
                 <ul class="user-edit-alert">
-                    <ul id="admin_user_edit_form_err_list"></ul>
+                    <ul id="admin_user_edit_form_err_list" class="admin-user-edit-error-alert"></ul>
                 </ul>
             </form>
         </div>

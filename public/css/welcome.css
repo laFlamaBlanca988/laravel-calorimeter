@@ -10,7 +10,7 @@
     font-weight: 600;
 }
 .date-and-time-filter-submit-button, .date-and-time-filter-clear-button {
-    margin-top: 20px;
+    margin-top: 1.8rem;
 }
 .meals-btn-container {
     display: flex;
@@ -117,6 +117,7 @@
 .filter-meal-form {
     margin: 5rem auto auto;
     padding: 2rem;
+    padding-bottom: 0.5rem;
     width: 20%;
     box-shadow: 3px 3px 3px 3px #888888;
     border-radius: 5px;
@@ -138,4 +139,7 @@
     display: flex;
     justify-content: space-between;
     padding-top: 1rem;
+}
+.date-time-error-alert {
+    margin-top: 2rem;
 }
