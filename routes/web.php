@@ -5,15 +5,15 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MealsController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('guest');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome')->middleware('guest');
 
-Route::get('welcome', [WelcomeController::class, 'index'])->middleware('auth');
-Route::get('welcome/fetch_data', [WelcomeController::class, 'fetch_data']);
+Route::get('home', [HomeController::class, 'index'])->middleware('auth');
+Route::get('home/fetch_data', [HomeController::class, 'fetch_data']);
 
 Route::get('admin', [AdminController::class, 'index'])->middleware('isAdmin');
 Route::get('admin/meals', [AdminController::class, 'fetchAllMeals']);
@@ -36,8 +36,8 @@ Route::get('/meal/lastWeek', [MealsController::class, 'getLastWeekData']);
 Route::get('/meal/lastMonth', [MealsController::class, 'getLastMonthData']);
 Route::post('/meal/dateTimeFilter', [MealsController::class, 'getMealsByDateAndTime']);
 
-Route::get('user', [UsersController::class, 'index'])->middleware('auth');
-Route::post('user', [UsersController::class, 'editUserControl'])->middleware('auth');
+Route::get('userEdit', [UserController::class, 'index'])->middleware('auth');
+Route::post('userEdit', [UserController::class, 'editUserControl'])->middleware('auth');
 
 Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('auth');
 Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('auth');

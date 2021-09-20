@@ -26,7 +26,7 @@ class SessionsController extends Controller
 
         if (auth()->attempt($attributes)) {
             if(Auth::user()->role_id === 3) {
-                return redirect('/welcome')->with('success', 'You are now logged in!');
+                return redirect('/home')->with('success', 'You are now logged in!');
             } else {
                 return redirect('/admin')->with('success', 'You are now logged in!');
             }
@@ -41,6 +41,6 @@ class SessionsController extends Controller
     {
         auth()->logout();
 
-        return redirect(route('home'))->with('success', 'Goodbye!');
+        return redirect(route('welcome'))->with('success', 'Goodbye!');
     }
 }

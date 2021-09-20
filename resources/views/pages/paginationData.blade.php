@@ -38,7 +38,7 @@
             event.preventDefault();
             let page = $(this).attr('href').split('page=')[1];
             $.ajax({
-                url:"/welcome/fetch_data?page="+page,
+                url:"/home/fetch_data?page="+page,
                 success:function(data)
                 {
                     $('#user_table_meals').html(data);

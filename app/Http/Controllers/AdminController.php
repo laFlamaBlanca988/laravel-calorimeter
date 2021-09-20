@@ -27,7 +27,12 @@ class AdminController extends Controller
     public function editUser(Request $request): JsonResponse
     {
 
-        $validator = Validator::make($request->all(), ['name' => ['required', 'max:255'], 'username' => ['required', 'max:255', 'min:3'], 'email' => ['required', 'email', 'max:255'], 'password' => ['required', 'min:4', 'max:255'],]);
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'max:255'],
+            'username' => ['required', 'max:255', 'min:3'],
+            'email' => ['required', 'email', 'max:255'],
+            'password' => ['required', 'min:4', 'max:255'],
+            ]);
 
         if ($validator->fails()) {
             return response()->json(['status' => 400, 'errors' => $validator->messages(),]);

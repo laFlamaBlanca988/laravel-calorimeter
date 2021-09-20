@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
         $user = new User;
         $userID = Auth::user()->id;
         $currentUser = $user->getUser($userID);
-        return view('pages.user', [
+        return view('pages.userEdit', [
             'user' => $currentUser,
         ]);
     }

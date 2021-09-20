@@ -18,7 +18,7 @@
                 <a href="{{"register"}}" class="btn-sign-up btn-danger">Sign Up?</a>
             </div>
             @if($errors->any())
-                <ul class="b">
+                <ul class="auth-errors">
                     @foreach($errors->all() as $error)
                         <li class="text-red-500 mb-2 text-sm">{{$error}}</li>
                     @endforeach

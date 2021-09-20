@@ -87,7 +87,7 @@
                     <h4>Are you sure you want to delete this meal?</h4>
                     <div class="delete-modal-buttons">
                         <button id="confirm_delete"  class="delete-confirm-button btn btn-danger">Submit</button>
-                        <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
+                        <a href="home" type="click" class="btn btn-dark">Dismiss</a>
                     </div>
                 </form>
             </div>
@@ -108,7 +108,7 @@
                     <input type="time" name="time" id="edit_time" class="time form-control" required>
                     <div class="reg-form-buttons">
                         <button type="click" class="edit-meal-btn btn btn-danger">Submit</button>
-                        <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
+                        <a href="home" type="click" class="btn btn-dark">Dismiss</a>
                     </div>
                     <ul id="edit_form_err_list"></ul>
                 </form>
@@ -121,7 +121,7 @@
             <h4>Are you sure you want to delete this user?</h4>
             <div class="delete-modal-buttons">
                 <button id="confirm_user_delete" class="delete-confirm-button btn btn-danger">Submit</button>
-                <a href="welcome" type="click" class="btn btn-dark">Dismiss</a>
+                <a href="home" type="click" class="btn btn-dark">Dismiss</a>
             </div>
         </div>
     </div>
@@ -129,7 +129,7 @@
     {{--    EDIT USER MODAL--}}
     <div id="edit_user_modal" class="modal">
         <div class="modal-content">
-            <form id="user_edit_form" action="user">
+            <form id="user_edit_form" action="userEdit">
                 <div class="edit_user_success_message" id="edit_user_success_message"></div>
                 <input type="hidden" id="edit_user_id" name="userID" value="">
                 <label for="name">Name</label>

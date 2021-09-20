@@ -18,10 +18,10 @@
             <input type="password" name="password" class="form-control"  required>
             <div class="reg-form-buttons">
                 <button type="submit" name="submitUser" class=" btn btn-danger">Submit</button>
-                <a href={{route('home')}} type="submit" class="btn btn-dark">Dismiss</a>
+                <a href={{route('welcome')}} type="submit" class="btn btn-dark">Dismiss</a>
             </div>
             @if($errors->any())
-            <ul class="b">
+            <ul class="auth-errors">
                 @foreach($errors->all() as $error)
                     <li class="text-red-500 text-xs">{{$error}}</li> <br>
                 @endforeach

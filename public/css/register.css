@@ -40,7 +40,7 @@
     color: #da4b59;
     border: none;
 }
-ul.b {
+ul.auth-errors {
     padding-left: 1rem;
     list-style-type: square;
 }

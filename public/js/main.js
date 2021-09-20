@@ -1,7 +1,7 @@
 let logo = document.querySelector('.logo');
 
 logo.addEventListener('click', function () {
-    window.location = 'welcome';
+    window.location = 'home';
 });
 
 timeoutLoginMessage();

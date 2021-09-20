@@ -38,8 +38,13 @@
                     <div class="dropdown">
                         <button class="drop-btn">{{auth()->user()->name}}</button>
                         <div class="dropdown-content">
-                            <a href="user">{{auth()->user()->name}} settings</a>
+                            <a href="userEdit">{{auth()->user()->name}} settings</a>
+                            @if(auth()->user()->role_id == 1)
                             <a href="admin">Admin settings</a>
+                            @endif
+                            @if(auth()->user()->role_id == 2)
+                                <a href="admin">Manager settings</a>
+                            @endif
                             <form method="POST" class="form-logout" action="{{route('logout')}}" >
                                 @csrf
                                 <button class="logout-btn">Logout</button>

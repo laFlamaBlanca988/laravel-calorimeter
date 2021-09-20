@@ -8,7 +8,7 @@ if(editUserSubmitButton) {
     editUserSubmitButton.addEventListener('click', function (e) {
         e.preventDefault();
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://calorimeter/user', true);
+        xhr.open('POST', 'http://calorimeter/userEdit', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
         let data = {
