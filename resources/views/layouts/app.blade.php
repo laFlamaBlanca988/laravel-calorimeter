@@ -43,7 +43,7 @@
                             <a href="admin">Admin settings</a>
                             @endif
                             @if(auth()->user()->role_id == 2)
-                                <a href="admin">Manager settings</a>
+                                <a href="manager">Manager settings</a>
                             @endif
                             <form method="POST" class="form-logout" action="{{route('logout')}}" >
                                 @csrf
@@ -79,4 +79,5 @@
 <script src="{{asset('js/userController.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/adminController.js')}}"></script>
+<script src="{{asset('js/managerController.js')}}"></script>
 

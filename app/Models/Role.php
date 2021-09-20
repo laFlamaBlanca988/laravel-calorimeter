@@ -19,7 +19,7 @@ class Role extends Model
     {
         DB::table('roles')->insert([
             'role_id' => 1,
-            'role_name' => 'isAdmin',
+            'role_name' => 'admin',
             'role_slug' => 'admin',
         ]);
 

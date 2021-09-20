@@ -10,9 +10,11 @@
                 <li>
                     <a id="admin_users_button" class="admin-users-button">Users</a>
                 </li>
+                @if(auth()->user()->role_id == 1)
                 <li>
                     <a id="admin_meals_button">Meals</a>
                 </li>
+                @endif
             </ul>
         </nav>
 
@@ -41,12 +43,14 @@
                             <button data-id="{{$user->id}}" class="edit-user-open-btn btn btn-danger btn-sm" type="submit"
                             >Edit user
                             </button>
+                            @if(auth()->user()->role_id == 1)
                             <button data-id="{{$user->id}}" class="edit-user-meals-open-btn btn btn-danger btn-sm" type="submit"
                             >User meals
                             </button>
                             <button data-id="{{$user->id}}" class="edit-user-access-open-btn btn btn-danger btn-sm" type="submit"
                             >Access
                             </button>
+                            @endif
                             <button data-row = "{{$key}}" data-id="{{$user->id}}" class="delete-user-btn btn btn-danger btn-sm">Delete</button>
                         </td>
                     </tr>

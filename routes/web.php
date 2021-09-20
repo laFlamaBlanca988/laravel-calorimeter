@@ -1,47 +1,54 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MealsController;
-use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome')->middleware('guest');
 
-Route::get('home', [HomeController::class, 'index'])->middleware('auth');
-Route::get('home/fetch_data', [HomeController::class, 'fetch_data']);
-
-Route::get('admin', [AdminController::class, 'index'])->middleware('isAdmin');
-Route::get('admin/meals', [AdminController::class, 'fetchAllMeals']);
-
-Route::get('register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
+Route::get('register', [RegisterController::class, 'index'])->name('register');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 
-Route::get('login', [SessionsController::class, 'index'])->name('login');
-Route::post('login', [SessionsController::class, 'store']);
-Route::post('logout', [SessionsController::class, 'destroy'])->name('logout')->middleware('auth');
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('login', [LoginController::class, 'store'])->name('login')->middleware('auth');
+Route::post('logout', [LoginController::class, 'destroy'])->name('logout')->middleware('auth');
+
+
+
+
+Auth::routes();
+Route::get('home', [HomeController::class, 'index'])->middleware('auth');
+Route::get('home/fetch_data', [HomeController::class, 'fetch_data'])->middleware('auth');
 
 Route::get('meals', [MealsController::class, 'index'])->middleware('auth');
 Route::post('meals', [MealsController::class, 'store'])->middleware('auth');
+Route::post('/meal/edit', [MealsController::class, 'edit'])->middleware('auth');
+Route::post('/meal/delete', [MealsController::class, 'destroy'])->middleware('auth');
+Route::get('/meal/lastWeek', [MealsController::class, 'getLastWeekData'])->middleware('auth');
+Route::get('/meal/lastMonth', [MealsController::class, 'getLastMonthData'])->middleware('auth');
+Route::post('/meal/dateTimeFilter', [MealsController::class, 'getMealsByDateAndTime'])->middleware('auth');
 
-Route::post('/meal/delete', [MealsController::class, 'destroy']);
+Route::get('userEdit', [UserController::class, 'index'])->middleware('auth')->middleware('auth');;
+Route::post('userEdit', [UserController::class, 'editUserControl'])->middleware('auth')->middleware('auth');
 
-Route::post('/meal/edit', [MealsController::class, 'edit']);
+Route::get('admin', [AdminController::class, 'index'])->middleware('admin');
+Route::get('admin/meals', [AdminController::class, 'fetchAllMeals'])->middleware('admin');
+Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('admin');
+Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->middleware('admin');
+Route::post('adminMealsDelete', [AdminController::class, 'adminMealDelete'])->middleware('admin');
 
-Route::get('/meal/lastWeek', [MealsController::class, 'getLastWeekData']);
-Route::get('/meal/lastMonth', [MealsController::class, 'getLastMonthData']);
-Route::post('/meal/dateTimeFilter', [MealsController::class, 'getMealsByDateAndTime']);
+Route::post('adminUserEdit', [AdminController::class, 'editUser']);
+Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('admin');
 
-Route::get('userEdit', [UserController::class, 'index'])->middleware('auth');
-Route::post('userEdit', [UserController::class, 'editUserControl'])->middleware('auth');
-
-Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('auth');
-Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('auth');
-Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->middleware('auth');
-Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('auth');
-Route::post('adminMealsDelete', [AdminController::class, 'adminMealDelete'])->middleware('auth');
+Route::get('manager', [ManagerController::class, 'index'])->middleware('manager');
+//Route::post('managerUserEdit', [ManagerController::class, 'editUser'])->name('adminUserEdit');
+//Route::post('managerUserDelete', [ManagerController::class, 'managerUserDelete']);
 
