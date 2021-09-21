@@ -51,10 +51,9 @@ class LoginController extends Controller
 //        $this->middleware('guest');
     }
 
-    public function destroy()
+    public function loggedOut()
     {
         auth()->logout();
-
         return redirect(route('login'))->with('success', 'Goodbye!');
     }
 }

@@ -19,7 +19,7 @@ Route::post('register', [RegisterController::class, 'register']);
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login', [LoginController::class, 'store'])->name('login')->middleware('auth');
-Route::post('logout', [LoginController::class, 'destroy'])->name('logout')->middleware('auth');
+Route::post('logout', [LoginController::class, 'loggedOut'])->name('logout')->middleware('auth');
 
 Auth::routes();
 Route::get('home', [HomeController::class, 'index'])->middleware('auth');
