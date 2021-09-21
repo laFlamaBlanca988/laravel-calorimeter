@@ -6,19 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-
 class RegisterController extends Controller
 {
 
-    public function index()
+    public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    public function store()
+    public function register()
     {
-//        dd(Request::capture());
-        // create the user
+
         $attributes = request()->validate([
             'name' => ['required', 'max:255'],
             'username' => ['required', 'max:255', 'min:3', Rule::unique('users', 'username')],

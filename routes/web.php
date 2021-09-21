@@ -14,15 +14,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome')->middleware('guest');
 
-Route::get('register', [RegisterController::class, 'index'])->name('register');
-Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login', [LoginController::class, 'store'])->name('login')->middleware('auth');
 Route::post('logout', [LoginController::class, 'destroy'])->name('logout')->middleware('auth');
-
-
-
 
 Auth::routes();
 Route::get('home', [HomeController::class, 'index'])->middleware('auth');
@@ -41,14 +38,12 @@ Route::post('userEdit', [UserController::class, 'editUserControl'])->middleware(
 
 Route::get('admin', [AdminController::class, 'index'])->middleware('admin');
 Route::get('admin/meals', [AdminController::class, 'fetchAllMeals'])->middleware('admin');
-Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('admin');
+Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('auth');
 Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->middleware('admin');
 Route::post('adminMealsDelete', [AdminController::class, 'adminMealDelete'])->middleware('admin');
 
-Route::post('adminUserEdit', [AdminController::class, 'editUser']);
+Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('auth');
 Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('admin');
 
 Route::get('manager', [ManagerController::class, 'index'])->middleware('manager');
-//Route::post('managerUserEdit', [ManagerController::class, 'editUser'])->name('adminUserEdit');
-//Route::post('managerUserDelete', [ManagerController::class, 'managerUserDelete']);
 
