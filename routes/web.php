@@ -33,8 +33,8 @@ Route::get('/meal/lastWeek', [MealsController::class, 'getLastWeekData'])->middl
 Route::get('/meal/lastMonth', [MealsController::class, 'getLastMonthData'])->middleware('auth');
 Route::post('/meal/dateTimeFilter', [MealsController::class, 'getMealsByDateAndTime'])->middleware('auth');
 
-Route::get('userEdit', [UserController::class, 'index'])->middleware('auth')->middleware('auth');;
-Route::post('userEdit', [UserController::class, 'editUserControl'])->middleware('auth')->middleware('auth');
+Route::get('userEdit', [UserController::class, 'index'])->middleware('auth');
+Route::post('userEdit', [UserController::class, 'editUserControl'])->middleware('auth');
 
 Route::get('admin', [AdminController::class, 'index'])->middleware('admin');
 Route::get('admin/meals', [AdminController::class, 'fetchAllMeals'])->middleware('admin');
@@ -43,7 +43,7 @@ Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->mi
 Route::post('adminMealsDelete', [AdminController::class, 'adminMealDelete'])->middleware('admin');
 
 Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('auth');
-Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('admin');
+Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('auth');
 
-Route::get('manager', [AdminController::class, 'index'])->middleware('manager');
+Route::get('manager', [ManagerController::class, 'index'])->middleware('manager');
 

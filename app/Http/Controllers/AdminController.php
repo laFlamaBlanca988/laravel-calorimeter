@@ -97,7 +97,7 @@ class AdminController extends Controller
         $deletedMeals = $meal->deleteUserMeals($userID);
         $deletedUser = $user->deleteUser($userID);
 
-        if ($deletedUser && $deletedMeals) {
+        if ($deletedUser || $deletedMeals) {
             return response()->json([
                 'status' => 200,
                 'message' => 'User successfully deleted'
