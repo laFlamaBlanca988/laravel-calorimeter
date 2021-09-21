@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="login-form-wrapper">
         <form method="POST" action="{{route('login')}}" class="login-form">
             @csrf
@@ -26,5 +25,18 @@
             @endif
         </form>
     </div>
+    @if($errors->any())
+        <ul class="auth-errors">
+            @foreach($errors->all() as $error)
+                <li class="text-red-500 mb-2 text-sm">{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+
+    @if(session()->has('alert'))
+        <div class="logged-in-message fixed right-0 bg-blue-500 text-white py-2 px-4 rounded-xl bottom-3 right-3">
+            <p>{{session('alert')}}</p>
+        </div>
+    @endif
 
 @endsection

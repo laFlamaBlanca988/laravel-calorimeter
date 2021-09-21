@@ -23,6 +23,7 @@ class AdminController extends Controller
         $mealsAll = $meals->getAllMeals();
         return view('admin.admin', ['userMeals' => $userMeals, 'users' => $usersAll, 'meals' => $mealsAll]);
     }
+
     public function editUser(Request $request): JsonResponse
     {
 

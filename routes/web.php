@@ -45,5 +45,5 @@ Route::post('adminMealsDelete', [AdminController::class, 'adminMealDelete'])->mi
 Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('auth');
 Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('admin');
 
-Route::get('manager', [ManagerController::class, 'index'])->middleware('manager');
+Route::get('manager', [AdminController::class, 'index'])->middleware('manager');
 

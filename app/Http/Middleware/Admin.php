@@ -27,11 +27,11 @@ class Admin
         }
 
         if (Auth::user()->role_id == 2) {
-            return redirect()->route('manager');
+            return redirect()->route('login')->with('alert', 'You don\'t have clearance for this level!');
         }
 
         if (Auth::user()->role_id == 3) {
-            return redirect()->route('user');
+            return redirect()->route('login')->with('alert', 'You don\'t have clearance for this level!');
         }
     }
 }
