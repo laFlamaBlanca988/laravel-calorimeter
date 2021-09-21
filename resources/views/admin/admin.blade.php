@@ -39,21 +39,30 @@
                         <td class="user-name">{{ $user->name }}</td>
                         <td class="user-username">{{ $user->username }}</td>
                         <td class="user-email">{{ $user->email }}</td>
+                        @if(auth()->user()->role_id == 1)
                         <td class="edit-users-buttons">
                             <button data-id="{{$user->id}}" class="edit-user-open-btn btn btn-danger btn-sm" type="submit"
                             >Edit user
                             </button>
-                            @if(auth()->user()->role_id == 1)
                             <button data-id="{{$user->id}}" class="edit-user-meals-open-btn btn btn-danger btn-sm" type="submit"
                             >User meals
                             </button>
                             <button data-id="{{$user->id}}" class="edit-user-access-open-btn btn btn-danger btn-sm" type="submit"
                             >Access
                             </button>
-                            @endif
                             <button data-row = "{{$key}}" data-id="{{$user->id}}" class="delete-user-btn btn btn-danger btn-sm">Delete</button>
                         </td>
+                        @endif
+                        @if(auth()->user()->role_id == 2)
+                            <td class="edit-meals-buttons">
+                                <button data-id="{{$user->id}}" class="edit-user-open-btn btn btn-danger btn-sm" type="submit"
+                                >Edit user
+                                </button>
+                                <button data-row = "{{$key}}" data-id="{{$user->id}}" class="delete-user-btn btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        @endif
                     </tr>
+
                 @endforeach
                 </tbody>
             </table>
@@ -148,7 +157,7 @@
                 <ul id="save_form_err_list"></ul>
                 <div class="reg-form-buttons">
                     <button name="submitUser" class="admin-edit-user-submit btn btn-danger">Submit</button>
-                    <a href="admin" class="btn btn-dark">Dismiss</a>
+                    <a href="home" class="btn btn-dark">Dismiss</a>
                 </div>
                 <ul class="user-edit-alert">
                     <ul id="admin_user_edit_form_err_list" class="admin-user-edit-error-alert"></ul>
@@ -184,7 +193,7 @@
                     <h4>Are you sure you want to delete this user?</h4>
                     <div class="delete-modal-buttons">
                         <button id="confirm_user_delete" class="delete-user-confirm-button btn btn-danger">Submit</button>
-                        <a href="admin" type="click" class="btn btn-dark">Dismiss</a>
+                        <a href="home" type="click" class="btn btn-dark">Dismiss</a>
                     </div>
                 </div>
             </div>

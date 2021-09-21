@@ -15,6 +15,7 @@ class CreateUsersUpdateTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->unique()->change();
+            $table->integer('role_id')->default(3)->change();
         });
     }
 
@@ -27,6 +28,7 @@ class CreateUsersUpdateTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->nullable()->change();
+            $table->integer('role_id')->default(3)->change();
         });
     }
 }
