@@ -27,10 +27,10 @@ class MealsController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:191',
-            'cal_num' => 'required|integer',
-            'date' => 'required|date',
-            'time' => 'required'
+            'title' => 'required|max:50',
+            'cal_num' => 'required|digits_between:1,9',
+            'date' => 'required|date_format:Y-m-d',
+            'time' => 'required|date_format:h:i'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -66,10 +66,10 @@ class MealsController extends Controller
     public function edit(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:191',
-            'cal_num' => 'required|integer',
-            'date' => 'required|date',
-            'time' => 'required'
+            'title' => 'required|max:50',
+            'cal_num' => 'required|digits_between:1,9',
+            'date' => 'required|date_format:Y-m-d',
+            'time' => 'required|date_format:h:i'
         ]);
         if ($validator->fails()) {
             return response()->json([

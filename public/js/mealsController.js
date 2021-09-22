@@ -180,8 +180,11 @@ if (addMealBtn) {
             if (!title || !cal_num || !date || !time) {
                 document.getElementById('save_form_err_list').classList.add('alert', 'alert-danger');
                 document.getElementById('save_form_err_list').textContent = `All fields are required`;
+            } else {
+                console.log(xhr.response)
             }
         }
+
         xhr.send(JSON.stringify(data));
     });
 }
