@@ -26,6 +26,7 @@ let fromTimeInput = document.getElementById('from_time');
 let toTimeInput = document.getElementById('to_time');
 let formWithDateAndTimeFilters = document.getElementById('filter_meal_form');
 
+let userMealRow = document.querySelector('.admin-table-row-meals');
 let editMealID = document.getElementById('edit_id');
 let deleteMealID = document.getElementById('delete_id');
 let titleEdit = document.querySelector('#edit_title');
@@ -153,7 +154,7 @@ if (addMealBtn) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
                 let response = JSON.parse(res);
-                if (response.status !== 400) {
+                if(response.status === 200) {
                     let mealID = response.id;
                     let newRow = document.createElement('tr');
                     newRow.id = "meal_" + mealID;
@@ -176,12 +177,14 @@ if (addMealBtn) {
                     document.getElementById('success_message').textContent = response.message;
                     timeoutMessage();
                 }
+                if(response.status === 400) {
+                    document.getElementById('save_form_err_list').classList.add('alert', 'alert-danger');
+                    document.getElementById('save_form_err_list').textContent = response.errors;
+                }
             }
             if (!title || !cal_num || !date || !time) {
                 document.getElementById('save_form_err_list').classList.add('alert', 'alert-danger');
                 document.getElementById('save_form_err_list').textContent = `All fields are required`;
-            } else {
-                console.log(xhr.response)
             }
         }
 
@@ -206,22 +209,31 @@ if (editMealButton) {
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                let res = xhr.responseText;
+                let res = xhr.response;
                 let response = JSON.parse(res);
-                document.getElementById(`meal_${editMealID.value}`).children[1].textContent = data.title;
-                document.getElementById(`meal_${editMealID.value}`).children[2].textContent = data.cal_num;
-                document.getElementById(`meal_${editMealID.value}`).children[3].textContent = data.date;
-                document.getElementById(`meal_${editMealID.value}`).children[4].textContent = data.time;
-                editModal.style.display = 'none';
-                displayUserMeals(buttonID);
-                if (!data.title || !data.cal_num || !data.date || !data.time) {
-                    document.getElementById(`meal_${editMealID.value}`).children[1].textContent = title;
-                    document.getElementById(`meal_${editMealID.value}`).children[2].textContent = calories;
-                    document.getElementById(`meal_${editMealID.value}`).children[3].textContent = date;
-                    document.getElementById(`meal_${editMealID.value}`).children[4].textContent = time;
+                if(response.status === 200) {
+                    document.getElementById(`meal_${editMealID.value}`).children[1].textContent = data.title;
+                    document.getElementById(`meal_${editMealID.value}`).children[2].textContent = data.cal_num;
+                    document.getElementById(`meal_${editMealID.value}`).children[3].textContent = data.date;
+                    document.getElementById(`meal_${editMealID.value}`).children[4].textContent = data.time;
+                    editModal.style.display = 'none';
+                    document.getElementById('edit_meals_success_message').classList.add('alert', 'alert-danger');
+                    document.getElementById('edit_meals_success_message').textContent = response.message;
+                    timeoutSuccessMessage(document.getElementById('edit_meals_success_message'));
+                    if (!data.title || !data.cal_num || !data.date || !data.time) {
+                        document.getElementById(`meal_${editMealID.value}`).children[1].textContent = title;
+                        document.getElementById(`meal_${editMealID.value}`).children[2].textContent = calories;
+                        document.getElementById(`meal_${editMealID.value}`).children[3].textContent = date;
+                        document.getElementById(`meal_${editMealID.value}`).children[4].textContent = time;
+                        document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
+                        document.getElementById('edit_form_err_list').textContent = `All fields are required`;
+                        editModal.style.display = 'block';
+                    }
+                } if (response.status === 400) {
+                    document.getElementById('edit_form_err_list').classList.remove('hidden');
                     document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
-                    document.getElementById('edit_form_err_list').textContent = `All fields are required`;
-                    editModal.style.display = 'block';
+                    document.getElementById('edit_form_err_list').textContent = response.errors;
+                    timeoutAlertMessage(document.getElementById('edit_form_err_list'))
                 }
             }
         }
@@ -241,19 +253,22 @@ if(deleteConfirmButton) {
             'id': deleteMealID.value
         }
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    let res = JSON.parse(xhr.responseText);
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                console.log(response.status)
+                if (response.status == 200) {
                     if (document.getElementById("meal_" + deleteMealID.value) !== null) {
                         document.getElementById("meal_" + deleteMealID.value).remove();
                         deleteModal.style.display = "none";
-                        displayUserMeals(buttonID);
                         document.getElementById('success_message').classList.add('alert', 'alert-success');
-                        document.getElementById('success_message').textContent = res.message;
+                        document.getElementById('success_message').textContent = response.message;
                         timeoutMessage();
                     }
                 } else {
-                    console.log('There was a problem, please try again');
+                    if (response.status != 200) {
+                        console.log('There was a problem, please try again');
+
+                    }
                 }
             }
         }
@@ -277,12 +292,12 @@ if (lastWeekFilterButton) {
                 res.meals.forEach(data => {
                     html += `
                 <tr id="meal_${data.id}">
-                     <td class="item-id">${res.meals.length + 1}</td>
+                     <td class="item-id">${data.id}</td>
                      <td class="item-title">${data.title}</td>
                      <td class="cal_num">${data.cal_num}</td>
                      <td class="item-date">${data.date}</td>
                      <td class="item-time">${data.time}</td>
-                     <td class="edit-buttons">
+                     <td class="edit-meals-buttons">
                         <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
                         <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-btn btn btn-danger btn-sm" type="submit"

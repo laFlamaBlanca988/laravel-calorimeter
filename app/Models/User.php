@@ -49,7 +49,18 @@ class User extends Authenticatable
             ->get();
     }
 
-    public function editUser ($userID, $name, $username, $email, $password): int
+    public function editUser ($userID, $username, $email, $password): int
+    {
+        return DB::table('users')
+            ->where('id', '=', $userID)
+            ->update([
+                'username' => $username,
+                'email' => $email,
+                'password' =>bcrypt($password),
+                'id' => $userID,
+            ]);
+    }
+    public function adminEditUser ($userID, $name, $username, $email, $password): int
     {
         return DB::table('users')
             ->where('id', '=', $userID)

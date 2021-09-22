@@ -1,6 +1,8 @@
 .user-edit-form-container {
+    position: relative;
     margin: auto;
     width: 50%;
+    min-height: 70%;
 }
 .user-edit-form {
     display: flex;
@@ -8,13 +10,13 @@
     flex-wrap: wrap;
     margin: 10rem auto;
     padding: 1.5rem 1.5rem 0;
-    max-height: 50%;
+    max-height: 80%;
     max-width: 40rem;
     border-radius: 10px;
     background-color: rgba(234, 230, 219, 0.92);
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
-.edit_user_success_message {
+.edit-user-success-message {
     margin: auto auto 1rem;
     width: 40rem;
     background-color: #ffa1aa;
@@ -22,7 +24,9 @@
 .user-edit-alert {
     margin: 0;
     padding: 0;
+    width: 100%;
     list-style: none;
+    color: white;
 }
 .admin-user-edit-error-alert {
     margin: auto;

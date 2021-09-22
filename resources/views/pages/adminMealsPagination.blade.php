@@ -1,7 +1,7 @@
 <table class="admin-meals-table table table-dark">
     <thead>
     <tr>
-        <th scope="col">#</th>
+        <th scope="col">ID</th>
         <th scope="col">Meal</th>
         <th scope="col">Calories</th>
         <th scope="col">Date</th>
@@ -12,7 +12,7 @@
     <tbody>
     @foreach ($meals as $key => $meal)
         <tr class="admin-table-row-meals" id="meal_{{$meal->id}}">
-            <td class="item-id">{{$key + 1}}</td>
+            <td class="item-id">{{$meal->id}}</td>
             <td class="item-title">{{ $meal->title }}</td>
             <td class="item-cal-num">{{ $meal->cal_num }}</td>
             <td class="item-date">{{ $meal->date }}</td>
@@ -45,6 +45,4 @@ $(document).ready(function (){
         });
     });
 })
-
-
 </script>

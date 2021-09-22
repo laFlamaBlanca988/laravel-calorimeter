@@ -2,9 +2,7 @@
 @section('content')
     <div class="user-edit-form-container">
         <form id="user_edit_form" action="userEdit" class="user-edit-form">
-            <div class="edit_user_success_message" id="edit_user_success_message"></div>
-{{--            <label for="name">Name</label>--}}
-            <input id="user_name" type="hidden" name="name" class="form-control" value="{{$user[0]->name}}" required>
+            <div class="edit-user-success-message" id="edit_user_success_message"></div>
         <label>Email</label>
         <input id="user_email" type="email" name="email" class="form-control" value="{{$user[0]->email}}" required>
         <label>Username</label>
@@ -18,7 +16,7 @@
             <a href="home" class="btn btn-dark">Dismiss</a>
         </div>
             <ul class="user-edit-alert">
-                <ul id="user_edit_form_err_list"></ul>
+                <ul id="user_edit_form_err_list" class="hidden alert alert-danger"></ul>
             </ul>
     </form>
     </div>

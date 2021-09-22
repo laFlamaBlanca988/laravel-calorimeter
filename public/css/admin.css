@@ -95,6 +95,12 @@
     animation-name: animatetop;
     animation-duration: 0.4s
 }
+.user-edit-success-message {
+    transform: translateY(10rem);
+}
+.edit-meals-success-message {
+    transform: translateY(10rem);
+}
 /* Add Animation */
 @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0}

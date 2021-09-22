@@ -47,7 +47,7 @@
                         <label>Time</label>
                         <input type="time" name="time" class="time form-control" required>
                         <div class="reg-form-buttons">
-                            <button type="click" class="add-meal-btn btn btn-danger">Submit</button>
+                            <button  class="add-meal-btn btn btn-danger">Submit</button>
                             <a href="home" type="click" class="btn btn-dark">Dismiss</a>
                         </div>
                         <ul id="save_form_err_list"></ul>
@@ -85,7 +85,7 @@
                             <button type="click" class="edit-meal-btn btn btn-danger">Submit</button>
                             <a href="home" type="click" class="btn btn-dark">Dismiss</a>
                         </div>
-                        <ul id="edit_form_err_list"></ul>
+                        <ul id="edit_form_err_list" class="hidden alert alert-danger"></ul>
                     </form>
                 </div>
             </div>

@@ -30,12 +30,12 @@ class MealsController extends Controller
             'title' => 'required|max:50',
             'cal_num' => 'required|digits_between:1,9',
             'date' => 'required|date_format:Y-m-d',
-            'time' => 'required|date_format:h:i'
+            'time' => 'required|date_format:H:i'
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
-                'errors' => $validator->messages()
+                'errors' => $validator->messages()->first()
             ]);
         } else {
             $meal = new Meal;
@@ -69,12 +69,12 @@ class MealsController extends Controller
             'title' => 'required|max:50',
             'cal_num' => 'required|digits_between:1,9',
             'date' => 'required|date_format:Y-m-d',
-            'time' => 'required|date_format:h:i'
+            'time' => 'required|date_format:H:i:s'
         ]);
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
-                'errors' => $validator->messages()
+                'errors' => $validator->messages()->first()
             ]);
         } else {
             $meal = new Meal;
@@ -104,7 +104,6 @@ class MealsController extends Controller
     {
         $meals = new Meal;
         $userID = Auth::user()->id;
-        $calSum = $meals->getSumOfCalories($userID);
         $lastWeekMeals = $meals->getLastWeekMeals($userID);
         $totalCalories = 0;
         foreach ($lastWeekMeals as $mealsData) {
@@ -134,23 +133,29 @@ class MealsController extends Controller
 
     public function getMealsByDateAndTime(Request $request): JsonResponse
     {
-        $meal = new Meal;
-        $userID = Auth::user()->id;
-        $dateFrom =  $request->input('fromDate');
-        $dateTo =  $request->input('toDate');
-        $timeFrom =  $request->input('fromTime');
-        $timeTo =  $request->input('toTime');
-        $mealsFilterAll = $meal->filterMealsByDateTimeRange($userID, $dateFrom, $dateTo, $timeFrom, $timeTo);
-        $totalCalories = 0;
-        foreach ($mealsFilterAll as $mealsData) {
-            $totalCalories += $mealsData->cal_num;
-        }
-        return response()->json([
-            "mealsFilterAll" => $mealsFilterAll,
-            "totalCalories" => $totalCalories
+        $validator = Validator::make($request->all(), [
+            'dateFrom' => 'date_format:Y-m-d',
+            'dateTo' => 'date_format:Y-m-d',
+            'timeFrom' => 'date_format:h:i',
+            'timeTo' => 'date_format:h:i'
         ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => 400, 'errors' => $validator->messages()]);
+        } else {
+            $meal = new Meal;
+            $userID = Auth::user()->id;
+            $dateFrom = $request->input('fromDate');
+            $dateTo = $request->input('toDate');
+            $timeFrom = $request->input('fromTime');
+            $timeTo = $request->input('toTime');
+            $mealsFilterAll = $meal->filterMealsByDateTimeRange($userID, $dateFrom, $dateTo, $timeFrom, $timeTo);
+            $totalCalories = 0;
+            foreach ($mealsFilterAll as $mealsData) {
+                $totalCalories += $mealsData->cal_num;
+            }
+            return response()->json(["mealsFilterAll" => $mealsFilterAll, "totalCalories" => $totalCalories]);
+        }
     }
-
     public function destroy(Request $request): JsonResponse
     {
         $meals = new Meal;

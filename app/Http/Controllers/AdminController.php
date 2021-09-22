@@ -28,14 +28,17 @@ class AdminController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'max:255'],
+            'name' => ['required', 'max:50'],
             'username' => ['required', 'max:255', 'min:3'],
             'email' => ['required', 'email', 'max:255'],
             'password' => ['required', 'min:4', 'max:255'],
             ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => 400, 'errors' => $validator->messages(),]);
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages()->first()
+            ]);
         } else {
             $user = new User;
             $userID = $request->json()->get('id');
@@ -45,7 +48,7 @@ class AdminController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
 
-            $editedUser = $user->editUser($userID, $name, $username, $email, $password);
+            $editedUser = $user->adminEditUser($userID, $name, $username, $email, $password);
 
             if ($editedUser) {
                 return response()->json(['status' => 200, 'message' => 'User edited successfully!',]);

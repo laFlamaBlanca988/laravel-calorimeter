@@ -64,7 +64,7 @@ class Meal extends Model
        return  DB::table('meals')
            ->select('*')
            ->where('userID','=', $userID)
-           ->paginate(4);
+           ->paginate(5);
     }
 
     public function getLatestMeal($userID): Collection

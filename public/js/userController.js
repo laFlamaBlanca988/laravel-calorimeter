@@ -12,7 +12,6 @@ if(editUserSubmitButton) {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
         let data = {
-            'name': nameInput.value,
             'email': emailInput.value,
             'username': usernameInput.value,
             'password': passwordInput.value,
@@ -21,22 +20,18 @@ if(editUserSubmitButton) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
                 let response = JSON.parse(res);
-                document.getElementById('save_form_err_list').value = "";
-                document.getElementById('edit_user_success_message').classList.add('alert', 'alert-success');
-                document.getElementById('edit_user_success_message').textContent = response.message;
-                timeoutSuccessMessage();
+                if(response.status === 200) {
+                    document.getElementById('save_form_err_list').value = "";
+                    document.getElementById('edit_user_success_message').classList.add('alert', 'alert-success');
+                    document.getElementById('edit_user_success_message').textContent = response.message;
+                    timeoutSuccessMessage(document.querySelector("#edit_user_success_message"));
+                }
+
                 if(response.status === 400) {
-                    let errorHTML = '';
-                    if(response.errors.email)
-                        errorHTML += response.errors.email + '</br>';
-                    if(response.errors.username)
-                        errorHTML += response.errors.username + '</br>';
-                    if(response.errors.name)
-                        errorHTML += response.errors.name + '</br>';
                     document.getElementById('edit_user_success_message').style.display = 'none';
-                    // document.getElementById("user_edit_form_err_list").innerHTML = errorHTML;
-                    document.getElementById('user_edit_form_err_list').classList.add('alert', 'alert-danger');
-                    document.getElementById('user_edit_form_err_list').textContent = `All fields are required`;
+                    document.getElementById('user_edit_form_err_list').classList.remove('hidden');
+                    document.getElementById('user_edit_form_err_list').textContent = response.errors;
+                    timeoutAlertMessage(document.getElementById('user_edit_form_err_list'));
                 }
             }
         }
@@ -44,11 +39,19 @@ if(editUserSubmitButton) {
     });
 }
 //TIMEOUT MESSAGE
-function timeoutSuccessMessage() {
+function timeoutSuccessMessage(message) {
     setTimeout(function () {
-        let successMsg = document.querySelector("#edit_user_success_message");
+        let successMsg = message;
         if (successMsg) {
             successMsg.style.display = "none";
+        }
+    }, 2000);
+}
+function timeoutAlertMessage(message) {
+    setTimeout(function () {
+        let alertMsg = message;
+        if (alertMsg) {
+            alertMsg.style.display = "none";
         }
     }, 2000);
 }
