@@ -6,7 +6,7 @@
         <th scope="col">Calories</th>
         <th scope="col">Date</th>
         <th scope="col">Time</th>
-        <th class="edit-header" scope="col"></th>
+        <th class="edit-header" scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -33,7 +33,6 @@
 </div>
 
 <script>
-    $(document).ready(function(){
         $('#pagination_buttons a').on('click', function(event){
             event.preventDefault();
             let page = $(this).attr('href').split('page=')[1];
@@ -41,9 +40,9 @@
                 url:"/home/fetch_data?page="+page,
                 success:function(data)
                 {
+                    console.log(page)
                     $('#user_table_meals').html(data);
                 }
             });
         });
-    });
 </script>

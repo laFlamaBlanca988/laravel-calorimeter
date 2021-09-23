@@ -140,7 +140,7 @@ class MealsController extends Controller
             'timeTo' => 'date_format:h:i'
         ]);
         if ($validator->fails()) {
-            return response()->json(['status' => 400, 'errors' => $validator->messages()]);
+            return response()->json(['status' => 400, 'errors' => $validator->messages()->first()]);
         } else {
             $meal = new Meal;
             $userID = Auth::user()->id;

@@ -71,7 +71,7 @@ for (let i = 0; i < deleteUserOpenModalButton.length; i++) {
         deleteUserModal.style.display = 'block';
     });
 }
-if(deleteUserSubmitButton) {
+if (deleteUserSubmitButton) {
     deleteUserSubmitButton.addEventListener('click', function (e) {
         e.preventDefault();
         let xhr = new XMLHttpRequest();
@@ -128,11 +128,12 @@ function displayUserMeals(userID) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let res = xhr.responseText;
             let response = JSON.parse(res);
-            let meals = response.userMeals.data;
-            let html = '';
-            meals.forEach((data, index) => {
-                html += `
-                    <tr class="admin-table-row-meals" id="meal_${data.id}">
+            if (response.status === 200) {
+                let meals = response.userMeals.data;
+                let html = '';
+                meals.forEach((data, index) => {
+                    html += `
+                            <tr class="user-table-row-meals" id="meal_${data.id}">
                             <td class="item-id">${data.id}</td>
                             <td class="item-title">${data.title}</td>
                             <td class="item-cal-num">${data.cal_num}</td>
@@ -146,15 +147,17 @@ function displayUserMeals(userID) {
                             </td>
                         </tr>
                     `
-            });
-            if(userMealsTableBody) {
-                userMealsTableBody.innerHTML = html;
-            }
-            if(userMealsTable) {
-                userMealsTable.style.display = 'block';
-            }
-            if(usersTable) {
-                usersTable.style.display = 'none';
+                });
+                if (userMealsTableBody) {
+                    userMealsTableBody.insertAdjacentHTML('afterbegin', html);
+                    console.log(document.querySelectorAll('.user-table-row-meals'));
+                }
+                if (userMealsTable) {
+                    userMealsTable.style.display = 'block';
+                }
+                if (usersTable) {
+                    usersTable.style.display = 'none';
+                }
             }
         }
     }

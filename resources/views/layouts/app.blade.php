@@ -22,10 +22,6 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/userEdit.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-
-
-
-    <title>Calorimeter</title>
 </head>
 <body>
 <header class="custom-header-container container-fluid">
@@ -74,10 +70,9 @@
         <p>{{session('success')}}</p>
     </div>
     @endif
+<script src="{{asset('js/mealsController.js')}}" defer></script>
+<script src="{{asset('js/userController.js')}}" defer></script>
+<script src="{{asset('js/main.js')}}" defer></script>
+<script src="{{asset('js/adminController.js')}}" defer></script>
 </body>
-<script src="{{asset('js/mealsController.js')}}"></script>
-<script src="{{asset('js/userController.js')}}"></script>
-<script src="{{asset('js/main.js')}}"></script>
-<script src="{{asset('js/adminController.js')}}"></script>
-<script src="{{asset('js/managerController.js')}}"></script>
 

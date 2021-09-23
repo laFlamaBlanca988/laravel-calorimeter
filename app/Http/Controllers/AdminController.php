@@ -18,10 +18,12 @@ class AdminController extends Controller
         $meals = new Meal;
         $users = new User;
         $usersAll = $users->getAllUsers();
+        $usersManager = $users->getManagerUsers();
         $userID = Auth::user()->id;
         $userMeals = $meals->getMealsForUser($userID);
         $mealsAll = $meals->getAllMeals();
-        return view('admin.admin', ['userMeals' => $userMeals, 'users' => $usersAll, 'meals' => $mealsAll]);
+
+        return view('admin.admin', ['userMeals' => $userMeals, 'users' => $usersAll, 'usersManager' => $usersManager, 'meals' => $mealsAll]);
     }
 
     public function editUser(Request $request): JsonResponse

@@ -42,6 +42,12 @@ class User extends Authenticatable
         return DB::table('users')->get();
     }
 
+    public function getManagerUsers (): \Illuminate\Support\Collection
+    {
+        return DB::table('users')
+            ->where('role_id', '!=', '1')
+            ->get();
+    }
     public function getUser($userID): \Illuminate\Support\Collection
     {
       return  DB::table('users')

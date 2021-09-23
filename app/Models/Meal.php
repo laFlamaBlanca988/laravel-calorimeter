@@ -40,6 +40,8 @@ class Meal extends Model
     public function getAllMeals(): LengthAwarePaginator
     {
         return DB::table('meals')
+            ->join('users', 'users.id', '=', 'meals.userID')
+            ->select('meals.*', 'users.name')
             ->paginate(5);
     }
 
@@ -96,13 +98,13 @@ class Meal extends Model
         ]);
     }
 
-    public function getLastWeekMeals ($userID): Collection
+    public function getLastWeekMeals ($userID): LengthAwarePaginator
     {
         return DB::table('meals')
             ->where('userID', '=', $userID)
             ->whereDate('date', '>=', Carbon::now()->subDays(7))
             ->whereDate('date', '<=', Carbon::now())
-            ->get();
+            ->paginate(5);
     }
 
     public function getLastMonthMeals ($userID): Collection

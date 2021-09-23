@@ -26,7 +26,6 @@ let fromTimeInput = document.getElementById('from_time');
 let toTimeInput = document.getElementById('to_time');
 let formWithDateAndTimeFilters = document.getElementById('filter_meal_form');
 
-let userMealRow = document.querySelector('.admin-table-row-meals');
 let editMealID = document.getElementById('edit_id');
 let deleteMealID = document.getElementById('delete_id');
 let titleEdit = document.querySelector('#edit_title');
@@ -47,17 +46,16 @@ if (toDateInput) {
             document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
             document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
             document.getElementById('filter_meal_form').reset();
-            // dateAndTimeFilterSubmitButton.click();
         }
     });
 }
+
 if (toTimeInput) {
     toTimeInput.addEventListener('change', function () {
         if (fromTimeInput.value > this.value) {
             document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
             document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
             document.getElementById('filter_meal_form').reset();
-            // dateAndTimeFilterSubmitButton.click();
         }
     });
 }
@@ -255,21 +253,21 @@ if(deleteConfirmButton) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
-                console.log(response.status)
                 if (response.status == 200) {
                     if (document.getElementById("meal_" + deleteMealID.value) !== null) {
                         document.getElementById("meal_" + deleteMealID.value).remove();
                         deleteModal.style.display = "none";
-                        document.getElementById('success_message').classList.add('alert', 'alert-success');
-                        document.getElementById('success_message').textContent = response.message;
-                        timeoutMessage();
-                    }
-                } else {
-                    if (response.status != 200) {
-                        console.log('There was a problem, please try again');
-
+                        document.getElementById('edit_meals_success_message').classList.add('alert', 'alert-success');
+                        document.getElementById('edit_meals_success_message').textContent = response.message;
+                        timeoutSuccessMessage(document.getElementById('edit_meals_success_message'));
                     }
                 }
+            }if ( xhr.status != 200) {
+                deleteModal.style.display = "block";
+                document.getElementById('delete_meal_err_list').classList.remove('hidden');
+                document.getElementById('delete_meal_err_list').classList.add('alert', 'alert-danger');
+                document.getElementById('delete_meal_err_list').textContent = 'Something went wrong. Please try again.';
+                timeoutAlertMessage(document.getElementById('delete_meal_err_list'))
             }
         }
         xhr.send(JSON.stringify(data));
@@ -289,7 +287,7 @@ if (lastWeekFilterButton) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = JSON.parse(xhr.responseText);
                 let html = '';
-                res.meals.forEach(data => {
+                res.meals.data.forEach(data => {
                     html += `
                 <tr id="meal_${data.id}">
                      <td class="item-id">${data.id}</td>
@@ -332,17 +330,12 @@ if (lastMonthFilterButton) {
                 res.meals.forEach(data => {
                     html += `
                 <tr id="meal_${data.id}">
-                     <td class="item-id">${res.meals.length + 1}</td>
+                     <td class="item-id">${data.id}</td>
                      <td class="item-title">${data.title}</td>
                      <td class="cal_num">${data.cal_num}</td>
                      <td class="item-date">${data.date}</td>
                      <td class="item-time">${data.time}</td>
-                     <td class="edit-buttons">
-                        <button data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm">Edit meal</button>
-                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-btn btn btn-danger btn-sm" type="submit"
-                            >Delete</button>
-                    </td>
-                </tr>`;
+                     zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz`;
                 });
                 tableBody.innerHTML = html;
                 totalCalories.innerText = res.totalCalories;
@@ -350,7 +343,7 @@ if (lastMonthFilterButton) {
 
             }
             if (xhr.readyState !== 4 && xhr.status !== 200) {
-                console.log('There was a problem, please try again!')
+                alert('There was a problem, please try again!')
             }
         }
         xhr.send();
@@ -365,45 +358,51 @@ if (dateAndTimeFilterClearButton) {
 if (dateAndTimeFilterSubmitButton) {
     dateAndTimeFilterSubmitButton.addEventListener('click', function (e) {
         e.preventDefault();
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'meal/dateTimeFilter', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
-        let data = {
-            'fromDate': formWithDateAndTimeFilters.fromDate.value,
-            'toDate': formWithDateAndTimeFilters.toDate.value,
-            'fromTime': formWithDateAndTimeFilters.fromTime.value,
-            'toTime': formWithDateAndTimeFilters.toTime.value
-        };
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let res = JSON.parse(xhr.responseText);
-                let html = '';
-                res.mealsFilterAll.forEach(data => {
-                    html += `
+        if( (fromDateInput.value && toDateInput.value) || (fromTimeInput.value && toTimeInput.value)) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'meal/dateTimeFilter', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+            let data = {
+                'fromDate': formWithDateAndTimeFilters.fromDate.value,
+                'toDate': formWithDateAndTimeFilters.toDate.value,
+                'fromTime': formWithDateAndTimeFilters.fromTime.value,
+                'toTime': formWithDateAndTimeFilters.toTime.value
+            };
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let res = JSON.parse(xhr.responseText);
+                    let html = '';
+                    res.mealsFilterAll.forEach(data => {
+                        html += `
                 <tr id="meal_${data.id}">
-                     <td class="item-id">${res.mealsFilterAll.length}</td>
+                     <td class="item-id">${data.id}</td>
                      <td class="item-title">${data.title}</td>
                      <td class="cal_num">${data.cal_num}</td>
                      <td class="item-date">${data.date}</td>
                      <td class="item-time">${data.time}</td>
-                     <td class="edit-buttons">
+                     <td class="edit-meals-buttons">
                         <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
                         <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-btn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
                     </td>
                 </tr>`;
-                });
-                tableBody.innerHTML = html;
-                totalCalories.innerText = res.totalCalories;
-                totalCalories.parentNode.style.visibility = "visible";
+                    });
+                    tableBody.innerHTML = html;
+                    totalCalories.innerText = res.totalCalories;
+                    totalCalories.parentNode.style.visibility = "visible";
+                }
+                if (xhr.readyState !== 4 && xhr.status !== 200) {
+                    console.log('There was a problem, please try again!')
+                }
             }
-            if (xhr.readyState !== 4 && xhr.status !== 200) {
-                console.log('There was a problem, please try again!')
-            }
+            xhr.send(JSON.stringify(data));
+        } else {
+            document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
+            document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
+            document.getElementById('filter_meal_form').reset();
         }
-        xhr.send(JSON.stringify(data));
     });
 }
 

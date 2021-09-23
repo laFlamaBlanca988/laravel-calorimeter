@@ -8,3 +8,9 @@ body {
     display: flex;
     padding: 0;
 }
+td {
+    text-align: center;
+}
+th {
+    text-align: center;
+}

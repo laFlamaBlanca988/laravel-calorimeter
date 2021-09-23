@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="cal-sum">
-        <h3 class="cal-sum-text">Calories amount: <span id="total_calories"></span></h3>
+        <h3 class="cal-sum-text">Calories amount: <span id="total_calories">{{$totalCalories}}</span></h3>
     </div>
-
     <div class="page-container">
         <div class="filter-meal-form">
             <form id="filter_meal_form">
@@ -64,6 +63,7 @@
                         <button id="confirm_delete"  class="delete-confirm-button btn btn-danger">Submit</button>
                         <a href="home" type="click" class="btn btn-dark">Dismiss</a>
                     </div>
+                    <ul class="delete-meal-err-list" id="delete_meal_err_list"></ul>
                 </form>
             </div>
 
@@ -91,8 +91,9 @@
             </div>
 
 {{--                MEALS TABLE--}}
-                        <div id="user_table_meals" class="meals-table">
-                            @include('pages.paginationData')
+            <div id="user_table_meals" class="meals-table">
+                <div class="edit-meal-success-message" id="edit_meals_success_message"></div>
+                @include('pages.paginationData')
                         </div>
         </div>
     </div>

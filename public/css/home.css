@@ -40,12 +40,10 @@
     overflow: auto;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
-    z-index: 1;
 }
 
 /* Modal Content */
 .modal-content {
-
     margin: auto;
     padding: 20px;
     width: 30%;
@@ -54,7 +52,8 @@
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
+    z-index: 1;
 }
 /* Add Animation */
 @-webkit-keyframes animatetop {
@@ -143,3 +142,7 @@
 .date-time-error-alert {
     margin-top: 2rem;
 }
+.delete-meal-err-list {
+    transform: translateY(1rem);
+}
+
