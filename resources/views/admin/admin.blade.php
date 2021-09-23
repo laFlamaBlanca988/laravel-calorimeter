@@ -20,7 +20,14 @@
 
         <div class="users-meals-container">
             {{--    USERS TABLE--}}
+
             <div id="users_table" class="users-table-container">
+                <form id="user_search_form" class="search-bar">
+                    <input id="search_input" type="search" value="" name="search" pattern=".*\S.*" required>
+                    <button id="search_button"  class="search-btn" type="submit">
+                        <span>Search</span>
+                    </button>
+                </form>
                 <table class="admin-users-table table table-dark">
                     <div class="user-edit-success-message" id="user_edit_success_message"></div>
                     <thead>

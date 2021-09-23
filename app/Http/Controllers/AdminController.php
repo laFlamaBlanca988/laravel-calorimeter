@@ -127,4 +127,13 @@ class AdminController extends Controller
             'message' => 'Something went wrong. Please try again later.'
         ]);
     }
+
+    public function userSearch(Request $request) {
+        $users = new User;
+        $userName = $request->json()->get('name');
+        $user = $users->searchUserByName($userName);
+        if ($user) {
+            return response()->json(['status' => 200, 'user' => $user]);
+        }
+    }
 }

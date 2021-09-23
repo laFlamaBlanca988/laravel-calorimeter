@@ -46,4 +46,4 @@ Route::post('adminUserEdit', [AdminController::class, 'editUser'])->middleware('
 Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->middleware('auth');
 
 Route::get('manager', [ManagerController::class, 'index'])->middleware('manager');
-
+Route::post('userSearch', [AdminController::class, 'userSearch']);

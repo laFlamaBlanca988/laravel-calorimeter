@@ -70,9 +70,12 @@
         <p>{{session('success')}}</p>
     </div>
     @endif
+
 <script src="{{asset('js/mealsController.js')}}" defer></script>
 <script src="{{asset('js/userController.js')}}" defer></script>
 <script src="{{asset('js/main.js')}}" defer></script>
 <script src="{{asset('js/adminController.js')}}" defer></script>
+<script src="{{asset('js/userSearch.js')}}" defer></script>
+
 </body>
 

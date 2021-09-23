@@ -6,6 +6,7 @@ use App\Models\Meal;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
@@ -37,18 +38,18 @@ class User extends Authenticatable
         return $this->hasMany(Meal::class);
     }
 
-    public function getAllUsers (): \Illuminate\Support\Collection
+    public function getAllUsers (): Collection
     {
         return DB::table('users')->get();
     }
 
-    public function getManagerUsers (): \Illuminate\Support\Collection
+    public function getManagerUsers (): Collection
     {
         return DB::table('users')
             ->where('role_id', '!=', '1')
             ->get();
     }
-    public function getUser($userID): \Illuminate\Support\Collection
+    public function getUser($userID): Collection
     {
       return  DB::table('users')
             ->where('id', '=', $userID)
@@ -86,6 +87,13 @@ class User extends Authenticatable
             ->update([
                 'role_id' => $roleID,
             ]);
+    }
+
+    public function searchUserByName($userName): Collection
+    {
+        return DB::table('users')
+            ->where('name', '=', $userName)
+            ->get();
     }
 
     public function deleteUser($userID): int
