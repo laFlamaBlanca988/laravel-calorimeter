@@ -46,7 +46,7 @@ class User extends Authenticatable
     public function getManagerUsers (): Collection
     {
         return DB::table('users')
-            ->where('role_id', '!=', '1')
+            ->where('role', '!=', 'admin')
             ->get();
     }
 
@@ -87,7 +87,7 @@ class User extends Authenticatable
         return DB::table('users')
             ->where('id', '=', $userID)
             ->update([
-                'role_id' => $roleID,
+                'role' => $roleID,
             ]);
     }
 
@@ -113,15 +113,15 @@ class User extends Authenticatable
     public function run()
     {
         DB::table('users')->insert([
-            'role_id' => '1'
+            'role' => 'admin'
         ]);
 
         DB::table('users')->insert([
-            'role_id' => '2'
+            'role' => 'manager'
         ]);
 
         DB::table('users')->insert([
-            'role_id' => '3'
+            'role' => 'user'
         ]);
     }
 };

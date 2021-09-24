@@ -35,10 +35,10 @@
                         <button class="drop-btn">{{auth()->user()->name}}</button>
                         <div class="dropdown-content">
                             <a href="userEdit">{{auth()->user()->name}} settings</a>
-                            @if(auth()->user()->role_id == 1)
+                            @if(auth()->user()->role == 'admin')
                             <a href="admin">Admin settings</a>
                             @endif
-                            @if(auth()->user()->role_id == 2)
+                            @if(auth()->user()->role == 'manager')
                                 <a href="manager">Manager settings</a>
                             @endif
                             <form method="POST" class="form-logout" action="{{route('logout')}}" >

@@ -93,7 +93,7 @@ class AdminController extends Controller
         $users = new User;
         $userID = $request->json()->get('id');
         $roleID = $request->json()->get('roleID');
-        $dbRoleID = $users->getUser($userID)[0]->role_id;
+        $dbRoleID = $users->getUser($userID)[0]->role;
         $accessEdit = $users->editUserAccess($userID, $roleID);
         if ($dbRoleID == $roleID) {
             return response()->json([

@@ -26,16 +26,16 @@ class LoginController extends Controller
         ]);
 
         if (auth()->attempt($attributes)) {
-            switch (Auth::user()->role_id) {
-                case 1:
+            switch (Auth::user()->role) {
+                case 'admin':
                     $this->redirectTo = '/admin';
                     return $this->redirectTo;
                     break;
-                case 2:
+                case 'manager':
                     $this->redirectTo = '/manager';
                     return $this->redirectTo;
                     break;
-                case 3:
+                case 'user':
                     $this->redirectTo = '/home';
                     return $this->redirectTo;
                     break;

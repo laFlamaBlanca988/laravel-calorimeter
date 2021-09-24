@@ -21,15 +21,15 @@ class Manager
             return redirect()->route('login');
         }
 
-        if (Auth::user()->role_id == 1) {
+        if (Auth::user()->role == 'admin') {
             return redirect()->route('login')->with('alert', 'You don\'t have clearance for this level!');
         }
 
-        if (Auth::user()->role_id == 2) {
+        if (Auth::user()->role == 'manager') {
             return $next($request);
         }
 
-        if (Auth::user()->role_id == 3) {
+        if (Auth::user()->role == 'user') {
             return redirect()->route('login')->with('alert', 'You don\'t have clearance for this level!');
         }
     }
