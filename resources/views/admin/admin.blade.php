@@ -10,7 +10,7 @@
                 <li>
                     <a id="admin_users_button" class="admin-users-button">Users</a>
                 </li>
-                @if(auth()->user()->role_id == 1)
+                @if(auth()->user()->role == 'admin')
                     <li>
                         <a id="admin_meals_button">Meals</a>
                     </li>
@@ -40,7 +40,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if(auth()->user()->role_id == 1)
+                    @if(auth()->user()->role == 'admin')
                         @foreach ($users as $key => $user)
                             <tr class="admin-table-row-user" id="user_{{$user->id}}">
                                 <td class="user-id">{{$user->id}}</td>
@@ -67,7 +67,7 @@
                             </tr>
                         @endforeach
                     @endif
-                    @if(auth()->user()->role_id == 2)
+                    @if(auth()->user()->role == 'manager')
                         @foreach ($usersManager as $key => $user)
                             <tr class="admin-table-row-user" id="user_{{$user->id}}">
                                 <td class="user-id">{{$user->id}}</td>
