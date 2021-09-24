@@ -202,9 +202,9 @@
                         <h3>Change access</h3>
                         <label for="userAccessEdit" class="form-label">Access Level</label>
                         <select class="form-control" id="userAccessEdit" name="userAccessEdit">
-                            <option name="1" value="1">Admin</option>
-                            <option name="2" value="2">User Manager</option>
-                            <option name="3" value="3">User</option>
+                            <option name="admin" value="admin">Admin</option>
+                            <option name="manager" value="manager">User Manager</option>
+                            <option name="user" value="user">User</option>
                         </select>
                         <div class="reg-form-buttons">
                             <button name="submitUserAccess" class="user-access-submit-button btn btn-danger">

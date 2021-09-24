@@ -102,6 +102,7 @@ if (userAccessSubmitButton) {
         e.preventDefault();
         let select = document.getElementById('userAccessEdit');
         let selectedAccess = select.options[select.selectedIndex].value;
+        console.log(selectedAccess)
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'adminUserAccess', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
