@@ -22,12 +22,12 @@
             {{--    USERS TABLE--}}
 
             <div id="users_table" class="users-table-container">
-                <form action="" class="search-bar">
-                    <input id="search_value" type="search" name="search" pattern=".*\S.*" required>
-                    <button class="search-btn" type="submit">
-                        <span>Search</span>
-                    </button>
-                </form>
+{{--                <form action="" class="search-bar">--}}
+{{--                    <input id="search_value" type="search" name="search" pattern=".*\S.*" required>--}}
+{{--                    <button class="search-btn" type="submit">--}}
+{{--                        <span>Search</span>--}}
+{{--                    </button>--}}
+{{--                </form>--}}
                 <table class="admin-users-table table table-dark">
                     <div class="user-edit-success-message" id="user_edit_success_message"></div>
                     <thead>

@@ -46,7 +46,7 @@
                         <label>Time</label>
                         <input type="time" name="time" class="time form-control" required>
                         <div class="reg-form-buttons">
-                            <button  class="add-meal-btn btn btn-danger">Submit</button>
+                            <button class="add-meal-btn btn btn-danger">Submit</button>
                             <a href="home" type="click" class="btn btn-dark">Dismiss</a>
                         </div>
                         <ul id="save_form_err_list"></ul>
@@ -60,7 +60,7 @@
                     <input type="hidden" id="delete_id" value="">
                     <h4>Are you sure you want to delete this meal?</h4>
                     <div class="delete-modal-buttons">
-                        <button id="confirm_delete"  class="delete-confirm-button btn btn-danger">Submit</button>
+                        <button id="confirm_delete" class="delete-confirm-button btn btn-danger">Submit</button>
                         <a href="home" type="click" class="btn btn-dark">Dismiss</a>
                     </div>
                     <ul class="delete-meal-err-list" id="delete_meal_err_list"></ul>
@@ -90,11 +90,11 @@
                 </div>
             </div>
 
-{{--                MEALS TABLE--}}
+            {{--                MEALS TABLE--}}
             <div id="user_table_meals" class="meals-table">
                 <div class="edit-meal-success-message" id="edit_meals_success_message"></div>
                 @include('pages.paginationData')
-                        </div>
+            </div>
         </div>
     </div>
 @endsection

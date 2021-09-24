@@ -33,7 +33,6 @@ let displayMeals = function () {
     userMealsTable.style.display = 'none';
 }
 
-
 window.addEventListener('click', function (e) {
     if (e.target == editUserModal || e.target == deleteUserModal || e.target == accessModal) {
         editUserModal.style.display = 'none';
@@ -71,6 +70,7 @@ for (let i = 0; i < deleteUserOpenModalButton.length; i++) {
         deleteUserModal.style.display = 'block';
     });
 }
+
 if (deleteUserSubmitButton) {
     deleteUserSubmitButton.addEventListener('click', function (e) {
         e.preventDefault();
@@ -85,8 +85,13 @@ if (deleteUserSubmitButton) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
                 let response = JSON.parse(res);
-                document.getElementById("user_" + buttonID).remove();
-                deleteUserModal.style.display = 'none';
+                if (response.status === 200) {
+                    document.getElementById("user_" + buttonID).remove();
+                    deleteUserModal.style.display = 'none';
+                } else {
+                    alert('There was a problem. Please try later.');
+                }
+
             }
         }
         xhr.send(JSON.stringify(data));
@@ -222,7 +227,6 @@ if (adminEditUserSubmitButton) {
         xhr.send(JSON.stringify(data));
     });
 }
-
 
 if (adminUsersButton) {
     adminUsersButton.addEventListener('click', displayUsers);

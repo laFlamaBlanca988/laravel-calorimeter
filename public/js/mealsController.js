@@ -335,12 +335,17 @@ if (lastMonthFilterButton) {
                      <td class="cal_num">${data.cal_num}</td>
                      <td class="item-date">${data.date}</td>
                      <td class="item-time">${data.time}</td>
-                     zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz`;
+                     <td class="edit-meals-buttons">
+                        <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
+                            >Edit meal</button>
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-btn btn btn-danger btn-sm" type="submit"
+                            >Delete</button>
+                    </td>
+                </tr>`
                 });
                 tableBody.innerHTML = html;
                 totalCalories.innerText = res.totalCalories;
                 totalCalories.parentNode.style.visibility = "visible";
-
             }
             if (xhr.readyState !== 4 && xhr.status !== 200) {
                 alert('There was a problem, please try again!')

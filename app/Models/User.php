@@ -49,6 +49,7 @@ class User extends Authenticatable
             ->where('role_id', '!=', '1')
             ->get();
     }
+
     public function getUser($userID): Collection
     {
       return  DB::table('users')
@@ -67,6 +68,7 @@ class User extends Authenticatable
                 'id' => $userID,
             ]);
     }
+
     public function adminEditUser ($userID, $name, $username, $email, $password): int
     {
         return DB::table('users')

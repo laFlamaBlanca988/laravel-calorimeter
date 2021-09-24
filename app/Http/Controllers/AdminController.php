@@ -23,7 +23,12 @@ class AdminController extends Controller
         $userMeals = $meals->getMealsForUser($userID);
         $mealsAll = $meals->getAllMeals();
 
-        return view('admin.admin', ['userMeals' => $userMeals, 'users' => $usersAll, 'usersManager' => $usersManager, 'meals' => $mealsAll]);
+        return view('admin.admin', [
+            'userMeals' => $userMeals,
+            'users' => $usersAll,
+            'usersManager' => $usersManager,
+            'meals' => $mealsAll
+        ]);
     }
 
     public function editUser(Request $request): JsonResponse
@@ -53,10 +58,16 @@ class AdminController extends Controller
             $editedUser = $user->adminEditUser($userID, $name, $username, $email, $password);
 
             if ($editedUser) {
-                return response()->json(['status' => 200, 'message' => 'User edited successfully!',]);
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'User edited successfully!'
+                ]);
             }
 
-            return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.',]);
+            return response()->json([
+                'status' => 400,
+                'message' => 'Something went wrong. Please try again later.'
+            ]);
         }
     }
 
@@ -85,13 +96,22 @@ class AdminController extends Controller
         $dbRoleID = $users->getUser($userID)[0]->role_id;
         $accessEdit = $users->editUserAccess($userID, $roleID);
         if ($dbRoleID == $roleID) {
-            return response()->json(['status' => 400, 'message' => 'User already registered with given credentials']);
+            return response()->json([
+                'status' => 400,
+                'message' => 'User already registered with given credentials'
+            ]);
         }
         if ($accessEdit) {
-            return response()->json(['status' => 200, 'message' => 'User access edited successfully']);
+            return response()->json([
+                'status' => 200,
+                'message' => 'User access edited successfully'
+            ]);
         }
 
-        return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.',]);
+        return response()->json([
+            'status' => 400,
+            'message' => 'Something went wrong. Please try again later.'
+        ]);
     }
 
     public function adminUserDelete(Request $request): JsonResponse

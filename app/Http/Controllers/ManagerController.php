@@ -22,11 +22,16 @@ class ManagerController extends Controller
         $userID = Auth::user()->id;
         $userMeals = $meals->getMealsForUser($userID);
         $mealsAll = $meals->getAllMeals();
-        return view('admin.admin', ['userMeals' => $userMeals, 'usersManager' => $usersManager, 'users' => $usersAll, 'meals' => $mealsAll]);
+        return view('admin.admin', [
+            'userMeals' => $userMeals,
+            'usersManager' => $usersManager,
+            'users' => $usersAll,
+            'meals' => $mealsAll
+        ]);
     }
+
     public function editUser(Request $request): JsonResponse
     {
-
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'max:255'],
             'username' => ['required', 'max:255', 'min:3'],
@@ -35,11 +40,13 @@ class ManagerController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => 400, 'errors' => $validator->messages(),]);
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages()->first()
+            ]);
         } else {
             $user = new User;
             $userID = $request->json()->get('id');
-
             $name = $request->input('name');
             $username = $request->input('username');
             $email = $request->input('email');
@@ -48,10 +55,16 @@ class ManagerController extends Controller
             $editedUser = $user->editUser($userID, $name, $username, $email, $password);
 
             if ($editedUser) {
-                return response()->json(['status' => 200, 'message' => 'User edited successfully!',]);
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'User edited successfully!'
+                ]);
             }
 
-            return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.',]);
+            return response()->json([
+                'status' => 400,
+                'message' => 'Something went wrong. Please try again later.'
+            ]);
         }
     }
 

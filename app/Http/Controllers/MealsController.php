@@ -16,6 +16,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class MealsController extends Controller
 {
+
     public function index(): JsonResponse
     {
         $meals = new Meal;
@@ -32,6 +33,7 @@ class MealsController extends Controller
             'date' => 'required|date_format:Y-m-d',
             'time' => 'required|date_format:H:i'
         ]);
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
@@ -39,7 +41,6 @@ class MealsController extends Controller
             ]);
         } else {
             $meal = new Meal;
-
             $title = $request->input('title');
             $cal_num = $request->input('cal_num');
             $date = $request->input('date');
@@ -65,12 +66,14 @@ class MealsController extends Controller
 
     public function edit(Request $request): JsonResponse
     {
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:50',
             'cal_num' => 'required|digits_between:1,9',
             'date' => 'required|date_format:Y-m-d',
             'time' => 'required|date_format:H:i:s'
         ]);
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
@@ -115,6 +118,7 @@ class MealsController extends Controller
             "totalCalories" => $totalCalories
         ]);
     }
+
     public function getLastMonthData(): JsonResponse
     {
         $meals = new Meal;
@@ -139,6 +143,7 @@ class MealsController extends Controller
             'timeFrom' => 'date_format:h:i',
             'timeTo' => 'date_format:h:i'
         ]);
+
         if ($validator->fails()) {
             return response()->json(['status' => 400, 'errors' => $validator->messages()->first()]);
         } else {
@@ -156,10 +161,12 @@ class MealsController extends Controller
             return response()->json(["mealsFilterAll" => $mealsFilterAll, "totalCalories" => $totalCalories]);
         }
     }
+
     public function destroy(Request $request): JsonResponse
     {
         $meals = new Meal;
         $mealID= $request->json()->all();
+
         if( $meals->deleteMeal($mealID) ) {
             return response()->json([
                 'status' => '200',

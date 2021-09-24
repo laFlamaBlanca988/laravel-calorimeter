@@ -130,12 +130,12 @@ class Meal extends Model
         return $query->get();
     }
 
-    public function getSumOfCalories($userID) {
-      return  DB::table("meals")
-          ->where('userID', '=', $userID)
-          ->get()
-          ->sum("cal_num");
-    }
+//    public function getSumOfCalories($userID) {
+//      return  DB::table("meals")
+//          ->where('userID', '=', $userID)
+//          ->get()
+//          ->sum("cal_num");
+//    }
 
     public function deleteUserMeals($userID): int
     {
