@@ -42,7 +42,7 @@
                         <label>Calories</label>
                         <input type="number" name="calories" class="cal-num form-control" required>
                         <label>Date</label>
-                        <input id="date" type="date" name="date" class="date form-control" required>
+                        <input type="date" name="date" class="date form-control" required>
                         <label>Time</label>
                         <input type="time" name="time" class="time form-control" required>
                         <div class="reg-form-buttons">
@@ -97,5 +97,4 @@
             </div>
         </div>
     </div>
-    @include('pages.chart')
 @endsection

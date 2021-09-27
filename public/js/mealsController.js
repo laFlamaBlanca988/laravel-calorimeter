@@ -81,7 +81,7 @@ if (addBtn) {
         let currentTime = now.toISOString().substring(11,16);
         document.querySelector('.title').value = '';
         document.querySelector('.cal-num').value = '';
-        document.getElementById('date').value = today;
+        document.querySelector('.date').value = today;
         document.querySelector('.time').value = currentTime;
         document.getElementById('save_form_err_list').classList.remove('alert', 'alert-danger');
         document.getElementById('save_form_err_list').textContent = '';
@@ -130,6 +130,9 @@ function editMeal(mealID) {
     caloriesEdit.value = currentTableRow.children[2].innerText;
     dateEdit.value = currentTableRow.children[3].innerText;
     timeEdit.value = currentTableRow.children[4].innerText;
+    document.getElementById('edit_form_err_list').classList.remove('alert', 'alert-danger');
+    document.getElementById('edit_form_err_list').textContent = '';
+
 }
 
 // DELETE BUTTON LISTENER
@@ -190,7 +193,7 @@ if (addMealBtn) {
                     document.getElementById('save_form_err_list').value = "";
                     document.getElementById('success_message').classList.add('alert', 'alert-success');
                     document.getElementById('success_message').textContent = response.message;
-                    timeoutMessage();
+                    timeoutSuccessMessage( document.getElementById('success_message'));
                 }
                 if(response.status === 400) {
                     document.getElementById('save_form_err_list').classList.add('alert', 'alert-danger');
@@ -248,7 +251,6 @@ if (editMealButton) {
                     document.getElementById('edit_form_err_list').classList.remove('hidden');
                     document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
                     document.getElementById('edit_form_err_list').textContent = response.errors;
-                    timeoutAlertMessage(document.getElementById('edit_form_err_list'))
                 }
             }
         }
@@ -374,7 +376,8 @@ if (lastMonthFilterButton) {
 if (dateAndTimeFilterClearButton) {
     dateAndTimeFilterClearButton.addEventListener('click', function () {
         document.getElementById('filter_meal_form').reset();
-
+        document.getElementById('date_time_form_err_list').classList.remove('alert', 'alert-danger');
+        document.getElementById('date_time_form_err_list').textContent = ``;
     });
 }
 if (dateAndTimeFilterSubmitButton) {
@@ -422,7 +425,7 @@ if (dateAndTimeFilterSubmitButton) {
             xhr.send(JSON.stringify(data));
         } else {
             document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
-            document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
+            document.getElementById('date_time_form_err_list').textContent = `Please input valid date!`;
             document.getElementById('filter_meal_form').reset();
         }
     });

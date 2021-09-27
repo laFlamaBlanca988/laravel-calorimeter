@@ -47,6 +47,8 @@ for (let i = 0; i < editUserButtons.length; i++) {
         buttonID = this.dataset.id;
         editUserModal.style.display = 'block';
         editUser(buttonID);
+        document.getElementById('admin_user_edit_form_err_list').classList.remove('alert', 'alert-danger');
+        document.getElementById('admin_user_edit_form_err_list').textContent = '';
     });
 }
 
@@ -102,7 +104,6 @@ if (userAccessSubmitButton) {
         e.preventDefault();
         let select = document.getElementById('userAccessEdit');
         let selectedAccess = select.options[select.selectedIndex].value;
-        console.log(selectedAccess)
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'adminUserAccess', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -156,7 +157,6 @@ function displayUserMeals(userID) {
                 });
                 if (userMealsTableBody) {
                     userMealsTableBody.insertAdjacentHTML('afterbegin', html);
-                    console.log(document.querySelectorAll('.user-table-row-meals'));
                 }
                 if (userMealsTable) {
                     userMealsTable.style.display = 'block';
