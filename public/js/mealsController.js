@@ -39,13 +39,15 @@ let title;
 let calories;
 let date;
 let time;
-
 if (toDateInput) {
     toDateInput.addEventListener('change', function () {
         if (fromDateInput.value > this.value) {
             document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
             document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
             document.getElementById('filter_meal_form').reset();
+        }else {
+            document.getElementById('date_time_form_err_list').classList.remove('alert', 'alert-danger');
+            document.getElementById('date_time_form_err_list').textContent = ``;
         }
     });
 }
@@ -56,6 +58,10 @@ if (toTimeInput) {
             document.getElementById('date_time_form_err_list').classList.add('alert', 'alert-danger');
             document.getElementById('date_time_form_err_list').textContent = `Please input correct format!`;
             document.getElementById('filter_meal_form').reset();
+        }else {
+            document.getElementById('date_time_form_err_list').classList.remove('alert', 'alert-danger');
+            document.getElementById('date_time_form_err_list').textContent = ``;
+
         }
     });
 }
@@ -64,10 +70,21 @@ if (toTimeInput) {
 if (addBtn) {
     addBtn.addEventListener('click', function () {
         addMealModal.style.display = 'block';
+        let now = new Date();
+        let month = (now.getMonth() + 1);
+        let day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        let today = now.getFullYear() + '-' + month + '-' + day;
+        let currentTime = now.toISOString().substring(11,16);
         document.querySelector('.title').value = '';
         document.querySelector('.cal-num').value = '';
-        document.querySelector('.date').value = '';
-        document.querySelector('.time').value = '';
+        document.getElementById('date').value = today;
+        document.querySelector('.time').value = currentTime;
+        document.getElementById('save_form_err_list').classList.remove('alert', 'alert-danger');
+        document.getElementById('save_form_err_list').textContent = '';
     });
 }
 
@@ -357,7 +374,7 @@ if (lastMonthFilterButton) {
 if (dateAndTimeFilterClearButton) {
     dateAndTimeFilterClearButton.addEventListener('click', function () {
         document.getElementById('filter_meal_form').reset();
-        dateAndTimeFilterSubmitButton.click();
+
     });
 }
 if (dateAndTimeFilterSubmitButton) {

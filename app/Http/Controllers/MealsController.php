@@ -88,7 +88,7 @@ class MealsController extends Controller
             $mealID= $request->json()->get('id');
             $editRowID = $meal->editMeal($mealID ,$title, $cal_num, $date, $time);
 
-            if( $editRowID ) {
+            if( $editRowID  || $editRowID == 0) {
                 return response()->json([
                     'status' => 200,
                     'id' => $mealID,
@@ -98,7 +98,7 @@ class MealsController extends Controller
 
             return response()->json([
                 'status' => 400,
-                'message' => 'Something went wrong. Please try again later.'
+                'message' => 'Something went wrong. Please try again.'
             ]);
        }
     }

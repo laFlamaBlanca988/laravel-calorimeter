@@ -8,6 +8,7 @@
 
     <title>Calorimeter</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!-- Fonts -->
@@ -22,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/userEdit.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/chart.css') }}">
+
 </head>
 <body>
 <header class="custom-header-container container-fluid">
@@ -32,9 +35,9 @@
                 <h3 class="welcome-name">Welcome, </h3>
              @auth
                     <div class="dropdown">
-                        <button class="drop-btn">{{auth()->user()->name}}</button>
+                        <button class="drop-btn">{{auth()->user()->username}}</button>
                         <div class="dropdown-content">
-                            <a href="userEdit">{{auth()->user()->name}} settings</a>
+                            <a href="userEdit">Settings</a>
                             @if(auth()->user()->role == 'admin')
                             <a href="admin">Admin settings</a>
                             @endif
@@ -76,6 +79,7 @@
 <script src="{{asset('js/main.js')}}" defer></script>
 <script src="{{asset('js/adminController.js')}}" defer></script>
 <script src="{{asset('js/userSearch.js')}}" defer></script>
+<script src="{{asset('js/chart.js')}}" defer></script>
 
 </body>
 

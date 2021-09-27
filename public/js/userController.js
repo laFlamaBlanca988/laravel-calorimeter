@@ -1,4 +1,3 @@
-let nameInput = document.getElementById('user_name');
 let emailInput = document.getElementById('user_email');
 let usernameInput = document.getElementById('user_username');
 let passwordInput = document.getElementById('user_password');
@@ -8,7 +7,7 @@ if(editUserSubmitButton) {
     editUserSubmitButton.addEventListener('click', function (e) {
         e.preventDefault();
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://calorimeter/userEdit', true);
+        xhr.open('POST', 'userEdit', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
         let data = {

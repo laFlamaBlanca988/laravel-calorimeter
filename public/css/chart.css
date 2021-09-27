@@ -1,0 +1,17 @@
+
+.chartCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 30rem;
+    margin: 3rem auto auto;
+    background: rgba(255, 26, 104, 0.2);
+}
+.chartBox {
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 3px rgba(255, 26, 104, 1);
+    background: white;
+}
