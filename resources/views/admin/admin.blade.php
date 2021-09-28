@@ -56,10 +56,10 @@
                                             type="submit"
                                     >Edit user
                                     </button>
-                                    <button data-id="{{$user->id}}"
-                                            class="edit-user-meals-open-btn btn btn-danger btn-sm" type="submit"
-                                    >User meals
-                                    </button>
+{{--                                    <button data-id="{{$user->id}}"--}}
+{{--                                            class="edit-user-meals-open-btn btn btn-danger btn-sm" type="submit"--}}
+{{--                                    >User meals--}}
+{{--                                    </button>--}}
                                     <button data-id="{{$user->id}}"
                                             class="edit-user-access-open-btn btn btn-danger btn-sm" type="submit"
                                     >Access
@@ -101,23 +101,23 @@
                 @include('pages.adminMealsPagination')
             </div>
 
-            {{--  USER MEALS TABLE--}}
-            <div class="hidden user-meals-table-container">
-                <table class="admin-meals-table table table-dark">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Meal</th>
-                        <th scope="col">Calories</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Time</th>
-                        <th class="edit-meals-table-header" scope="col"></th>
-                    </tr>
-                    </thead>
-                    <tbody id="user_meals_table_body">
-                    </tbody>
-                </table>
-            </div>
+{{--            --}}{{--  USER MEALS TABLE--}}
+{{--            <div class="hidden user-meals-table-container">--}}
+{{--                <table class="admin-meals-table table table-dark">--}}
+{{--                    <thead>--}}
+{{--                    <tr>--}}
+{{--                        <th scope="col">ID</th>--}}
+{{--                        <th scope="col">Meal</th>--}}
+{{--                        <th scope="col">Calories</th>--}}
+{{--                        <th scope="col">Date</th>--}}
+{{--                        <th scope="col">Time</th>--}}
+{{--                        <th class="edit-meals-table-header" scope="col"></th>--}}
+{{--                    </tr>--}}
+{{--                    </thead>--}}
+{{--                    <tbody id="user_meals_table_body">--}}
+{{--                    </tbody>--}}
+{{--                </table>--}}
+{{--            </div>--}}
 
             {{--    DELETE MEAL CONFIRMATION MODAL--}}
             <div id="delete_confirm_modal" class="modal delete-confirm-modal">

@@ -38,7 +38,7 @@ Route::post('userEdit', [UserController::class, 'editUserControl'])->middleware(
 
 Route::get('admin', [AdminController::class, 'index'])->middleware('admin');
 Route::get('admin/meals', [AdminController::class, 'fetchAllMeals'])->middleware('admin');
-Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('auth');
+//Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('auth');
 Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->middleware('admin');
 Route::post('adminMealsDelete', [AdminController::class, 'adminMealDelete'])->middleware('admin');
 
