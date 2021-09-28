@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+@endsection
 @section('content')
     <div class="register-form-wrapper">
         <form method="POST" action="{{ route('register') }}" class="reg-form">

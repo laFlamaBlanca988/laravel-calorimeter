@@ -156,7 +156,7 @@ function displayUserMeals(userID) {
                     `
                 });
                 if (userMealsTableBody) {
-                    userMealsTableBody.insertAdjacentHTML('afterbegin', html);
+                    userMealsTableBody.innerHTML = html;
                 }
                 if (userMealsTable) {
                     userMealsTable.style.display = 'block';

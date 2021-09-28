@@ -145,4 +145,9 @@
 .delete-meal-err-list {
     transform: translateY(1rem);
 }
+.edit-meals-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 10rem;
+}
 

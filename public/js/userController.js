@@ -37,20 +37,3 @@ if(editUserSubmitButton) {
         xhr.send(JSON.stringify(data));
     });
 }
-//TIMEOUT MESSAGE
-function timeoutSuccessMessage(message) {
-    setTimeout(function () {
-        let successMsg = message;
-        if (successMsg) {
-            successMsg.style.display = "none";
-        }
-    }, 2000);
-}
-function timeoutAlertMessage(message) {
-    setTimeout(function () {
-        let alertMsg = message;
-        if (alertMsg) {
-            alertMsg.style.display = "none";
-        }
-    }, 2000);
-}

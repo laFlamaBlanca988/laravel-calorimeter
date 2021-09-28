@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endsection
 @section('content')
     <div class="custom-body-container container-fluid">
 
@@ -22,12 +26,12 @@
             {{--    USERS TABLE--}}
 
             <div id="users_table" class="users-table-container">
-{{--                <form action="" class="search-bar">--}}
-{{--                    <input id="search_value" type="search" name="search" pattern=".*\S.*" required>--}}
-{{--                    <button class="search-btn" type="submit">--}}
-{{--                        <span>Search</span>--}}
-{{--                    </button>--}}
-{{--                </form>--}}
+                {{--                <form action="" class="search-bar">--}}
+                {{--                    <input id="search_value" type="search" name="search" pattern=".*\S.*" required>--}}
+                {{--                    <button class="search-btn" type="submit">--}}
+                {{--                        <span>Search</span>--}}
+                {{--                    </button>--}}
+                {{--                </form>--}}
                 <table class="admin-users-table table table-dark">
                     <div class="user-edit-success-message" id="user_edit_success_message"></div>
                     <thead>
@@ -227,30 +231,35 @@
                     </div>
                 </div>
             </div>
-{{--            <script>--}}
-{{--                $(document).ready(function(){--}}
-{{--                    $.ajaxSetup({ cache: false });--}}
-{{--                    $('#search').keyup(function(){--}}
-{{--                        $('#result').html('');--}}
-{{--                        $('#state').val('');--}}
-{{--                        var searchField = $('#search').val();--}}
-{{--                        var expression = new RegExp(searchField, "i");--}}
-{{--                        $.getJSON('data.json', function(data) {--}}
-{{--                            $.each(data, function(key, value){--}}
-{{--                                if (value.name.search(expression) != -1 || value.location.search(expression) != -1)--}}
-{{--                                {--}}
-{{--                                    $('#result').append('<li class="list-group-item link-class"><img src="'+value.image+'" height="40" width="40" class="img-thumbnail" /> '+value.name+' | <span class="text-muted">'+value.location+'</span></li>');--}}
-{{--                                }--}}
-{{--                            });--}}
-{{--                        });--}}
-{{--                    });--}}
+            {{--            <script>--}}
+            {{--                $(document).ready(function(){--}}
+            {{--                    $.ajaxSetup({ cache: false });--}}
+            {{--                    $('#search').keyup(function(){--}}
+            {{--                        $('#result').html('');--}}
+            {{--                        $('#state').val('');--}}
+            {{--                        var searchField = $('#search').val();--}}
+            {{--                        var expression = new RegExp(searchField, "i");--}}
+            {{--                        $.getJSON('data.json', function(data) {--}}
+            {{--                            $.each(data, function(key, value){--}}
+            {{--                                if (value.name.search(expression) != -1 || value.location.search(expression) != -1)--}}
+            {{--                                {--}}
+            {{--                                    $('#result').append('<li class="list-group-item link-class"><img src="'+value.image+'" height="40" width="40" class="img-thumbnail" /> '+value.name+' | <span class="text-muted">'+value.location+'</span></li>');--}}
+            {{--                                }--}}
+            {{--                            });--}}
+            {{--                        });--}}
+            {{--                    });--}}
 
-{{--                    $('#result').on('click', 'li', function() {--}}
-{{--                        var click_text = $(this).text().split('|');--}}
-{{--                        $('#search').val($.trim(click_text[0]));--}}
-{{--                        $("#result").html('');--}}
-{{--                    });--}}
-{{--                });--}}
-{{--            </script>--}}
+            {{--                    $('#result').on('click', 'li', function() {--}}
+            {{--                        var click_text = $(this).text().split('|');--}}
+            {{--                        $('#search').val($.trim(click_text[0]));--}}
+            {{--                        $("#result").html('');--}}
+            {{--                    });--}}
+            {{--                });--}}
+            {{--            </script>--}}
+
+            @endsection
+            @section('script')
+                <script src="{{asset('js/adminController.js')}}" defer></script>
+                <script src="{{asset('js/mealsController.js')}}" defer></script>
 
 @endsection

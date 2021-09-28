@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endsection
 @section('content')
     <div class="login-form-wrapper">
         <form method="POST" action="{{route('login')}}" class="login-form">

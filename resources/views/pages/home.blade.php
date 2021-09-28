@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endsection
 @section('content')
     <div class="cal-sum">
         <h3 class="cal-sum-text">Calories amount: <span id="total_calories">{{$totalCalories}}</span></h3>
@@ -97,4 +100,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script src="{{asset('js/mealsController.js')}}" defer></script>
 @endsection

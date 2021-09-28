@@ -14,14 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/userEdit.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    @yield('style')
 </head>
 <body>
 <header class="custom-header-container container-fluid">
@@ -71,12 +66,9 @@
     </div>
     @endif
 
-<script src="{{asset('js/mealsController.js')}}" defer></script>
-<script src="{{asset('js/userController.js')}}" defer></script>
 <script src="{{asset('js/main.js')}}" defer></script>
-<script src="{{asset('js/adminController.js')}}" defer></script>
 
 {{--<script src="{{asset('js/userSearch.js')}}" defer></script>--}}
-
+@yield('script')
 </body>
 
