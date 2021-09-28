@@ -71,22 +71,22 @@ class AdminController extends Controller
         }
     }
 
-    public function displayUserMeals(Request $request): JsonResponse
-    {
-        $meal = new Meal;
-        $userID = $request->json()->get('id');
-        $userMeals = $meal->getMealsForUser($userID);
-        if ($userMeals) {
-            return response()->json([
-                'status' => 200,
-                'userMeals' => $userMeals
-            ]);
-        }
-        return response()->json([
-            'status' => 400,
-            'message' => 'Something went wrong. Please try again later.'
-            ]);
-    }
+//    public function displayUserMeals(Request $request): JsonResponse
+//    {
+//        $meal = new Meal;
+//        $userID = $request->json()->get('id');
+//        $userMeals = $meal->getMealsForUser($userID);
+//        if ($userMeals) {
+//            return response()->json([
+//                'status' => 200,
+//                'userMeals' => $userMeals
+//            ]);
+//        }
+//        return response()->json([
+//            'status' => 400,
+//            'message' => 'Something went wrong. Please try again later.'
+//            ]);
+//    }
 
     public function updateUserAccess(Request $request): JsonResponse
     {
@@ -94,17 +94,18 @@ class AdminController extends Controller
         $userID = $request->json()->get('id');
         $roleID = $request->json()->get('roleID');
         $dbRoleID = $users->getUser($userID)[0]->role;
-        $accessEdit = $users->editUserAccess($userID, $roleID);
+
         if ($dbRoleID == $roleID) {
             return response()->json([
-                'status' => 400,
-                'message' => 'User already registered with given credentials'
+                'status' => 300,
+                'message' => 'User already registered with given access credentials!'
             ]);
         }
-        if ($accessEdit) {
+        if ($roleID === 'user' || $roleID === 'admin' || $roleID === 'manager') {
+            $users->editUserAccess($userID, $roleID);
             return response()->json([
                 'status' => 200,
-                'message' => 'User access edited successfully'
+                'message' => 'User access edited to '.$roleID.'!'
             ]);
         }
 

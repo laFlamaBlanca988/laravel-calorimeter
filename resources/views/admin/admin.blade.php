@@ -5,7 +5,6 @@
 @endsection
 @section('content')
     <div class="custom-body-container container-fluid">
-
         <nav class="sidebar">
             <div class="sidebar-header">
                 <h3>Filter Views</h3>
@@ -24,16 +23,9 @@
 
         <div class="users-meals-container">
             {{--    USERS TABLE--}}
-
             <div id="users_table" class="users-table-container">
-                {{--                <form action="" class="search-bar">--}}
-                {{--                    <input id="search_value" type="search" name="search" pattern=".*\S.*" required>--}}
-                {{--                    <button class="search-btn" type="submit">--}}
-                {{--                        <span>Search</span>--}}
-                {{--                    </button>--}}
-                {{--                </form>--}}
                 <table class="admin-users-table table table-dark">
-                    <div class="user-edit-success-message" id="user_edit_success_message"></div>
+                    <div class="hidden user-edit-success-message" id="user_edit_success_message"></div>
                     <thead>
                     <tr>
                         <th scope="col">UserID</th>
@@ -56,10 +48,6 @@
                                             type="submit"
                                     >Edit user
                                     </button>
-{{--                                    <button data-id="{{$user->id}}"--}}
-{{--                                            class="edit-user-meals-open-btn btn btn-danger btn-sm" type="submit"--}}
-{{--                                    >User meals--}}
-{{--                                    </button>--}}
                                     <button data-id="{{$user->id}}"
                                             class="edit-user-access-open-btn btn btn-danger btn-sm" type="submit"
                                     >Access
@@ -100,24 +88,6 @@
                 <div class="edit-meals-success-message" id="edit_meals_success_message"></div>
                 @include('pages.adminMealsPagination')
             </div>
-
-{{--            --}}{{--  USER MEALS TABLE--}}
-{{--            <div class="hidden user-meals-table-container">--}}
-{{--                <table class="admin-meals-table table table-dark">--}}
-{{--                    <thead>--}}
-{{--                    <tr>--}}
-{{--                        <th scope="col">ID</th>--}}
-{{--                        <th scope="col">Meal</th>--}}
-{{--                        <th scope="col">Calories</th>--}}
-{{--                        <th scope="col">Date</th>--}}
-{{--                        <th scope="col">Time</th>--}}
-{{--                        <th class="edit-meals-table-header" scope="col"></th>--}}
-{{--                    </tr>--}}
-{{--                    </thead>--}}
-{{--                    <tbody id="user_meals_table_body">--}}
-{{--                    </tbody>--}}
-{{--                </table>--}}
-{{--            </div>--}}
 
             {{--    DELETE MEAL CONFIRMATION MODAL--}}
             <div id="delete_confirm_modal" class="modal delete-confirm-modal">
@@ -258,8 +228,4 @@
             {{--            </script>--}}
 
             @endsection
-            @section('script')
-                <script src="{{asset('js/adminController.js')}}" defer></script>
-                <script src="{{asset('js/mealsController.js')}}" defer></script>
 
-@endsection

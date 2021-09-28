@@ -1,7 +1,4 @@
 @extends('layouts.app')
-@section('style')
-    <link rel="stylesheet" href="{{ asset('css/userEdit.css') }}">
-@endsection
 @section('content')
     <div class="user-edit-form-container">
         <form id="user_edit_form" action="userEdit" class="user-edit-form">
@@ -25,6 +22,4 @@
     </div>
 
 @endsection
- @section('script')
-     <script src="{{asset('js/userController.js')}}" defer></script>
- @endsection
+

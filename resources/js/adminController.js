@@ -108,7 +108,26 @@ if (userAccessSubmitButton) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
                 let response = JSON.parse(res);
-                accessModal.style.display = 'none';
+                console.log(response)
+                if (response.status === 200) {
+                    accessModal.style.display = 'none';
+                    document.getElementById('user_edit_success_message').classList.remove('hidden');
+                    document.getElementById('user_edit_success_message').classList.add('alert', 'alert-danger');
+                    document.getElementById('user_edit_success_message').textContent = response.message;
+                    timeoutSuccessMessage(document.getElementById('user_edit_success_message'));
+                }  if (response.status === 300) {
+                    accessModal.style.display = 'none';
+                    document.getElementById('user_edit_success_message').classList.remove('hidden');
+                    document.getElementById('user_edit_success_message').classList.add('alert', 'alert-danger');
+                    document.getElementById('user_edit_success_message').textContent = response.message;
+                    timeoutSuccessMessage(document.getElementById('user_edit_success_message'));
+                } if (response.status === 400) {
+                    accessModal.style.display = 'none';
+                    document.getElementById('user_edit_success_message').classList.remove('hidden');
+                    document.getElementById('admin_user_edit_form_err_list').classList.add('alert', 'alert-danger');
+                    document.getElementById('admin_user_edit_form_err_list').textContent = response.errors;
+                    timeoutAlertMessage(document.getElementById('user_edit_success_message'));
+                }
             }
         }
         xhr.send(JSON.stringify(data));
@@ -156,6 +175,7 @@ if (adminEditUserSubmitButton) {
                     document.getElementById(`user_${editUserID.value}`).children[2].textContent = data.username;
                     document.getElementById(`user_${editUserID.value}`).children[3].textContent = data.email;
                     editUserModal.style.display = 'none';
+                    document.getElementById('user_edit_success_message').classList.remove('hidden');
                     document.getElementById('user_edit_success_message').classList.add('alert', 'alert-danger');
                     document.getElementById('user_edit_success_message').textContent = response.message;
                     timeoutSuccessMessage(document.getElementById('user_edit_success_message'));

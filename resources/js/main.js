@@ -9,7 +9,7 @@ function timeoutLoginMessage() {
     setTimeout(function () {
         let successMsg = document.querySelector('.logged-in-message');
         if (successMsg) {
-            successMsg.style.display = "none";
+            successMsg.classList.add('hidden');
         }
     }, 2000);
 }
@@ -18,7 +18,7 @@ function timeoutSuccessMessage(message) {
     setTimeout(function () {
         let successMsg = message;
         if (successMsg) {
-            successMsg.style.display = "none";
+            successMsg.classList.add('hidden');
         }
     }, 2000);
 }
@@ -26,7 +26,7 @@ function timeoutAlertMessage(message) {
     setTimeout(function () {
         let alertMsg = message;
         if (alertMsg) {
-            alertMsg.style.display = "none";
+            alertMsg.classList.add('hidden');
         }
     }, 2000);
 }

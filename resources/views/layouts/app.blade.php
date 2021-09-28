@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    @yield('style')
 </head>
 <body>
 <header class="custom-header-container container-fluid">
@@ -66,9 +63,6 @@
     </div>
     @endif
 
-<script src="{{asset('js/main.js')}}" defer></script>
-
-{{--<script src="{{asset('js/userSearch.js')}}" defer></script>--}}
-@yield('script')
+<script src="{{asset('js/app.js')}}" defer></script>
 </body>
 
