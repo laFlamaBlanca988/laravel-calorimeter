@@ -1,8 +1,10 @@
+import {timeoutSuccessMessage} from "./main.js";
+import {timeoutAlertMessage} from "./main.js";
+
 let adminUsersButton = document.getElementById('admin_users_button');
 let adminMealsButton = document.getElementById('admin_meals_button');
 let usersTable = document.getElementById('users_table');
 let mealsTable = document.getElementById('meals_table');
-let userMealsTable = document.querySelector('.user-meals-table-container');
 let editUserButtons = document.getElementsByClassName('edit-user-open-btn');
 let adminMealsTable = document.querySelector('.admin-meals-table');
 let adminEditUserSubmitButton = document.querySelector('.admin-edit-user-submit');
@@ -18,16 +20,16 @@ let userAccessSubmitButton = document.querySelector('.user-access-submit-button'
 let deleteUserOpenModalButton = document.getElementsByClassName('delete-user-btn');
 let deleteUserModal = document.getElementById('delete_user_confirm_modal');
 let deleteUserSubmitButton = document.querySelector('.delete-user-confirm-button');
+let buttonID;
+
 let displayUsers = function () {
     usersTable.style.display = 'block';
     mealsTable.style.display = 'none';
-// userMealsTable.style.display = 'none';
 }
 
 let displayMeals = function () {
     mealsTable.style.display = 'block';
     usersTable.style.display = 'none';
-    // userMealsTable.style.display = 'none';
 }
 
 window.addEventListener('click', function (e) {
@@ -143,7 +145,6 @@ function editUser(userID) {
     usernameEdit.value = currentTableRow.children[2].innerText;
     emailEdit.value = currentTableRow.children[3].innerText;
 }
-
 
 if (adminEditUserSubmitButton) {
     adminEditUserSubmitButton.addEventListener('click', function (e) {

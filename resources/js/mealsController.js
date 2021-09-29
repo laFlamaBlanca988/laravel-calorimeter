@@ -1,3 +1,6 @@
+import {timeoutSuccessMessage} from "./main.js";
+import {timeoutAlertMessage} from "./main.js";
+
 let addMealModal = document.querySelector(".modal");
 let editModal = document.querySelector('#edit_meal_modal');
 let deleteModal = document.getElementById('delete_confirm_modal');
@@ -122,7 +125,7 @@ for (let i = 0; i < editButtons.length; i++) {
     });
 }
 
-function editMeal(mealID) {
+ window.editMeal = function(mealID) {
     editModal.style.display = "block";
     let currentTableRow = document.getElementById(`meal_${mealID}`).closest('tr');
     editMealID.value = mealID;
@@ -143,7 +146,7 @@ for (let i = 0; i < deleteButtons.length; i++) {
     });
 }
 
-function deleteMeal(mealID) {
+window.deleteMeal = function(mealID) {
     deleteModal.style.display = 'block';
     deleteMealID.value = mealID;
 }

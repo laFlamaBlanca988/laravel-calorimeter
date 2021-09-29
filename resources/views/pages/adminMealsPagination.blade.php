@@ -11,6 +11,7 @@
     </thead>
     <tbody>
     @foreach ($meals as $key => $meal)
+        <div class="edit-meal-success-message" id="edit_meals_success_message"></div>
         <tr class="admin-table-row-meals" id="meal_{{$meal->id}}">
             <td class="item-user-name">{{$meal->name}}</td>
             <td class="item-title">{{ $meal->title }}</td>

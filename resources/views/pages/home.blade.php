@@ -95,7 +95,6 @@
 
             {{--                MEALS TABLE--}}
             <div id="user_table_meals" class="meals-table">
-                <div class="edit-meal-success-message" id="edit_meals_success_message"></div>
                 @include('pages.paginationData')
             </div>
         </div>

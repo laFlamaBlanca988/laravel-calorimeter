@@ -5,7 +5,7 @@ logo.addEventListener('click', function () {
 });
 
 timeoutLoginMessage();
-function timeoutLoginMessage() {
+export function timeoutLoginMessage() {
     setTimeout(function () {
         let successMsg = document.querySelector('.logged-in-message');
         if (successMsg) {
@@ -14,7 +14,7 @@ function timeoutLoginMessage() {
     }, 2000);
 }
 //TIMEOUT MESSAGE
-function timeoutSuccessMessage(message) {
+export function timeoutSuccessMessage(message) {
     setTimeout(function () {
         let successMsg = message;
         if (successMsg) {
@@ -22,7 +22,7 @@ function timeoutSuccessMessage(message) {
         }
     }, 2000);
 }
-function timeoutAlertMessage(message) {
+export function timeoutAlertMessage(message) {
     setTimeout(function () {
         let alertMsg = message;
         if (alertMsg) {

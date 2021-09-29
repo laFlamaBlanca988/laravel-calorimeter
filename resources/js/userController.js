@@ -1,3 +1,5 @@
+import {timeoutSuccessMessage} from "./main.js";
+import {timeoutAlertMessage} from "./main.js";
 let emailInput = document.getElementById('user_email');
 let usernameInput = document.getElementById('user_username');
 let passwordInput = document.getElementById('user_password');

@@ -21,6 +21,7 @@ mix.js([
     'resources/js/main.js',
     'resources/js/mealsController.js',
     'resources/js/userController.js',
+    'resources/js/chart.js',
 ], 'public/js/app.js');
 mix.styles([
     'resources/css/admin.css',

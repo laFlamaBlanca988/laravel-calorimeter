@@ -11,6 +11,7 @@
     </thead>
     <tbody>
     @foreach ($data as $key => $meal)
+        <div class="edit-meal-success-message" id="edit_meals_success_message"></div>
         <tr id="meal_{{$meal->id}}">
             <td class="item-id">{{$meal->id}}</td>
             <td class="item-title">{{ $meal->title }}</td>
@@ -40,7 +41,6 @@
                 url:"/home/fetch_data?page="+page,
                 success:function(data)
                 {
-                    console.log(page)
                     $('#user_table_meals').html(data);
                 }
             });

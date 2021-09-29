@@ -1,5 +1,6 @@
 // let userMealsButtons = document.getElementsByClassName('edit-user-meals-open-btn');
 // let userMealsTableBody = document.getElementById('user_meals_table_body');
+// let userMealsTable = document.querySelector('.user-meals-table-container');
 
 // for (let i = 0; i < userMealsButtons.length; i++) {
 //     userMealsButtons[i].addEventListener('click', function () {
