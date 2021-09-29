@@ -6,7 +6,6 @@ let adminMealsButton = document.getElementById('admin_meals_button');
 let usersTable = document.getElementById('users_table');
 let mealsTable = document.getElementById('meals_table');
 let editUserButtons = document.getElementsByClassName('edit-user-open-btn');
-let adminMealsTable = document.querySelector('.admin-meals-table');
 let adminEditUserSubmitButton = document.querySelector('.admin-edit-user-submit');
 let editUserModal = document.getElementById('edit_user_modal');
 let nameEdit = document.getElementById('user_name');
@@ -110,7 +109,6 @@ if (userAccessSubmitButton) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let res = xhr.responseText;
                 let response = JSON.parse(res);
-                console.log(response)
                 if (response.status === 200) {
                     accessModal.style.display = 'none';
                     document.getElementById('user_edit_success_message').classList.remove('hidden');

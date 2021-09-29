@@ -28,6 +28,7 @@ mix.styles([
     'resources/css/home.css',
     'resources/css/navbar.css',
     'resources/css/style.css',
+    'resources/css/chart.css',
     'resources/css/login.css',
     'resources/css/register.css',
     'resources/css/tailwind.css',

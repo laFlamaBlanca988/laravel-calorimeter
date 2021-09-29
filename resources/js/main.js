@@ -1,9 +1,3 @@
-let logo = document.querySelector('.logo');
-
-logo.addEventListener('click', function () {
-    window.location = 'home';
-});
-
 timeoutLoginMessage();
 export function timeoutLoginMessage() {
     setTimeout(function () {

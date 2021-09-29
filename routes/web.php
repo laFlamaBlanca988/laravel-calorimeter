@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ChartDataController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MealsController;
@@ -38,7 +39,6 @@ Route::post('userEdit', [UserController::class, 'editUserControl'])->middleware(
 
 Route::get('admin', [AdminController::class, 'index'])->middleware('admin');
 Route::get('admin/meals', [AdminController::class, 'fetchAllMeals'])->middleware('admin');
-//Route::post('adminUserMeals', [AdminController::class, 'displayUserMeals'])->middleware('auth');
 Route::post('adminUserAccess', [AdminController::class, 'updateUserAccess'])->middleware('admin');
 Route::post('adminMealsDelete', [AdminController::class, 'adminMealDelete'])->middleware('admin');
 
@@ -47,3 +47,4 @@ Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->mid
 
 Route::get('manager', [ManagerController::class, 'index'])->middleware('manager');
 Route::post('userSearch', [AdminController::class, 'userSearch']);
+Route::get('getMealsChartData', [ChartDataController::class, 'getCaloriesConsumptionData']);
