@@ -130,12 +130,23 @@ class Meal extends Model
         return $query->get();
     }
 
-//    public function getSumOfCalories($userID) {
-//      return  DB::table("meals")
-//          ->where('userID', '=', $userID)
-//          ->get()
-//          ->sum("cal_num");
-//    }
+    public function getSumOfCaloriesByDateRange($userID,$dateFrom, $dateTo): Collection
+    {
+        $query = DB::table('meals')->where('userID', '=', $userID)->orderBy('date');
+        if( isset($dateFrom, $dateTo) && strlen($dateFrom) > 0 && strlen($dateTo) > 0 ) {
+            $query->whereBetween('date', [$dateFrom, $dateTo]);
+        }
+        return $query
+            ->selectRaw('sum(cal_num) as cal_num, date')
+            ->groupBy('date')
+            ->get()
+            ->map(function($item){
+                return [
+                    'date' => date('m/d/Y', strtotime($item->date)),
+                    'total' => $item->cal_num
+                ];
+            });
+    }
 
     public function deleteUserMeals($userID): int
     {

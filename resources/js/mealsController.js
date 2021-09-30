@@ -255,6 +255,8 @@ if (editMealButton) {
                     document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
                     document.getElementById('edit_form_err_list').textContent = response.errors;
                 }
+            } else {
+                alert('')
             }
         }
         xhr.send(JSON.stringify(data));

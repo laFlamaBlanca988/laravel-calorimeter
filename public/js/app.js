@@ -229,34 +229,46 @@ if (adminMealsButton) {
 /***/ (() => {
 
 var chartFilterSubmitButton = document.getElementById('chart_submit_button');
-var myChart = document.getElementById('myChart').getContext('2d');
 chartFilterSubmitButton.addEventListener('click', function (e) {
   e.preventDefault();
-  var labels = [];
+  var myChart = document.getElementById('my_chart').getContext('2d');
   var startDate = document.getElementById('chart_from_date').value;
   var endDate = document.getElementById('chart_to_date').value;
-  var dateMove = new Date(startDate);
-  var strDate = startDate;
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'getMealsChartData', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
+  var data = {
+    'startDate': startDate,
+    'endDate': endDate
+  };
 
-  while (strDate < endDate) {
-    strDate = dateMove.toISOString().slice(0, 10);
-    labels.push(strDate);
-    dateMove.setDate(dateMove.getDate() + 1);
-  }
-
-  var caloriesChart = new Chart(myChart, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Calories consumption',
-        data: [1200],
-        backgroundColor: 'rgba(255, 26, 104, 0.2)',
-        borderColor: 'rgba(255, 26, 104, 1)',
-        borderWidth: 1
-      }]
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var response = JSON.parse(xhr.responseText);
+      var labels = response.result.map(function (res) {
+        return res.date;
+      });
+      var calories = response.result.map(function (res) {
+        return res.total;
+      });
+      var caloriesChart = new Chart(myChart, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Calories consumption',
+            data: calories,
+            backgroundColor: 'rgba(255, 26, 104, 0.2)',
+            borderColor: 'rgba(255, 26, 104, 1)',
+            borderWidth: 1
+          }]
+        }
+      }); // document.getElementById('my_chart').remove();
     }
-  });
+  };
+
+  xhr.send(JSON.stringify(data));
 });
 
 /***/ }),
@@ -555,6 +567,8 @@ if (editMealButton) {
           document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
           document.getElementById('edit_form_err_list').textContent = response.errors;
         }
+      } else {
+        alert('');
       }
     };
 

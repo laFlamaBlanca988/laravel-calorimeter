@@ -47,4 +47,5 @@ Route::post('adminUserDelete', [AdminController::class, 'adminUserDelete'])->mid
 
 Route::get('manager', [ManagerController::class, 'index'])->middleware('manager');
 Route::post('userSearch', [AdminController::class, 'userSearch']);
+Route::post('getMealsChartData', [ChartDataController::class, 'getCaloriesConsumptionData']);
 Route::get('getMealsChartData', [ChartDataController::class, 'getCaloriesConsumptionData']);
