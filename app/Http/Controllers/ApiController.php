@@ -7,18 +7,22 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class ApiController extends Controller
 {
-        public function index($id): JsonResponse
+        public function index(Request $request, $id): JsonResponse
         {
+            $authHeader = $request->header('Authorization');
+            $userPass =explode(' ', $authHeader.'')[1];
             $meals = new Meal;
-            $userID = $id;
-            $userMeals = $meals->apiGetUserMeals($userID);
+            $userMeals = $meals->apiGetUserMeals($id);
             $mealCount = count($userMeals);
-            return response()->json([
-                'meal_count' => $mealCount,
-                'data' => $userMeals
-            ]);
+
+                return response()->json([
+                    'meal_count' => $mealCount,
+                    'data' => $userMeals
+                ]);
         }
 }
