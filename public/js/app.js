@@ -229,18 +229,18 @@ if (adminMealsButton) {
 /***/ (() => {
 
 var chartFilterSubmitButton = document.getElementById('chart_submit_button');
+var chartContainer = document.getElementById("chartContainer");
+var startDate = document.getElementById('chart_from_date');
+var endDate = document.getElementById('chart_to_date');
 chartFilterSubmitButton.addEventListener('click', function (e) {
   e.preventDefault();
-  var myChart = document.getElementById('my_chart').getContext('2d');
-  var startDate = document.getElementById('chart_from_date').value;
-  var endDate = document.getElementById('chart_to_date').value;
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'getMealsChartData', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
   var data = {
-    'startDate': startDate,
-    'endDate': endDate
+    'startDate': startDate.value,
+    'endDate': endDate.value
   };
 
   xhr.onreadystatechange = function () {
@@ -252,6 +252,8 @@ chartFilterSubmitButton.addEventListener('click', function (e) {
       var calories = response.result.map(function (res) {
         return res.total;
       });
+      chartContainer.innerHTML = '<canvas id="my_chart"></canvas>';
+      var myChart = document.getElementById('my_chart').getContext('2d');
       var caloriesChart = new Chart(myChart, {
         type: 'bar',
         data: {
@@ -264,11 +266,18 @@ chartFilterSubmitButton.addEventListener('click', function (e) {
             borderWidth: 1
           }]
         }
-      }); // document.getElementById('my_chart').remove();
+      });
     }
   };
 
   xhr.send(JSON.stringify(data));
+});
+endDate.addEventListener('change', function () {
+  if (startDate.value > this.value) {
+    var temp = startDate.value;
+    startDate.value = endDate.value;
+    endDate.value = temp;
+  }
 });
 
 /***/ }),

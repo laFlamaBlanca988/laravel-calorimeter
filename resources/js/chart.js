@@ -1,20 +1,19 @@
-
 let chartFilterSubmitButton = document.getElementById('chart_submit_button');
+let chartContainer = document.getElementById("chartContainer");
+let startDate = document.getElementById('chart_from_date');
+let endDate = document.getElementById('chart_to_date');
 
 chartFilterSubmitButton.addEventListener('click', function (e) {
     e.preventDefault();
-    let myChart = document.getElementById('my_chart').getContext('2d');
-
-    let startDate = document.getElementById('chart_from_date').value;
-    let endDate = document.getElementById('chart_to_date').value;
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'getMealsChartData', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementsByName('csrf-token')[0].getAttribute('content'));
     let data = {
-        'startDate': startDate,
-        'endDate': endDate,
+        'startDate': startDate.value,
+        'endDate': endDate.value,
     };
+
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
@@ -24,6 +23,10 @@ chartFilterSubmitButton.addEventListener('click', function (e) {
             let calories = response.result.map(res => {
                 return res.total;
             });
+
+            chartContainer.innerHTML = '<canvas id="my_chart"></canvas>';
+            let myChart = document.getElementById('my_chart').getContext('2d');
+
             let caloriesChart = new Chart(myChart, {
                 type: 'bar',
                 data: {
@@ -37,12 +40,17 @@ chartFilterSubmitButton.addEventListener('click', function (e) {
                     }],
                 },
             });
-            // document.getElementById('my_chart').remove();
-
         }
-
     }
 
     xhr.send(JSON.stringify(data));
+});
+
+endDate.addEventListener('change', function () {
+    if (startDate.value > this.value) {
+        let temp = startDate.value;
+        startDate.value = endDate.value;
+        endDate.value = temp;
+    }
 });
 

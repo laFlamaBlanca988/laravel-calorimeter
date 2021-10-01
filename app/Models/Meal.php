@@ -154,4 +154,12 @@ class Meal extends Model
             ->where('userID' , '=', $userID)->delete();
     }
 
+    public function apiGetUserMeals($userID): Collection
+    {
+        return  DB::table('meals')
+            ->select('*')
+            ->where('userID','=', $userID)
+            ->get();
+    }
+
 }
