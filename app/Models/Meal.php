@@ -162,4 +162,19 @@ class Meal extends Model
             ->get();
     }
 
+    public function apiDeleteUserMeals($mealID): int
+    {
+        return DB::table('meals')
+            ->where('id', '=', $mealID)
+            ->delete();
+    }
+
+    public function apiGetMealsForUser($userID): Collection
+    {
+        return  DB::table('meals')
+            ->select('*')
+            ->where('userID','=', $userID)
+            ->get();
+    }
+
 }

@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('user/{id}/meals', [ApiController::class, 'index'])->middleware('api');
+Route::get('user/{id}/meals', [ApiController::class, 'readMeals'])->middleware('api');
+Route::post('/meals/{id}/delete', [ApiController::class, 'deleteMeals']);
+Route::post('/meals/{id}/edit', [ApiController::class, 'editMeals']);
