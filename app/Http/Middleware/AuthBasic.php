@@ -15,14 +15,15 @@ class AuthBasic
      * @param Closure $next
      * @return mixed
      */
-//    public function handle(Request $request, Closure $next)
-//    {
-//        if(Auth::onceBasic()){
-//            return response()->json([
-//                'message' => 'Auth failed'
-//            ], 403);
-//        }else {
-//            return $next($request);
-//        }
-//    }
+    public function handle(Request $request, Closure $next)
+    {
+        if(Auth::onceBasic()){
+            return response()->json([
+                'message' => 'Auth failed'
+            ], 403);
+        }else {
+            return $next($request);
+        }
+    }
 }
+

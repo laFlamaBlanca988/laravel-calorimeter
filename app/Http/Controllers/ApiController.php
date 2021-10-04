@@ -15,14 +15,17 @@ class ApiController extends Controller
         public function index(Request $request, $id): JsonResponse
         {
             $authHeader = $request->header('Authorization');
-            $userPass =explode(' ', $authHeader.'')[1];
+//            $userPass =explode(' ', $authHeader.'')[1];
+//            $userID = auth()->id();
+//            dd($userID);
             $meals = new Meal;
             $userMeals = $meals->apiGetUserMeals($id);
             $mealCount = count($userMeals);
-
+//            if($id === $userID) {
                 return response()->json([
                     'meal_count' => $mealCount,
                     'data' => $userMeals
                 ]);
+//            }
         }
 }
