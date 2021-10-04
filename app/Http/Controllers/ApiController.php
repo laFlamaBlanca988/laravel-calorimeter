@@ -55,10 +55,11 @@ class ApiController extends Controller
             $time = $request->json()->get('time');
             $userID = $request->json()->get('userID');
 
-            $newRowID = $meal->storeMeal($title, $cal_num, $date, $time, $userID);
             if ($userID !== auth()->id()) {
                 return response()->json(['status' => 401, 'message' => 'Wrong credentials']);
             }
+            $newRowID = $meal->storeMeal($title, $cal_num, $date, $time, $userID);
+
             if ($newRowID) {
                 return response()->json(['status' => 200, 'message' => 'Meal added successfully!']);
             }
