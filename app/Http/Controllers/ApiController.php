@@ -16,16 +16,19 @@ class ApiController extends Controller
         {
             $authHeader = $request->header('Authorization');
 //            $userPass =explode(' ', $authHeader.'')[1];
-//            $userID = auth()->id();
-//            dd($userID);
+            $userID = auth()->id();
             $meals = new Meal;
             $userMeals = $meals->apiGetUserMeals($id);
             $mealCount = count($userMeals);
-//            if($id === $userID) {
+            if($id == $userID) {
                 return response()->json([
                     'meal_count' => $mealCount,
                     'data' => $userMeals
                 ]);
-//            }
+            }else {
+                return response()->json([
+                    'message' => 'Auth failed'
+                ], 403);
+            }
         }
 }
