@@ -17,5 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('user/{id}/meals', [ApiController::class, 'readMeals'])->middleware('api');
-Route::post('/meals/{id}/delete', [ApiController::class, 'deleteMeals']);
-Route::post('/meals/{id}/edit', [ApiController::class, 'editMeals']);
+Route::post('/meals/store', [ApiController::class, 'storeMeal'])->middleware('api');
+Route::post('/meals/{id}/delete', [ApiController::class, 'deleteMeal'])->middleware('api');
+Route::post('/meals/{id}/edit', [ApiController::class, 'editMeal'])->middleware('api');
