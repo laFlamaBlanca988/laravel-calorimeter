@@ -36,7 +36,7 @@
             <div class="w-1/2 m-auto" id="success_message"></div>
 
             {{--    ADD MEAL MODAL--}}
-            <div id="add_meal_modal" class="modal">
+            <div id="add_meal_modal" class="custom-modal modal">
                 <div class="modal-content">
                     <form id="add_new_meal_form">
                         <span class="close">&times;</span>
@@ -58,7 +58,7 @@
             </div>
 
             {{--    DELETE MEAL CONFIRMATION MODAL--}}
-            <div id="delete_confirm_modal" class="modal delete-confirm-modal">
+            <div id="delete_confirm_modal" class="custom-modal modal delete-confirm-modal">
                 <form class="delete-modal-content modal-content">
                     <input type="hidden" id="delete_id" value="">
                     <h4>Are you sure you want to delete this meal?</h4>
@@ -71,7 +71,7 @@
             </div>
 
             {{--    EDIT MEAL MODAL--}}
-            <div id="edit_meal_modal" class="modal">
+            <div id="edit_meal_modal" class="custom-modal modal">
                 <div class="modal-content">
                     <form id="edit_meal_form">
                         <span class="close_edit close">&times;</span>

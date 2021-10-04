@@ -1,4 +1,4 @@
-<table class="meals table table-dark">
+<table class="meals table table-responsive table-dark">
     <thead>
     <tr>
         <th scope="col">ID</th>

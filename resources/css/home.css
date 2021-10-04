@@ -151,3 +151,26 @@
     width: 10rem;
 }
 
+@media only screen and (max-width: 1024px) {
+        .page-container {
+            flex-direction: column;
+        }
+        .all-meals {
+            width: 100%;
+        }
+        .filter-meal-form {
+            width: 50%;
+        }
+        .modal-content {
+            width: 70%;
+        }
+
+}
+@media only screen and (max-width: 576px) {
+    .modal-content {
+        width: 100%;
+    }
+    .filter-meal-form {
+        width: 100%;
+    }
+}

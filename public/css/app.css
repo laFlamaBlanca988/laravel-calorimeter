@@ -386,8 +386,32 @@
     width: 10rem;
 }
 
+@media only screen and (max-width: 1024px) {
+        .page-container {
+            flex-direction: column;
+        }
+        .all-meals {
+            width: 100%;
+        }
+        .filter-meal-form {
+            width: 50%;
+        }
+        .modal-content {
+            width: 70%;
+        }
+
+}
+@media only screen and (max-width: 576px) {
+    .modal-content {
+        width: 100%;
+    }
+    .filter-meal-form {
+        width: 100%;
+    }
+}
 
 .custom-header-container {
+    min-width: 100%;
     padding: 0;
 }
 .navbar {
@@ -420,7 +444,7 @@
 .auth-buttons {
     display: flex;
     justify-content: space-between;
-    width: 15%;
+    width: 15rem;
     padding-right: 1rem;
 }
 .welcome-register-btn {
@@ -481,6 +505,26 @@
 .form-logout:hover {
     background-color: #f1f1f1;
 }
+@media only screen and (max-width: 768px) {
+    .welcome-login-btn {
+        display: none;
+    }
+    .auth-buttons {
+        justify-content: right;
+    }
+    .welcome-register-btn {
+        background-color: #bb2d3b;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .welcome-register-btn {
+        display: none;
+    }
+    .login-form {
+        background-color: #ffffff;
+    }
+}
 
 body {
     background: #ffffff;
@@ -497,6 +541,10 @@ td {
 }
 th {
     text-align: center;
+}
+tr {
+    border: 1px solid black;
+
 }
 h4 {
     font-size: 1.17em;
@@ -515,6 +563,9 @@ h3 {
 }
 .logo-link {
     text-decoration: none;
+}
+tbody {
+    border: 1px solid black;
 }
 
 
