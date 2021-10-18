@@ -1,5 +1,5 @@
-<div class="chartCard">
-    <form id="chart_filter_meal_form">
+<div class="chart-card">
+    <form id="chart_filter_meal_form" class="chart-form">
         <label for="from" class="form-label"> From Date
         <input class="form-control" id="chart_from_date" name="chartFromDate" type="date">
            </label>

@@ -20,6 +20,11 @@
     padding: 2rem;
     width: 50vw;
 }
+.date-and-chart-container {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: row;
+}
 .edit-header {
     width: 15%;
     height: 3rem;
@@ -85,14 +90,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
     border-radius: 20px;
+    padding: 2rem;
 }
 .pagination-buttons {
     display: flex;
     justify-content: space-between;
 }
 .meals {
-    width: 100%;
+    width: 70%;
+    margin: auto auto 2rem;
     box-shadow: 3px 3px 3px 3px #888888;
 }
 .add-meal-button-container {
@@ -114,20 +122,14 @@
 }
 
 .filter-meal-form {
-    margin: 5rem auto auto;
-    padding: 2rem;
-    padding-bottom: 0.5rem;
+    margin: 0  2rem;
+    padding: 2rem 2rem 0.5rem;
     width: 20%;
+    max-height: 25rem;
     box-shadow: 3px 3px 3px 3px #888888;
     border-radius: 5px;
 }
-.page-container {
-    display: flex;
-}
-.all-meals {
-    margin: 5rem auto auto;
-    width: 50%;
-}
+
 .date-filter-submit-button {
     margin-top: 1rem;
 }
@@ -148,29 +150,5 @@
 .edit-meals-buttons {
     display: flex;
     justify-content: space-between;
-    width: 10rem;
 }
 
-@media only screen and (max-width: 1024px) {
-        .page-container {
-            flex-direction: column;
-        }
-        .all-meals {
-            width: 100%;
-        }
-        .filter-meal-form {
-            width: 50%;
-        }
-        .modal-content {
-            width: 70%;
-        }
-
-}
-@media only screen and (max-width: 576px) {
-    .modal-content {
-        width: 100%;
-    }
-    .filter-meal-form {
-        width: 100%;
-    }
-}
