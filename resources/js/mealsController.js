@@ -1,16 +1,15 @@
 import {timeoutSuccessMessage} from "./main.js";
 import {timeoutAlertMessage} from "./main.js";
 
-let addMealModal = document.querySelector(".modal");
+let addMealModal = document.getElementById("add_meal_modal");
 let editModal = document.querySelector('#edit_meal_modal');
 let deleteModal = document.getElementById('delete_confirm_modal');
 
 let spanEdit = document.querySelector('.close-edit');
 let span = document.querySelector(".close");
-let table = document.querySelector('.meals');
 let tableBody = document.querySelector('tbody');
 
-let addBtn = document.querySelector(".add-meal-open-modal");
+let addMealOpenModalButton = document.querySelector(".add-meal-open-modal");
 let addMealBtn = document.querySelector('.add-meal-btn');
 
 let editButtons = document.getElementsByClassName('edit-meal-open-btn');
@@ -70,8 +69,8 @@ if (toTimeInput) {
 }
 
 // ADD MEAL MODAL CONTROL
-if (addBtn) {
-    addBtn.addEventListener('click', function () {
+if (addMealOpenModalButton) {
+    addMealOpenModalButton.addEventListener('click', function () {
         addMealModal.style.display = 'block';
         let now = new Date();
         let month = (now.getMonth() + 1);
@@ -82,10 +81,11 @@ if (addBtn) {
             day = "0" + day;
         let today = now.getFullYear() + '-' + month + '-' + day;
         let currentTime = now.toISOString().substring(11,16);
-        document.querySelector('.title').value = '';
-        document.querySelector('.cal-num').value = '';
-        document.querySelector('.date').value = today;
-        document.querySelector('.time').value = currentTime;
+
+        document.querySelector('.title-add-meal').value = '';
+        document.querySelector('.cal-num-add-meal').value = '';
+        document.querySelector('.date-add-meal').value = today;
+        document.querySelector('.time-add-meal').value = currentTime;
         document.getElementById('save_form_err_list').classList.remove('alert', 'alert-danger');
         document.getElementById('save_form_err_list').textContent = '';
     });
@@ -155,11 +155,11 @@ window.deleteMeal = function(mealID) {
 if (addMealBtn) {
     addMealBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        let title = document.querySelector('.title').value;
-        let cal_num = document.querySelector('.cal-num').value;
-        let date = document.querySelector('.date').value;
-        let time = document.querySelector('.time').value;
-
+        let title = document.querySelector('.title-add-meal').value;
+        let cal_num = document.querySelector('.cal-num-add-meal').value;
+        let date = document.querySelector('.date-add-meal').value;
+        let time = document.querySelector('.time-add-meal').value;
+        console.log(title, cal_num, date, time)
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'meals', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -185,7 +185,7 @@ if (addMealBtn) {
                  <td class="cal_num">${data.cal_num}</td>
                  <td class="item-date">${data.date}</td>
                  <td class="item-time">${data.time}:00</td>
-                 <td class="edit-meals-buttons">
+                 <td class="home-edit-meals-buttons">
                     <button id="edit_meal_${mealID}" onclick="editMeal(${mealID})" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                         >Edit meal</button>
                     <button id="delete_meal_${mealID}" onclick="deleteMeal(${mealID})" class="delete-btn btn btn-danger btn-sm" type="submit"
@@ -255,8 +255,6 @@ if (editMealButton) {
                     document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
                     document.getElementById('edit_form_err_list').textContent = response.errors;
                 }
-            } else {
-                alert('')
             }
         }
         xhr.send(JSON.stringify(data));

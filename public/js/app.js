@@ -344,14 +344,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _main_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.js */ "./resources/js/main.js");
 
 
-var addMealModal = document.querySelector(".modal");
+var addMealModal = document.getElementById("add_meal_modal");
 var editModal = document.querySelector('#edit_meal_modal');
 var deleteModal = document.getElementById('delete_confirm_modal');
 var spanEdit = document.querySelector('.close-edit');
 var span = document.querySelector(".close");
-var table = document.querySelector('.meals');
 var tableBody = document.querySelector('tbody');
-var addBtn = document.querySelector(".add-meal-open-modal");
+var addMealOpenModalButton = document.querySelector(".add-meal-open-modal");
 var addMealBtn = document.querySelector('.add-meal-btn');
 var editButtons = document.getElementsByClassName('edit-meal-open-btn');
 var editMealButton = document.querySelector('.edit-meal-btn');
@@ -406,8 +405,8 @@ if (toTimeInput) {
 } // ADD MEAL MODAL CONTROL
 
 
-if (addBtn) {
-  addBtn.addEventListener('click', function () {
+if (addMealOpenModalButton) {
+  addMealOpenModalButton.addEventListener('click', function () {
     addMealModal.style.display = 'block';
     var now = new Date();
     var month = now.getMonth() + 1;
@@ -416,10 +415,10 @@ if (addBtn) {
     if (day < 10) day = "0" + day;
     var today = now.getFullYear() + '-' + month + '-' + day;
     var currentTime = now.toISOString().substring(11, 16);
-    document.querySelector('.title').value = '';
-    document.querySelector('.cal-num').value = '';
-    document.querySelector('.date').value = today;
-    document.querySelector('.time').value = currentTime;
+    document.querySelector('.title-add-meal').value = '';
+    document.querySelector('.cal-num-add-meal').value = '';
+    document.querySelector('.date-add-meal').value = today;
+    document.querySelector('.time-add-meal').value = currentTime;
     document.getElementById('save_form_err_list').classList.remove('alert', 'alert-danger');
     document.getElementById('save_form_err_list').textContent = '';
   });
@@ -487,10 +486,11 @@ window.deleteMeal = function (mealID) {
 if (addMealBtn) {
   addMealBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    var title = document.querySelector('.title').value;
-    var cal_num = document.querySelector('.cal-num').value;
-    var date = document.querySelector('.date').value;
-    var time = document.querySelector('.time').value;
+    var title = document.querySelector('.title-add-meal').value;
+    var cal_num = document.querySelector('.cal-num-add-meal').value;
+    var date = document.querySelector('.date-add-meal').value;
+    var time = document.querySelector('.time-add-meal').value;
+    console.log(title, cal_num, date, time);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'meals', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -511,7 +511,7 @@ if (addMealBtn) {
           var mealID = response.id;
           var newRow = document.createElement('tr');
           newRow.id = "meal_" + mealID;
-          newRow.innerHTML = "\n                 <td class=\"item-id\">".concat(tableBody.children.length + 1, "</td>\n                 <td class=\"item-title\">").concat(data.title, "</td>\n                 <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                 <td class=\"item-date\">").concat(data.date, "</td>\n                 <td class=\"item-time\">").concat(data.time, ":00</td>\n                 <td class=\"edit-meals-buttons\">\n                    <button id=\"edit_meal_").concat(mealID, "\" onclick=\"editMeal(").concat(mealID, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                        >Edit meal</button>\n                    <button id=\"delete_meal_").concat(mealID, "\" onclick=\"deleteMeal(").concat(mealID, ")\" class=\"delete-btn btn btn-danger btn-sm\" type=\"submit\"\n                        >Delete</button>\n                </td> ");
+          newRow.innerHTML = "\n                 <td class=\"item-id\">".concat(tableBody.children.length + 1, "</td>\n                 <td class=\"item-title\">").concat(data.title, "</td>\n                 <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                 <td class=\"item-date\">").concat(data.date, "</td>\n                 <td class=\"item-time\">").concat(data.time, ":00</td>\n                 <td class=\"home-edit-meals-buttons\">\n                    <button id=\"edit_meal_").concat(mealID, "\" onclick=\"editMeal(").concat(mealID, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                        >Edit meal</button>\n                    <button id=\"delete_meal_").concat(mealID, "\" onclick=\"deleteMeal(").concat(mealID, ")\" class=\"delete-btn btn btn-danger btn-sm\" type=\"submit\"\n                        >Delete</button>\n                </td> ");
           tableBody.appendChild(newRow);
           addMealModal.style.display = "none";
           document.getElementById('save_form_err_list').value = "";
@@ -582,8 +582,6 @@ if (editMealButton) {
           document.getElementById('edit_form_err_list').classList.add('alert', 'alert-danger');
           document.getElementById('edit_form_err_list').textContent = response.errors;
         }
-      } else {
-        alert('');
       }
     };
 

@@ -8,16 +8,16 @@ body {
     display: flex;
     padding: 0;
 }
-td {
-    text-align: center;
-}
-th {
-    text-align: center;
-}
-tr {
-    border: 1px solid black;
+/*td {*/
+/*    text-align: center;*/
+/*}*/
+/*th {*/
+/*    text-align: center;*/
+/*}*/
+/*tr {*/
+/*    border: 1px solid black;*/
 
-}
+/*}*/
 h4 {
     font-size: 1.17em;
     font-weight: bold;
@@ -36,6 +36,6 @@ h3 {
 .logo-link {
     text-decoration: none;
 }
-tbody {
-    border: 1px solid black;
-}
+/*tbody {*/
+/*    border: 1px solid black;*/
+/*}*/

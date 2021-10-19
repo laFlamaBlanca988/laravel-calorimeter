@@ -387,6 +387,141 @@
 }
 
 
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: auto;
+    padding: 0;
+    width: 80%;
+    table-layout: fixed;
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+table tr {
+    background-color: #fff;
+    border: 1px solid #e1e5e9;
+    padding: .35em;
+    border-radius: 3px;
+}
+table thead tr:first-child {
+    border: 1px solid #0f82e6;
+}
+table th,
+table td {
+    padding: 1.625em;
+    text-align: center;
+    color: #9da9b9;
+    font-size: 14px;
+    font-family: cursive;
+}
+
+table td:nth-child(4) {
+    font-size: 18px;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: #0f82e6;
+    color: #FFF;
+}
+
+table tbody tr td .btn-invoice {
+    background: #0f82e6;
+    color: #FFF;
+    font-size: 13px;
+    padding: 10px 20px;
+    border: 0;
+    font-family: cursive;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #eee;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+.id-table-home-header {
+    width: 3rem;
+}
+@media screen and (max-width: 1320px) {
+    .home-edit-meals-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+@media screen and (max-width: 910px) {
+    table {
+        border: 0;
+    }
+
+    table caption {
+        font-size: 1.3em;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+        padding: 0;
+    }
+
+    table tr {
+        border-bottom: 3px solid #e1e5e9;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    table th,
+    table td {
+        padding: 0.625em;
+    }
+
+    table td {
+        border-bottom: 1px solid #e1e5e9;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+        color: #9da9b9;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #656971;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
+
+    table td:nth-child(4) {
+        font-size: 0.8em;
+    }
+    .home-edit-meals-buttons {
+        display: block;
+    }
+    .dropdown {
+        width: 136px;
+    }
+    .welcome-name {
+        display: none;
+    }
+}
+
+
 .custom-header-container {
     min-width: 100%;
     padding: 0;
@@ -513,16 +648,16 @@ body {
     display: flex;
     padding: 0;
 }
-td {
-    text-align: center;
-}
-th {
-    text-align: center;
-}
-tr {
-    border: 1px solid black;
+/*td {*/
+/*    text-align: center;*/
+/*}*/
+/*th {*/
+/*    text-align: center;*/
+/*}*/
+/*tr {*/
+/*    border: 1px solid black;*/
 
-}
+/*}*/
 h4 {
     font-size: 1.17em;
     font-weight: bold;
@@ -541,9 +676,9 @@ h3 {
 .logo-link {
     text-decoration: none;
 }
-tbody {
-    border: 1px solid black;
-}
+/*tbody {*/
+/*    border: 1px solid black;*/
+/*}*/
 
 
 .chart-card {

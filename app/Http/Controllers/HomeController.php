@@ -28,7 +28,7 @@ class HomeController extends Controller
         if($request->ajax()){
             $meals = new Meal;
             $data = $meals->getMealsForUser(Auth::user()->id);
-            return view('pages.paginationData', compact('data'))->render();
+            return view('pages.tableHome', compact('data'))->render();
         }
         return response()->json([
             'status' => 400,

@@ -10,6 +10,7 @@ mix.js([
 mix.styles([
     'resources/css/admin.css',
     'resources/css/home.css',
+    'resources/css/tableHome.css',
     'resources/css/navbar.css',
     'resources/css/style.css',
     'resources/css/chart.css',
