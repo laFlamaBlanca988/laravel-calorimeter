@@ -17,10 +17,7 @@
     flex-direction: row;
     gap: 2rem;
 }
-.edit-header {
-    width: 15%;
-    height: 3rem;
-}
+
 .edit-buttons {
     display: flex;
     justify-content: space-between;
@@ -128,8 +125,22 @@
         flex-direction: column;
         gap: 5rem;
     }
-    .filter-meal-form {
-        margin: auto;
+    .modal-content {
+        width: 50%;
     }
-
+}
+@media only screen and (max-width: 920px) {
+    .modal-content {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .modal-content {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .modal-content {
+        width: 90%;
+    }
 }

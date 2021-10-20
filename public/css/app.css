@@ -251,10 +251,7 @@
     flex-direction: row;
     gap: 2rem;
 }
-.edit-header {
-    width: 15%;
-    height: 3rem;
-}
+
 .edit-buttons {
     display: flex;
     justify-content: space-between;
@@ -362,10 +359,24 @@
         flex-direction: column;
         gap: 5rem;
     }
-    .filter-meal-form {
-        margin: auto;
+    .modal-content {
+        width: 50%;
     }
-
+}
+@media only screen and (max-width: 920px) {
+    .modal-content {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .modal-content {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .modal-content {
+        width: 90%;
+    }
 }
 
 table {
@@ -376,7 +387,6 @@ table {
     width: 80%;
     table-layout: fixed;
     box-shadow: 3px 3px 3px 3px #888888;
-
 }
 
 table caption {
@@ -466,11 +476,9 @@ tbody tr:nth-child(odd) {
     table {
         border: 0;
     }
-
     table caption {
         font-size: 1.3em;
     }
-
     table thead {
         border: none;
         clip: rect(0 0 0 0);
@@ -598,6 +606,7 @@ tbody tr:nth-child(odd) {
     .filter-meal-form {
         width: 74%;
     }
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -640,7 +649,7 @@ tbody tr:nth-child(odd) {
     background-color: #000000;
 }
 .drop-btn {
-    /*margin-right: 2rem;*/
+    margin-right: 2rem;
     padding: 16px;
     background-color: #dc3545;
     color: white;
@@ -653,7 +662,7 @@ tbody tr:nth-child(odd) {
     display: none;
     position: absolute;
     min-width: 160px;
-    /*right: 2rem;*/
+    right: 2rem;
     background-color: #f9f9f9;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     border-radius: 2px;

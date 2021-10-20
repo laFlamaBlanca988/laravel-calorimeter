@@ -6,7 +6,6 @@ table {
     width: 80%;
     table-layout: fixed;
     box-shadow: 3px 3px 3px 3px #888888;
-
 }
 
 table caption {
@@ -96,11 +95,9 @@ tbody tr:nth-child(odd) {
     table {
         border: 0;
     }
-
     table caption {
         font-size: 1.3em;
     }
-
     table thead {
         border: none;
         clip: rect(0 0 0 0);
