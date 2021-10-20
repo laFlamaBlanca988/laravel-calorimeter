@@ -24,8 +24,8 @@ if (chartFilterSubmitButton) {
                     return res.total;
                 });
 
-                chartContainer.innerHTML = '<canvas id="my_chart"></canvas>';
-                let myChart = document.getElementById('my_chart').getContext('2d');
+                chartContainer.innerHTML = '<canvas id="my_chart" style="max-height: 279px"></canvas>';
+                let myChart = document.getElementById('my_chart');
 
                 let caloriesChart = new Chart(myChart, {
                     type: 'bar',

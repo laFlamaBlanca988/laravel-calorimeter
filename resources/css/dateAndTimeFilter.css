@@ -1,0 +1,62 @@
+.date-and-time-filter-submit-button,
+.date-and-time-filter-clear-button {
+    margin-top: 1.8rem;
+}
+.filter-week-month-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 1rem;
+}
+.filter-meal-form {
+    margin-left: 2rem;
+    padding: 2rem 2rem 0.5rem;
+    width: 73%;
+    max-height: 30rem;
+    box-shadow: 3px 3px 3px 3px #888888;
+    border-radius: 5px;
+}
+.date-and-time-filter-submit-container {
+    display: flex;
+    justify-content: space-between;
+}
+.filter-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+.date-filter-submit-button {
+    margin-top: 1rem;
+}
+.date-time-error-alert {
+    margin-top: 2rem;
+}
+.last-week-filter-button,
+.last-month-filter-button {
+    background: #dc3545;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+@media only screen and (max-width: 1400px) {
+    .filter-meal-form {
+        margin: auto;
+        width: 75%;
+    }
+}
+@media only screen and (max-width: 920px) {
+    .filter-meal-form {
+        width: 74%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .filter-meal-form{
+        width: 95%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .chart-form {
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -21,8 +21,7 @@
     <nav class="navbar">
         <a class="logo-link" href="home"><h1 class="logo">Calorimeter</h1></a>
         @auth
-        <div class="welcome">
-                <h3 class="welcome-name">Welcome, </h3>
+
              @auth
                     <div class="dropdown">
                         <button class="drop-btn">{{auth()->user()->username}}</button>
@@ -41,8 +40,6 @@
                         </div>
                     </div>
                     @endauth
-
-        </div>
         @endauth
 
 

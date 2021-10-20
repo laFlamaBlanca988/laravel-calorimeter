@@ -234,30 +234,22 @@
 
 .cal-sum {
     display: flex;
+    margin-top: 2rem;
 }
 .cal-sum-text {
-    margin: auto auto auto 76%;
+    margin: auto;
     padding: 2rem;
     visibility: hidden;
     font-size: 2rem;
     color: #dc3545;
     font-weight: 600;
 }
-.date-and-time-filter-submit-button, .date-and-time-filter-clear-button {
-    margin-top: 1.8rem;
-}
-.meals-btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: auto;
-    padding: 2rem;
-    width: 50vw;
-}
+
 .date-and-chart-container {
     margin-top: 5rem;
     display: flex;
     flex-direction: row;
+    gap: 2rem;
 }
 .edit-header {
     width: 15%;
@@ -339,34 +331,13 @@
 }
 .add-meal-button-container {
     display: flex;
-    justify-content: center;
-}
-.filter-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem;
-}
-.last-week-filter-button,
-.last-month-filter-button {
-    margin: auto;
-    background: #dc3545;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+    justify-content: flex-end;
 }
 
-.filter-meal-form {
-    margin: 0  2rem;
-    padding: 2rem 2rem 0.5rem;
-    width: 20%;
-    max-height: 25rem;
-    box-shadow: 3px 3px 3px 3px #888888;
-    border-radius: 5px;
-}
 
-.date-filter-submit-button {
-    margin-top: 1rem;
-}
+
+
+
 .delete-modal-content {
     width:25rem;
 }
@@ -375,9 +346,7 @@
     justify-content: space-between;
     padding-top: 1rem;
 }
-.date-time-error-alert {
-    margin-top: 2rem;
-}
+
 .delete-meal-err-list {
     transform: translateY(1rem);
 }
@@ -386,6 +355,18 @@
     justify-content: space-between;
 }
 
+@media only screen and (max-width: 1400px) {
+    .date-and-chart-container {
+        margin-top: 5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+    }
+    .filter-meal-form {
+        margin: auto;
+    }
+
+}
 
 table {
     border: 1px solid #ccc;
@@ -394,6 +375,8 @@ table {
     padding: 0;
     width: 80%;
     table-layout: fixed;
+    box-shadow: 3px 3px 3px 3px #888888;
+
 }
 
 table caption {
@@ -407,7 +390,7 @@ table tr {
     border-radius: 3px;
 }
 table thead tr:first-child {
-    border: 1px solid #0f82e6;
+    border: 1px solid #212529;
 }
 table th,
 table td {
@@ -415,7 +398,7 @@ table td {
     text-align: center;
     color: #9da9b9;
     font-size: 14px;
-    font-family: cursive;
+    word-break: break-word;
 }
 
 table td:nth-child(4) {
@@ -426,12 +409,12 @@ table th {
     font-size: .85em;
     letter-spacing: .1em;
     text-transform: uppercase;
-    background: #0f82e6;
+    background: #212529;
     color: #FFF;
 }
 
 table tbody tr td .btn-invoice {
-    background: #0f82e6;
+    background: #212529;
     color: #FFF;
     font-size: 13px;
     padding: 10px 20px;
@@ -448,15 +431,38 @@ tbody tr:nth-child(odd) {
 }
 .id-table-home-header {
     width: 3rem;
+    padding: 1rem 1rem 1rem 0.5rem;
+    word-break: unset;
+    align-content: center;
 }
-@media screen and (max-width: 1320px) {
+.home-edit-meals-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+.edit-meal-open-btn,
+.delete-meal-open-btn {
+    min-width: 45%;
+}
+.add-meal-open-modal {
+    width: 90%;
+}
+@media screen and (max-width: 1500px) {
     .home-edit-meals-buttons {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 20px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .add-meal-open-modal {
+        width: 97%;
+    }
+    .add-meal-table-header {
+        padding: 0.9rem;
     }
 }
-@media screen and (max-width: 910px) {
+@media screen and (max-width: 920px) {
     table {
         border: 0;
     }
@@ -511,7 +517,16 @@ tbody tr:nth-child(odd) {
         font-size: 0.8em;
     }
     .home-edit-meals-buttons {
-        display: block;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: auto;
+        padding-left: 0;
+
+    }
+    .edit-meal-open-btn,
+    .delete-meal-open-btn {
+       margin: auto ;
     }
     .dropdown {
         width: 136px;
@@ -519,8 +534,83 @@ tbody tr:nth-child(odd) {
     .welcome-name {
         display: none;
     }
+    .id-table-home-header {
+        width: 100%;
+    }
 }
 
+@media screen and (max-width: 768px) {
+    table {
+        width: 100%;
+        padding: 1rem;
+    }
+    .meals-table {
+        padding: 1rem;
+    }
+}
+
+.date-and-time-filter-submit-button,
+.date-and-time-filter-clear-button {
+    margin-top: 1.8rem;
+}
+.filter-week-month-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 1rem;
+}
+.filter-meal-form {
+    margin-left: 2rem;
+    padding: 2rem 2rem 0.5rem;
+    width: 73%;
+    max-height: 30rem;
+    box-shadow: 3px 3px 3px 3px #888888;
+    border-radius: 5px;
+}
+.date-and-time-filter-submit-container {
+    display: flex;
+    justify-content: space-between;
+}
+.filter-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+.date-filter-submit-button {
+    margin-top: 1rem;
+}
+.date-time-error-alert {
+    margin-top: 2rem;
+}
+.last-week-filter-button,
+.last-month-filter-button {
+    background: #dc3545;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+@media only screen and (max-width: 1400px) {
+    .filter-meal-form {
+        margin: auto;
+        width: 75%;
+    }
+}
+@media only screen and (max-width: 920px) {
+    .filter-meal-form {
+        width: 74%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .filter-meal-form{
+        width: 95%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .chart-form {
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 .custom-header-container {
     min-width: 100%;
@@ -529,9 +619,7 @@ tbody tr:nth-child(odd) {
 .navbar {
     display: flex;
     justify-content: space-between;
-    min-width: 100%;
-    padding: 0.6rem;
-    height: 6rem;
+    min-height: 6rem;
     background: #212529;
 }
 .logo {
@@ -541,17 +629,6 @@ tbody tr:nth-child(odd) {
     font-size: 3rem;
     font-weight: 600;
     cursor: pointer;
-}
-.welcome {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 1rem;
-    width: 18rem;
-}
-.welcome-name {
-    padding-top: 0.7rem;
-    font-size: 1.5rem;
-    color: white;
 }
 .auth-buttons {
     display: flex;
@@ -563,7 +640,7 @@ tbody tr:nth-child(odd) {
     background-color: #000000;
 }
 .drop-btn {
-    margin-right: 2rem;
+    /*margin-right: 2rem;*/
     padding: 16px;
     background-color: #dc3545;
     color: white;
@@ -576,7 +653,7 @@ tbody tr:nth-child(odd) {
     display: none;
     position: absolute;
     min-width: 160px;
-    right: 2rem;
+    /*right: 2rem;*/
     background-color: #f9f9f9;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     border-radius: 2px;
@@ -635,6 +712,22 @@ tbody tr:nth-child(odd) {
     }
     .login-form {
         background-color: #ffffff;
+    }
+
+}
+
+/*HOME NAVBAR*/
+/*@media only screen and (max-width: 920px) {*/
+/*    .dropdown {*/
+/*        margin-left: 0;*/
+/*    }*/
+/*}*/
+@media only screen and (max-width: 576px) {
+    .navbar {
+        /*flex-direction: column;*/
+    }
+    .dropdown {
+        margin-left: 0;
     }
 }
 
@@ -707,12 +800,37 @@ h3 {
     margin: auto;
     width: 10rem;
 }
+@media only screen and (max-width: 1400px) {
+    .chart-card {margin: auto;
+       width: 74%;
+    }
+}
+@media only screen and (max-width: 920px) {
+    .chart-card {
+        width: 74%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .chart-card {
+        width: 95%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .chart-form {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+    }
+    .chart-buttons {
+        width: 100%;
+    }
+}
 
 .login-form-wrapper {
     position: relative;
     margin: 5rem auto auto;
     max-width: 30rem;
-    background-color: rgba(254, 242, 231, 0.92);
+    background-color: rgba(255, 255, 255, 0.92);
     border-radius: 10px;
 }
 .login-form {

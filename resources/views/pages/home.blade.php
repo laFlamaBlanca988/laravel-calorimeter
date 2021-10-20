@@ -5,14 +5,6 @@
         <h3 class="cal-sum-text">Calories amount: <span id="total_calories">{{$totalCalories}}</span></h3>
     </div>
 
-        <div class="add-meal-button-container">
-            <button class="add-meal-open-modal btn btn-danger">Add meal</button>
-        </div>
-        <div class="meals-btn-container">
-            <button class="last-week-filter-button myBtn btn btn-danger">Filter Last Week</button>
-            <button class="last-month-filter-button myBtn btn btn-danger">Filter Last Month</button>
-        </div>
-
     <div class="w-1/2 m-auto" id="success_message"></div>
         <div id="user_table_meals" class="meals-table">
             @include('pages.tableHome')
@@ -82,7 +74,12 @@
     </div>
 
     <div class="date-and-chart-container">
+
         <div class="filter-meal-form">
+            <div class="filter-week-month-container">
+                <button class="last-week-filter-button myBtn btn btn-danger btn-sm">Filter Last Week</button>
+                <button class="last-month-filter-button myBtn btn btn-danger btn-sm">Filter Last Month</button>
+            </div>
             <form id="filter_meal_form">
                 <label for="from" class="form-label">From Date</label>
                 <input class="form-control" id="from_date" name="fromDate" type="date">
@@ -93,9 +90,11 @@
                 <input class="form-control" id="from_time" name="fromTime" type="time">
                 <label for="to" class="form-label">To Time</label>
                 <input class="form-control" id="to_time" name="toTime" type="time">
+                <div class="date-and-time-filter-submit-container">
+                    <div class="date-and-time-filter-submit-button btn btn-danger btn-sm">Submit</div>
+                    <div class="date-and-time-filter-clear-button btn btn-danger btn-sm">Clear</div>
+                </div>
 
-                <div class="date-and-time-filter-submit-button btn btn-danger btn-sm">Submit</div>
-                <div class="date-and-time-filter-clear-button btn btn-danger btn-sm">Clear</div>
                 <ul id="date_time_form_err_list" class="date-time-error-alert"></ul>
             </form>
         </div>

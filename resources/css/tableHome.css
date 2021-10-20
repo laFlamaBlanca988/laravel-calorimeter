@@ -5,6 +5,8 @@ table {
     padding: 0;
     width: 80%;
     table-layout: fixed;
+    box-shadow: 3px 3px 3px 3px #888888;
+
 }
 
 table caption {
@@ -18,7 +20,7 @@ table tr {
     border-radius: 3px;
 }
 table thead tr:first-child {
-    border: 1px solid #0f82e6;
+    border: 1px solid #212529;
 }
 table th,
 table td {
@@ -26,7 +28,7 @@ table td {
     text-align: center;
     color: #9da9b9;
     font-size: 14px;
-    font-family: cursive;
+    word-break: break-word;
 }
 
 table td:nth-child(4) {
@@ -37,12 +39,12 @@ table th {
     font-size: .85em;
     letter-spacing: .1em;
     text-transform: uppercase;
-    background: #0f82e6;
+    background: #212529;
     color: #FFF;
 }
 
 table tbody tr td .btn-invoice {
-    background: #0f82e6;
+    background: #212529;
     color: #FFF;
     font-size: 13px;
     padding: 10px 20px;
@@ -59,15 +61,38 @@ tbody tr:nth-child(odd) {
 }
 .id-table-home-header {
     width: 3rem;
+    padding: 1rem 1rem 1rem 0.5rem;
+    word-break: unset;
+    align-content: center;
 }
-@media screen and (max-width: 1320px) {
+.home-edit-meals-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+.edit-meal-open-btn,
+.delete-meal-open-btn {
+    min-width: 45%;
+}
+.add-meal-open-modal {
+    width: 90%;
+}
+@media screen and (max-width: 1500px) {
     .home-edit-meals-buttons {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 20px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .add-meal-open-modal {
+        width: 97%;
+    }
+    .add-meal-table-header {
+        padding: 0.9rem;
     }
 }
-@media screen and (max-width: 910px) {
+@media screen and (max-width: 920px) {
     table {
         border: 0;
     }
@@ -122,7 +147,16 @@ tbody tr:nth-child(odd) {
         font-size: 0.8em;
     }
     .home-edit-meals-buttons {
-        display: block;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: auto;
+        padding-left: 0;
+
+    }
+    .edit-meal-open-btn,
+    .delete-meal-open-btn {
+       margin: auto ;
     }
     .dropdown {
         width: 136px;
@@ -130,5 +164,17 @@ tbody tr:nth-child(odd) {
     .welcome-name {
         display: none;
     }
+    .id-table-home-header {
+        width: 100%;
+    }
 }
 
+@media screen and (max-width: 768px) {
+    table {
+        width: 100%;
+        padding: 1rem;
+    }
+    .meals-table {
+        padding: 1rem;
+    }
+}

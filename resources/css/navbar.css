@@ -5,9 +5,7 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    min-width: 100%;
-    padding: 0.6rem;
-    height: 6rem;
+    min-height: 6rem;
     background: #212529;
 }
 .logo {
@@ -17,17 +15,6 @@
     font-size: 3rem;
     font-weight: 600;
     cursor: pointer;
-}
-.welcome {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 1rem;
-    width: 18rem;
-}
-.welcome-name {
-    padding-top: 0.7rem;
-    font-size: 1.5rem;
-    color: white;
 }
 .auth-buttons {
     display: flex;
@@ -39,7 +26,7 @@
     background-color: #000000;
 }
 .drop-btn {
-    margin-right: 2rem;
+    /*margin-right: 2rem;*/
     padding: 16px;
     background-color: #dc3545;
     color: white;
@@ -52,7 +39,7 @@
     display: none;
     position: absolute;
     min-width: 160px;
-    right: 2rem;
+    /*right: 2rem;*/
     background-color: #f9f9f9;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     border-radius: 2px;
@@ -111,5 +98,21 @@
     }
     .login-form {
         background-color: #ffffff;
+    }
+
+}
+
+/*HOME NAVBAR*/
+/*@media only screen and (max-width: 920px) {*/
+/*    .dropdown {*/
+/*        margin-left: 0;*/
+/*    }*/
+/*}*/
+@media only screen and (max-width: 576px) {
+    .navbar {
+        /*flex-direction: column;*/
+    }
+    .dropdown {
+        margin-left: 0;
     }
 }

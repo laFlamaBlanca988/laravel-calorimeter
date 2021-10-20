@@ -1,29 +1,21 @@
 .cal-sum {
     display: flex;
+    margin-top: 2rem;
 }
 .cal-sum-text {
-    margin: auto auto auto 76%;
+    margin: auto;
     padding: 2rem;
     visibility: hidden;
     font-size: 2rem;
     color: #dc3545;
     font-weight: 600;
 }
-.date-and-time-filter-submit-button, .date-and-time-filter-clear-button {
-    margin-top: 1.8rem;
-}
-.meals-btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: auto;
-    padding: 2rem;
-    width: 50vw;
-}
+
 .date-and-chart-container {
     margin-top: 5rem;
     display: flex;
     flex-direction: row;
+    gap: 2rem;
 }
 .edit-header {
     width: 15%;
@@ -105,34 +97,13 @@
 }
 .add-meal-button-container {
     display: flex;
-    justify-content: center;
-}
-.filter-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem;
-}
-.last-week-filter-button,
-.last-month-filter-button {
-    margin: auto;
-    background: #dc3545;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+    justify-content: flex-end;
 }
 
-.filter-meal-form {
-    margin: 0  2rem;
-    padding: 2rem 2rem 0.5rem;
-    width: 20%;
-    max-height: 25rem;
-    box-shadow: 3px 3px 3px 3px #888888;
-    border-radius: 5px;
-}
 
-.date-filter-submit-button {
-    margin-top: 1rem;
-}
+
+
+
 .delete-modal-content {
     width:25rem;
 }
@@ -141,9 +112,7 @@
     justify-content: space-between;
     padding-top: 1rem;
 }
-.date-time-error-alert {
-    margin-top: 2rem;
-}
+
 .delete-meal-err-list {
     transform: translateY(1rem);
 }
@@ -152,3 +121,15 @@
     justify-content: space-between;
 }
 
+@media only screen and (max-width: 1400px) {
+    .date-and-chart-container {
+        margin-top: 5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+    }
+    .filter-meal-form {
+        margin: auto;
+    }
+
+}

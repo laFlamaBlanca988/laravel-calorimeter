@@ -254,8 +254,8 @@ if (chartFilterSubmitButton) {
         var calories = response.result.map(function (res) {
           return res.total;
         });
-        chartContainer.innerHTML = '<canvas id="my_chart"></canvas>';
-        var myChart = document.getElementById('my_chart').getContext('2d');
+        chartContainer.innerHTML = '<canvas id="my_chart" style="max-height: 279px"></canvas>';
+        var myChart = document.getElementById('my_chart');
         var caloriesChart = new Chart(myChart, {
           type: 'bar',
           data: {
@@ -354,7 +354,7 @@ var addMealOpenModalButton = document.querySelector(".add-meal-open-modal");
 var addMealBtn = document.querySelector('.add-meal-btn');
 var editButtons = document.getElementsByClassName('edit-meal-open-btn');
 var editMealButton = document.querySelector('.edit-meal-btn');
-var deleteButtons = document.getElementsByClassName('delete-btn');
+var deleteButtons = document.getElementsByClassName('delete-meal-open-btn ');
 var deleteConfirmButton = document.querySelector('#confirm_delete');
 var lastWeekFilterButton = document.querySelector('.last-week-filter-button');
 var lastMonthFilterButton = document.querySelector('.last-month-filter-button');
@@ -490,7 +490,6 @@ if (addMealBtn) {
     var cal_num = document.querySelector('.cal-num-add-meal').value;
     var date = document.querySelector('.date-add-meal').value;
     var time = document.querySelector('.time-add-meal').value;
-    console.log(title, cal_num, date, time);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'meals', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -511,7 +510,7 @@ if (addMealBtn) {
           var mealID = response.id;
           var newRow = document.createElement('tr');
           newRow.id = "meal_" + mealID;
-          newRow.innerHTML = "\n                 <td class=\"item-id\">".concat(tableBody.children.length + 1, "</td>\n                 <td class=\"item-title\">").concat(data.title, "</td>\n                 <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                 <td class=\"item-date\">").concat(data.date, "</td>\n                 <td class=\"item-time\">").concat(data.time, ":00</td>\n                 <td class=\"home-edit-meals-buttons\">\n                    <button id=\"edit_meal_").concat(mealID, "\" onclick=\"editMeal(").concat(mealID, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                        >Edit meal</button>\n                    <button id=\"delete_meal_").concat(mealID, "\" onclick=\"deleteMeal(").concat(mealID, ")\" class=\"delete-btn btn btn-danger btn-sm\" type=\"submit\"\n                        >Delete</button>\n                </td> ");
+          newRow.innerHTML = "\n                 <td class=\"id-table-home-header\" data-label=\"ID\">".concat(mealID, "</td>\n                 <td data-label=\"Meal\">").concat(data.title, "</td>\n                 <td data-label=\"Calories\">").concat(data.cal_num, "</td>\n                 <td data-label=\"Date\">").concat(data.date, "</td>\n                 <td data-label=\"Time\">").concat(data.time, ":00</td>\n                 <td class=\"home-edit-meals-buttons\">\n                    <button id=\"edit_meal_").concat(mealID, "\" onclick=\"editMeal(").concat(mealID, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                        >Edit meal</button>\n                    <button id=\"delete_meal_").concat(mealID, "\" onclick=\"deleteMeal(").concat(mealID, ")\" class=\"delete-meal-open-btn  btn btn-danger btn-sm\" type=\"submit\"\n                        >Delete</button>\n                </td> ");
           tableBody.appendChild(newRow);
           addMealModal.style.display = "none";
           document.getElementById('save_form_err_list').value = "";
@@ -644,7 +643,7 @@ if (lastWeekFilterButton) {
         var res = JSON.parse(xhr.responseText);
         var html = '';
         res.meals.data.forEach(function (data) {
-          html += "\n                <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"item-id\">").concat(data.id, "</td>\n                     <td class=\"item-title\">").concat(data.title, "</td>\n                     <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                     <td class=\"item-date\">").concat(data.date, "</td>\n                     <td class=\"item-time\">").concat(data.time, "</td>\n                     <td class=\"edit-meals-buttons\">\n                        <button  data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
+          html += "\n                <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"id-table-home-header\" data-label=\"ID\">").concat(data.id, "</td>\n                     <td data-label=\"Meal\">").concat(data.title, "</td>\n                     <td data-label=\"Calories\">").concat(data.cal_num, "</td>\n                     <td data-label=\"Date\">").concat(data.date, "</td>\n                     <td data-label=\"Time\">").concat(data.time, "</td>\n                     <td class=\"home-edit-meals-buttons\">\n                        <button data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
         });
         tableBody.innerHTML = html;
         totalCalories.innerText = res.totalCalories;
@@ -675,7 +674,7 @@ if (lastMonthFilterButton) {
         var res = JSON.parse(xhr.responseText);
         var html = '';
         res.meals.forEach(function (data) {
-          html += "\n                <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"item-id\">").concat(data.id, "</td>\n                     <td class=\"item-title\">").concat(data.title, "</td>\n                     <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                     <td class=\"item-date\">").concat(data.date, "</td>\n                     <td class=\"item-time\">").concat(data.time, "</td>\n                     <td class=\"edit-meals-buttons\">\n                        <button  data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
+          html += "\n                <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"item-id\">").concat(data.id, "</td>\n                     <td class=\"item-title\">").concat(data.title, "</td>\n                     <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                     <td class=\"item-date\">").concat(data.date, "</td>\n                     <td class=\"item-time\">").concat(data.time, "</td>\n                     <td class=\"edit-meals-buttons\">\n                        <button  data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
         });
         tableBody.innerHTML = html;
         totalCalories.innerText = res.totalCalories;
@@ -720,7 +719,7 @@ if (dateAndTimeFilterSubmitButton) {
           var res = JSON.parse(xhr.responseText);
           var html = '';
           res.mealsFilterAll.forEach(function (data) {
-            html += "\n                <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"item-id\">").concat(data.id, "</td>\n                     <td class=\"item-title\">").concat(data.title, "</td>\n                     <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                     <td class=\"item-date\">").concat(data.date, "</td>\n                     <td class=\"item-time\">").concat(data.time, "</td>\n                     <td class=\"edit-meals-buttons\">\n                        <button  data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
+            html += "\n                <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"item-id\">").concat(data.id, "</td>\n                     <td class=\"item-title\">").concat(data.title, "</td>\n                     <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                     <td class=\"item-date\">").concat(data.date, "</td>\n                     <td class=\"item-time\">").concat(data.time, "</td>\n                     <td class=\"edit-meals-buttons\">\n                        <button  data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
           });
           tableBody.innerHTML = html;
           totalCalories.innerText = res.totalCalories;

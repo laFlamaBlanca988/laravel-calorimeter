@@ -14,7 +14,7 @@ let addMealBtn = document.querySelector('.add-meal-btn');
 
 let editButtons = document.getElementsByClassName('edit-meal-open-btn');
 let editMealButton = document.querySelector('.edit-meal-btn');
-let deleteButtons = document.getElementsByClassName('delete-btn');
+let deleteButtons = document.getElementsByClassName('delete-meal-open-btn ');
 let deleteConfirmButton = document.querySelector('#confirm_delete');
 
 let lastWeekFilterButton = document.querySelector('.last-week-filter-button');
@@ -159,7 +159,6 @@ if (addMealBtn) {
         let cal_num = document.querySelector('.cal-num-add-meal').value;
         let date = document.querySelector('.date-add-meal').value;
         let time = document.querySelector('.time-add-meal').value;
-        console.log(title, cal_num, date, time)
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'meals', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -180,15 +179,15 @@ if (addMealBtn) {
                     let newRow = document.createElement('tr');
                     newRow.id = "meal_" + mealID;
                     newRow.innerHTML = `
-                 <td class="item-id">${tableBody.children.length + 1}</td>
-                 <td class="item-title">${data.title}</td>
-                 <td class="cal_num">${data.cal_num}</td>
-                 <td class="item-date">${data.date}</td>
-                 <td class="item-time">${data.time}:00</td>
+                 <td class="id-table-home-header" data-label="ID">${mealID}</td>
+                 <td data-label="Meal">${data.title}</td>
+                 <td data-label="Calories">${data.cal_num}</td>
+                 <td data-label="Date">${data.date}</td>
+                 <td data-label="Time">${data.time}:00</td>
                  <td class="home-edit-meals-buttons">
                     <button id="edit_meal_${mealID}" onclick="editMeal(${mealID})" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                         >Edit meal</button>
-                    <button id="delete_meal_${mealID}" onclick="deleteMeal(${mealID})" class="delete-btn btn btn-danger btn-sm" type="submit"
+                    <button id="delete_meal_${mealID}" onclick="deleteMeal(${mealID})" class="delete-meal-open-btn  btn btn-danger btn-sm" type="submit"
                         >Delete</button>
                 </td> `;
                     tableBody.appendChild(newRow);
@@ -312,15 +311,15 @@ if (lastWeekFilterButton) {
                 res.meals.data.forEach(data => {
                     html += `
                 <tr id="meal_${data.id}">
-                     <td class="item-id">${data.id}</td>
-                     <td class="item-title">${data.title}</td>
-                     <td class="cal_num">${data.cal_num}</td>
-                     <td class="item-date">${data.date}</td>
-                     <td class="item-time">${data.time}</td>
-                     <td class="edit-meals-buttons">
-                        <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
+                     <td class="id-table-home-header" data-label="ID">${data.id}</td>
+                     <td data-label="Meal">${data.title}</td>
+                     <td data-label="Calories">${data.cal_num}</td>
+                     <td data-label="Date">${data.date}</td>
+                     <td data-label="Time">${data.time}</td>
+                     <td class="home-edit-meals-buttons">
+                        <button data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
-                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-btn btn btn-danger btn-sm" type="submit"
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-meal-open-btn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
                     </td>
                 </tr>`;
@@ -360,7 +359,7 @@ if (lastMonthFilterButton) {
                      <td class="edit-meals-buttons">
                         <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
-                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-btn btn btn-danger btn-sm" type="submit"
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-meal-open-btn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
                     </td>
                 </tr>`
@@ -412,7 +411,7 @@ if (dateAndTimeFilterSubmitButton) {
                      <td class="edit-meals-buttons">
                         <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
-                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-btn btn btn-danger btn-sm" type="submit"
+                        <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-meal-open-btn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
                     </td>
                 </tr>`;

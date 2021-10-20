@@ -1,13 +1,15 @@
 
     <table>
+
     <thead>
+
     <tr>
         <th class="id-table-home-header"><label>ID</label></th>
         <th><label>Meal</label></th>
         <th><label>Calories</label></th>
         <th><label>Date</label></th>
         <th><label>Time</label></th>
-        <th><label>Actions</label></th>
+        <th class="add-meal-table-header"><button class="add-meal-open-modal btn btn-danger">Add meal</button></th>
     </tr>
     </thead>
     <tbody>
@@ -15,7 +17,7 @@
     @foreach($data as $key => $meal)
 
         <tr id="meal_{{$meal->id}}">
-        <td data-label="ID">{{$meal->id}}</td>
+        <td class="id-table-home-header" data-label="ID">{{$meal->id}}</td>
         <td data-label="Meal">{{$meal->title}}</td>
         <td data-label="Calories">{{$meal->cal_num}}</td>
         <td data-label="Date">{{$meal->date}}</td>
@@ -24,7 +26,7 @@
             <button data-id="{{$meal->id}}" onclick="editMeal({{$meal->id}})" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
             >Edit meal
             </button>
-            <button data-row="{{$key}}" onclick="deleteMeal({{$meal->id}})" data-id="{{$meal->id}}" class="delete-btn btn btn-danger btn-sm">Delete
+            <button data-row="{{$key}}" onclick="deleteMeal({{$meal->id}})" data-id="{{$meal->id}}" class="delete-meal-open-btn btn btn-danger btn-sm">Delete
             </button>
         </td>
     </tr>

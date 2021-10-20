@@ -25,3 +25,28 @@
     margin: auto;
     width: 10rem;
 }
+@media only screen and (max-width: 1400px) {
+    .chart-card {margin: auto;
+       width: 74%;
+    }
+}
+@media only screen and (max-width: 920px) {
+    .chart-card {
+        width: 74%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .chart-card {
+        width: 95%;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .chart-form {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+    }
+    .chart-buttons {
+        width: 100%;
+    }
+}
