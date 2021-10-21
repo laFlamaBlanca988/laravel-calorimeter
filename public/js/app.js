@@ -648,6 +648,10 @@ if (lastWeekFilterButton) {
         tableBody.innerHTML = html;
         totalCalories.innerText = res.totalCalories;
         totalCalories.parentNode.style.visibility = "visible";
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       }
 
       if (xhr.readyState !== 4 && xhr.status !== 200) {
@@ -674,11 +678,15 @@ if (lastMonthFilterButton) {
         var res = JSON.parse(xhr.responseText);
         var html = '';
         res.meals.forEach(function (data) {
-          html += "\n                <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"item-id\">").concat(data.id, "</td>\n                     <td class=\"item-title\">").concat(data.title, "</td>\n                     <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                     <td class=\"item-date\">").concat(data.date, "</td>\n                     <td class=\"item-time\">").concat(data.time, "</td>\n                     <td class=\"edit-meals-buttons\">\n                        <button  data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
+          html += "\n               <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"id-table-home-header\" data-label=\"ID\">").concat(data.id, "</td>\n                     <td data-label=\"Meal\">").concat(data.title, "</td>\n                     <td data-label=\"Calories\">").concat(data.cal_num, "</td>\n                     <td data-label=\"Date\">").concat(data.date, "</td>\n                     <td data-label=\"Time\">").concat(data.time, "</td>\n                     <td class=\"home-edit-meals-buttons\">\n                        <button data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
         });
         tableBody.innerHTML = html;
         totalCalories.innerText = res.totalCalories;
         totalCalories.parentNode.style.visibility = "visible";
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       }
 
       if (xhr.readyState !== 4 && xhr.status !== 200) {
@@ -719,11 +727,15 @@ if (dateAndTimeFilterSubmitButton) {
           var res = JSON.parse(xhr.responseText);
           var html = '';
           res.mealsFilterAll.forEach(function (data) {
-            html += "\n                <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"item-id\">").concat(data.id, "</td>\n                     <td class=\"item-title\">").concat(data.title, "</td>\n                     <td class=\"cal_num\">").concat(data.cal_num, "</td>\n                     <td class=\"item-date\">").concat(data.date, "</td>\n                     <td class=\"item-time\">").concat(data.time, "</td>\n                     <td class=\"edit-meals-buttons\">\n                        <button  data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
+            html += "\n               <tr id=\"meal_".concat(data.id, "\">\n                     <td class=\"id-table-home-header\" data-label=\"ID\">").concat(data.id, "</td>\n                     <td data-label=\"Meal\">").concat(data.title, "</td>\n                     <td data-label=\"Calories\">").concat(data.cal_num, "</td>\n                     <td data-label=\"Date\">").concat(data.date, "</td>\n                     <td data-label=\"Time\">").concat(data.time, "</td>\n                     <td class=\"home-edit-meals-buttons\">\n                        <button data-id=\"").concat(data.id, "\" onclick=\"editMeal(").concat(data.id, ")\" class=\"edit-meal-open-btn btn btn-danger btn-sm\"  type=\"submit\"\n                            >Edit meal</button>\n                        <button id=\"delete_meal_").concat(data.id, "\" data-id=\"").concat(data.id, "\" onclick=\"deleteMeal(").concat(data.id, ")\" class=\"delete-meal-open-btn btn btn-danger btn-sm\" type=\"submit\"\n                            >Delete</button>\n                    </td>\n                </tr>");
           });
           tableBody.innerHTML = html;
           totalCalories.innerText = res.totalCalories;
           totalCalories.parentNode.style.visibility = "visible";
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
         }
 
         if (xhr.readyState !== 4 && xhr.status !== 200) {

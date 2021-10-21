@@ -67,7 +67,6 @@ if (toTimeInput) {
         }
     });
 }
-
 // ADD MEAL MODAL CONTROL
 if (addMealOpenModalButton) {
     addMealOpenModalButton.addEventListener('click', function () {
@@ -112,7 +111,6 @@ window.addEventListener('click', function (e) {
         deleteModal.style.display = 'none';
     }
 });
-
 // EDIT BUTTON LISTENER
 for (let i = 0; i < editButtons.length; i++) {
     editButtons[i].addEventListener('click', function () {
@@ -327,6 +325,7 @@ if (lastWeekFilterButton) {
                 tableBody.innerHTML = html;
                 totalCalories.innerText = res.totalCalories;
                 totalCalories.parentNode.style.visibility = "visible";
+                window.scrollTo({top: 0, behavior: 'smooth'});
             }
             if (xhr.readyState !== 4 && xhr.status !== 200) {
                 console.log('There was a problem, please try again!')
@@ -350,14 +349,14 @@ if (lastMonthFilterButton) {
                 let html = '';
                 res.meals.forEach(data => {
                     html += `
-                <tr id="meal_${data.id}">
-                     <td class="item-id">${data.id}</td>
-                     <td class="item-title">${data.title}</td>
-                     <td class="cal_num">${data.cal_num}</td>
-                     <td class="item-date">${data.date}</td>
-                     <td class="item-time">${data.time}</td>
-                     <td class="edit-meals-buttons">
-                        <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
+               <tr id="meal_${data.id}">
+                     <td class="id-table-home-header" data-label="ID">${data.id}</td>
+                     <td data-label="Meal">${data.title}</td>
+                     <td data-label="Calories">${data.cal_num}</td>
+                     <td data-label="Date">${data.date}</td>
+                     <td data-label="Time">${data.time}</td>
+                     <td class="home-edit-meals-buttons">
+                        <button data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
                         <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-meal-open-btn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
@@ -367,6 +366,7 @@ if (lastMonthFilterButton) {
                 tableBody.innerHTML = html;
                 totalCalories.innerText = res.totalCalories;
                 totalCalories.parentNode.style.visibility = "visible";
+                window.scrollTo({top: 0, behavior: 'smooth'});
             }
             if (xhr.readyState !== 4 && xhr.status !== 200) {
                 alert('There was a problem, please try again!')
@@ -402,14 +402,14 @@ if (dateAndTimeFilterSubmitButton) {
                     let html = '';
                     res.mealsFilterAll.forEach(data => {
                         html += `
-                <tr id="meal_${data.id}">
-                     <td class="item-id">${data.id}</td>
-                     <td class="item-title">${data.title}</td>
-                     <td class="cal_num">${data.cal_num}</td>
-                     <td class="item-date">${data.date}</td>
-                     <td class="item-time">${data.time}</td>
-                     <td class="edit-meals-buttons">
-                        <button  data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
+               <tr id="meal_${data.id}">
+                     <td class="id-table-home-header" data-label="ID">${data.id}</td>
+                     <td data-label="Meal">${data.title}</td>
+                     <td data-label="Calories">${data.cal_num}</td>
+                     <td data-label="Date">${data.date}</td>
+                     <td data-label="Time">${data.time}</td>
+                     <td class="home-edit-meals-buttons">
+                        <button data-id="${data.id}" onclick="editMeal(${data.id})" class="edit-meal-open-btn btn btn-danger btn-sm"  type="submit"
                             >Edit meal</button>
                         <button id="delete_meal_${data.id}" data-id="${data.id}" onclick="deleteMeal(${data.id})" class="delete-meal-open-btn btn btn-danger btn-sm" type="submit"
                             >Delete</button>
@@ -419,6 +419,7 @@ if (dateAndTimeFilterSubmitButton) {
                     tableBody.innerHTML = html;
                     totalCalories.innerText = res.totalCalories;
                     totalCalories.parentNode.style.visibility = "visible";
+                    window.scrollTo({top: 0, behavior: 'smooth'});
                 }
                 if (xhr.readyState !== 4 && xhr.status !== 200) {
                     console.log('There was a problem, please try again!')

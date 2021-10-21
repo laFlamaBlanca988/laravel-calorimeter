@@ -49,4 +49,18 @@
     justify-content: space-between;
     padding-top: 0.7rem;
 }
+@media screen and (max-width: 800px) {
+    .welcome-login-btn {
+        display: none;
+    }
+    .welcome-register-btn {
+        display: none;
+    }
+    .brand {
+        margin: auto;
+    }
+    .logo {
+        padding-left: 0;
+    }
+}
 

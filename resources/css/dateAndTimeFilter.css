@@ -42,10 +42,18 @@
         margin: auto;
         width: 75%;
     }
+    .date-time-error-alert {
+        margin-top: 9px;
+        padding: 9px;
+    }
 }
 @media only screen and (max-width: 920px) {
     .filter-meal-form {
         width: 74%;
+    }
+    .date-time-error-alert {
+        margin-top: 9px;
+        padding: 9px;
     }
 
 }
@@ -54,10 +62,18 @@
     .filter-meal-form{
         width: 95%;
     }
+    .date-time-error-alert {
+        margin-top: 9px;
+        padding: 9px;
+    }
 }
 @media only screen and (max-width: 576px) {
     .chart-form {
         display: flex;
         flex-direction: column;
+    }
+    .date-time-error-alert {
+        margin-top: 9px;
+        padding: 9px;
     }
 }

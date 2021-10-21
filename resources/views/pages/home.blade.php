@@ -4,12 +4,13 @@
     <div class="cal-sum">
         <h3 class="cal-sum-text">Calories amount: <span id="total_calories">{{$totalCalories}}</span></h3>
     </div>
-
+    <div class="home-add-meal-open-modal-button">
+        <button class="add-meal-open-modal btn btn-danger">Add meal</button>
+    </div>
     <div class="w-1/2 m-auto" id="success_message"></div>
         <div id="user_table_meals" class="meals-table">
             @include('pages.tableHome')
         </div>
-
 
     {{--    EDIT MEAL MODAL--}}
     <div id="edit_meal_modal" class="custom-modal modal">
@@ -67,10 +68,6 @@
                 <ul id="save_form_err_list"></ul>
             </form>
         </div>
-    </div>
-
-    <div id="pagination_buttons" class="d-flex justify-content-center">
-        {!! $data->links() !!}
     </div>
 
     <div class="date-and-chart-container">

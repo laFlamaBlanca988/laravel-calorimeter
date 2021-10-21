@@ -17,37 +17,6 @@
     <script src="{{asset('js/app.js')}}" defer></script>
 </head>
 <body>
-{{--<header class="custom-header-container container-fluid">--}}
-{{--    <nav class="navbar">--}}
-{{--        <a class="logo-link" href="home"><h1 class="logo">Calorimeter</h1></a>--}}
-{{--        @auth--}}
-
-{{--             @auth--}}
-{{--                    <div class="dropdown">--}}
-{{--                        <button class="drop-btn">{{auth()->user()->username}}</button>--}}
-{{--                        <div class="dropdown-content">--}}
-{{--                            <a href="userEdit">Settings</a>--}}
-{{--                            @if(auth()->user()->role == 'admin')--}}
-{{--                            <a href="admin">Admin settings</a>--}}
-{{--                            @endif--}}
-{{--                            @if(auth()->user()->role == 'manager')--}}
-{{--                                <a href="manager">Manager settings</a>--}}
-{{--                            @endif--}}
-{{--                            <form method="POST" class="form-logout" action="{{route('logout')}}" >--}}
-{{--                                @csrf--}}
-{{--                                <button class="logout-btn">Logout</button>--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    @endauth--}}
-{{--        @endauth--}}
-
-
-
-
-{{--    </nav>--}}
-
-{{--</header>--}}
 
 <section class="nav-bar">
     <div class="navbar nav-container">
@@ -59,7 +28,7 @@
                 <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
                 <ul class="nav-list">
                     <li>
-                        <a href="#!">{{auth()->user()->username}}</a>
+                        <a class="username-dropdown" href="#!">{{auth()->user()->username}}</a>
                         <ul class="nav-dropdown">
                             <li><a href="userEdit">Settings</a></li>
                             @if(auth()->user()->role == 'admin')
@@ -108,12 +77,13 @@
                 e.stopPropagation();
             });
             $('html').click(function () {
-                $('.nav-dropdown').hide();
+                $('.nav ul').hide();
             });
             $('#nav-toggle').click(function () {
                 $('nav ul').slideToggle();
             });
             $('#nav-toggle').on('click', function () {
+                $('.username-dropdown').hide();
                 this.classList.toggle('active');
             });
         });

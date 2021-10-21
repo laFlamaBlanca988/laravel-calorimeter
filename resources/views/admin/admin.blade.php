@@ -4,46 +4,36 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endsection
 @section('content')
-    <div class="custom-body-container container-fluid">
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h3>Filter Views</h3>
-            </div>
-            <ul class="components">
-                <li>
-                    <a id="admin_users_button" class="admin-users-button">Users</a>
-                </li>
-                @if(auth()->user()->role == 'admin')
-                    <li>
-                        <a id="admin_meals_button">Meals</a>
-                    </li>
-                @endif
-            </ul>
-        </nav>
 
-        <div class="users-meals-container">
+    @if(auth()->user()->role == 'admin')
+            <ul class="components admin-meals-or-users-buttons">
+                <li><a id="admin_users_button" class="admin-users-button">Users</a></li>
+                    <li><a id="admin_meals_button" class="admin-meals-button">Meals</a></li>
+            </ul>
+    @endif
             {{--    USERS TABLE--}}
             <div id="users_table" class="users-table-container">
-                <table class="admin-users-table table table-dark">
-                    <div class="hidden user-edit-success-message" id="user_edit_success_message"></div>
-                    <thead>
-                    <tr>
-                        <th scope="col">UserID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th class="edit-users-table-header" scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                    <table class="admin-users-table">
+                        <div class="hidden user-edit-success-message" id="user_edit_success_message"></div>
+                        <thead>
+                        <tr>
+                            <th class="id-table-home-header"><label>ID</label></th>
+                            <th><label>Name</label></th>
+                            <th><label>Username</label></th>
+                            <th><label>Email</label></th>
+                            <th class="add-meal-table-header"><span>Actions</span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
                     @if(auth()->user()->role == 'admin')
                         @foreach ($users as $key => $user)
                             <tr class="admin-table-row-user" id="user_{{$user->id}}">
-                                <td class="user-id">{{$user->id}}</td>
-                                <td class="user-name">{{ $user->name }}</td>
-                                <td class="user-username">{{ $user->username }}</td>
-                                <td class="user-email">{{ $user->email }}</td>
-                                <td class="edit-users-buttons">
+                                <td class="id-table-home-header" data-label="ID">{{$user->id}}</td>
+                                <td data-label="Meal">{{$user->name}}</td>
+                                <td data-label="Calories">{{$user->username}}</td>
+                                <td data-label="Date">{{$user->email}}</td>
+                                <td class="admin-edit-meals-buttons">
                                     <button data-id="{{$user->id}}" class="edit-user-open-btn btn btn-danger btn-sm"
                                             type="submit"
                                     >Edit user
@@ -61,18 +51,18 @@
                     @endif
                     @if(auth()->user()->role == 'manager')
                         @foreach ($usersManager as $key => $user)
-                            <tr class="admin-table-row-user" id="user_{{$user->id}}">
-                                <td class="user-id">{{$user->id}}</td>
-                                <td class="user-name">{{ $user->name }}</td>
-                                <td class="user-username">{{ $user->username }}</td>
-                                <td class="user-email">{{ $user->email }}</td>
-                                <td class="edit-meals-buttons">
-                                    <button data-id="{{$user->id}}" class="edit-user-open-btn btn btn-danger btn-sm"
-                                            type="submit"
-                                    >Edit user
+                            <tr id="meal_{{$user->id}}">
+                                <td class="id-table-home-header" data-label="ID">{{$user->id}}</td>
+                                <td data-label="Meal">{{$user->name}}</td>
+                                <td data-label="Calories">{{$user->username}}</td>
+                                <td data-label="Date">{{$user->email}}</td>
+                                <td class="home-edit-meals-buttons">
+                                    <button data-id="{{$user->id}}" onclick="editMeal({{$user->id}})"
+                                            class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
+                                    >Edit meal
                                     </button>
-                                    <button data-row="{{$key}}" data-id="{{$user->id}}"
-                                            class="delete-user-btn btn btn-danger btn-sm">Delete
+                                    <button data-row="{{$key}}" onclick="deleteMeal({{$user->id}})" data-id="{{$user->id}}"
+                                            class="delete-meal-open-btn btn btn-danger btn-sm">Delete
                                     </button>
                                 </td>
                             </tr>
@@ -81,7 +71,6 @@
                     </tbody>
                 </table>
             </div>
-
             {{--  ALL MEALS TABLE--}}
 
             <div id="meals_table" class="hidden meals-table-container">
@@ -201,6 +190,7 @@
                     </div>
                 </div>
             </div>
+
             {{--            <script>--}}
             {{--                $(document).ready(function(){--}}
             {{--                    $.ajaxSetup({ cache: false });--}}
