@@ -809,6 +809,13 @@ article {
     padding: 10px;
 }
 
+@media only screen and (max-width: 470px) {
+    .logo {
+        padding-top: 27px;
+        font-size: 2rem;
+    }
+}
+
 body {
     background: #ffffff;
 }
