@@ -115,7 +115,13 @@ ul.components a {
         margin: auto;
     }
 }
-
+@media screen and (min-width: 1450px) {
+    .edit-user-open-btn,
+    .edit-user-access-open-btn,
+    .delete-user-btn {
+        width: 5rem;
+    }
+}
 
 
 
@@ -372,7 +378,7 @@ tbody tr:nth-child(odd) {
 .home-edit-meals-buttons {
     display: flex;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 1rem;
 }
 .edit-meal-open-btn,
 .delete-meal-open-btn {
