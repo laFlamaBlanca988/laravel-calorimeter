@@ -1,28 +1,30 @@
-<table class="admin-meals-table table table-dark">
+<table class="admin-meals-table">
+    <thead>
     <thead>
     <tr>
-        <th scope="col">User</th>
-        <th scope="col">Meal</th>
-        <th scope="col">Calories</th>
-        <th scope="col">Date</th>
-        <th scope="col">Time</th>
-        <th class="edit-meals-table-header" scope="col">Actions</th>
+        <th><label>User</label></th>
+        <th><label>Meal</label></th>
+        <th><label>Calories</label></th>
+        <th><label>Date</label></th>
+        <th><label>Time</label></th>
+        <th class="add-meal-table-header"><span>Actions</span>
+        </th>
     </tr>
     </thead>
     <tbody>
     @foreach ($meals as $key => $meal)
         <div class="edit-meal-success-message" id="edit_meals_success_message"></div>
         <tr class="admin-table-row-meals" id="meal_{{$meal->id}}">
-            <td class="item-user-name">{{$meal->name}}</td>
-            <td class="item-title">{{ $meal->title }}</td>
-            <td class="item-cal-num">{{ $meal->cal_num }}</td>
-            <td class="item-date">{{ $meal->date }}</td>
-            <td class="item-time">{{ $meal->time }}</td>
-            <td class="edit-meals-buttons">
+            <td data-label="User">{{$meal->name}}</td>
+            <td data-label="Meal">{{ $meal->title }}</td>
+            <td data-label="Calories">{{ $meal->cal_num }}</td>
+            <td data-label="Date">{{ $meal->date }}</td>
+            <td data-label="Time">{{ $meal->time }}</td>
+            <td class="home-edit-meals-buttons">
                 <button data-id="{{$meal->id}}" onclick="editMeal({{$meal->id}})" class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
                 >Edit meal
                 </button>
-                <button data-row ="{{$key}}" onclick="deleteMeal({{$meal->id}})" data-id="{{$meal->id}}" class="delete-meal-open-btn-btn btn btn-danger btn-sm">Delete</button>
+                <button data-row ="{{$key}}" onclick="deleteMeal({{$meal->id}})" data-id="{{$meal->id}}" class="delete-meal-open-btn btn btn-danger btn-sm">Delete</button>
             </td>
         </tr>
     @endforeach

@@ -13,26 +13,26 @@
     @endif
             {{--    USERS TABLE--}}
             <div id="users_table" class="users-table-container">
-                    <table class="admin-users-table">
-                        <div class="hidden user-edit-success-message" id="user_edit_success_message"></div>
-                        <thead>
-                        <tr>
-                            <th class="id-table-home-header"><label>ID</label></th>
-                            <th><label>Name</label></th>
-                            <th><label>Username</label></th>
-                            <th><label>Email</label></th>
-                            <th class="add-meal-table-header"><span>Actions</span>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                    @if(auth()->user()->role == 'admin')
+                <div class="user-edit-success-message" id="user_edit_success_message"></div>
+            @if(auth()->user()->role == 'admin')
+                        <table class="admin-users-table">
+                            <thead>
+                            <tr>
+                                <th class="id-table-home-header"><label>ID</label></th>
+                                <th><label>Name</label></th>
+                                <th><label>Username</label></th>
+                                <th><label>Email</label></th>
+                                <th class="add-meal-table-header"><span>Actions</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
                         @foreach ($users as $key => $user)
                             <tr class="admin-table-row-user" id="user_{{$user->id}}">
                                 <td class="id-table-home-header" data-label="ID">{{$user->id}}</td>
-                                <td data-label="Meal">{{$user->name}}</td>
-                                <td data-label="Calories">{{$user->username}}</td>
-                                <td data-label="Date">{{$user->email}}</td>
+                                <td data-label="User">{{$user->name}}</td>
+                                <td data-label="Username">{{$user->username}}</td>
+                                <td data-label="Email">{{$user->email}}</td>
                                 <td class="admin-edit-meals-buttons">
                                     <button data-id="{{$user->id}}" class="edit-user-open-btn btn btn-danger btn-sm"
                                             type="submit"
@@ -50,19 +50,32 @@
                         @endforeach
                     @endif
                     @if(auth()->user()->role == 'manager')
+                        <table class="manager-users-table">
+                            <div class="hidden user-edit-success-message" id="user_edit_success_message"></div>
+                            <thead>
+                            <tr>
+                                <th class="id-table-home-header"><label>ID</label></th>
+                                <th><label>Name</label></th>
+                                <th><label>Username</label></th>
+                                <th><label>Email</label></th>
+                                <th class="add-meal-table-header"><span>Actions</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
                         @foreach ($usersManager as $key => $user)
-                            <tr id="meal_{{$user->id}}">
+                            <tr class="admin-table-row-user" id="user_{{$user->id}}">
                                 <td class="id-table-home-header" data-label="ID">{{$user->id}}</td>
                                 <td data-label="Meal">{{$user->name}}</td>
                                 <td data-label="Calories">{{$user->username}}</td>
                                 <td data-label="Date">{{$user->email}}</td>
-                                <td class="home-edit-meals-buttons">
-                                    <button data-id="{{$user->id}}" onclick="editMeal({{$user->id}})"
-                                            class="edit-meal-open-btn btn btn-danger btn-sm" type="submit"
-                                    >Edit meal
+                                <td class="manager-edit-user-buttons">
+                                    <button data-id="{{$user->id}}" class="manager-user-button edit-user-open-btn btn btn-danger btn-sm"
+                                            type="submit"
+                                    >Edit user
                                     </button>
-                                    <button data-row="{{$key}}" onclick="deleteMeal({{$user->id}})" data-id="{{$user->id}}"
-                                            class="delete-meal-open-btn btn btn-danger btn-sm">Delete
+                                    <button data-row="{{$key}}" data-id="{{$user->id}}"
+                                            class="manager-user-button delete-user-btn btn btn-danger btn-sm">Delete
                                     </button>
                                 </td>
                             </tr>
@@ -190,32 +203,6 @@
                     </div>
                 </div>
             </div>
-
-            {{--            <script>--}}
-            {{--                $(document).ready(function(){--}}
-            {{--                    $.ajaxSetup({ cache: false });--}}
-            {{--                    $('#search').keyup(function(){--}}
-            {{--                        $('#result').html('');--}}
-            {{--                        $('#state').val('');--}}
-            {{--                        var searchField = $('#search').val();--}}
-            {{--                        var expression = new RegExp(searchField, "i");--}}
-            {{--                        $.getJSON('data.json', function(data) {--}}
-            {{--                            $.each(data, function(key, value){--}}
-            {{--                                if (value.name.search(expression) != -1 || value.location.search(expression) != -1)--}}
-            {{--                                {--}}
-            {{--                                    $('#result').append('<li class="list-group-item link-class"><img src="'+value.image+'" height="40" width="40" class="img-thumbnail" /> '+value.name+' | <span class="text-muted">'+value.location+'</span></li>');--}}
-            {{--                                }--}}
-            {{--                            });--}}
-            {{--                        });--}}
-            {{--                    });--}}
-
-            {{--                    $('#result').on('click', 'li', function() {--}}
-            {{--                        var click_text = $(this).text().split('|');--}}
-            {{--                        $('#search').val($.trim(click_text[0]));--}}
-            {{--                        $("#result").html('');--}}
-            {{--                    });--}}
-            {{--                });--}}
-            {{--            </script>--}}
 
             @endsection
 

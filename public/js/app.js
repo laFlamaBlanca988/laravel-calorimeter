@@ -440,8 +440,12 @@ if (spanEdit) {
 
 window.addEventListener('click', function (e) {
   if (e.target == addMealModal || e.target == editModal || e.target == deleteModal) {
-    addMealModal.style.display = "none";
     editModal.style.display = 'none';
+
+    if (addMealModal) {
+      addMealModal.style.display = "none";
+    }
+
     deleteModal.style.display = 'none';
   }
 }); // EDIT BUTTON LISTENER

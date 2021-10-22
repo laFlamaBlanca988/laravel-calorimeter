@@ -148,7 +148,6 @@ tbody tr:nth-child(odd) {
         justify-content: space-between;
         margin: auto;
         padding-left: 0;
-
     }
     .edit-meal-open-btn,
     .delete-meal-open-btn {

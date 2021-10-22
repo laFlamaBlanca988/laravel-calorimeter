@@ -22,8 +22,10 @@ ul.components a {
     justify-content: center;
     margin-top: 5rem;
 }
+
 .admin-edit-meals-buttons {
-    padding: 0;
+    display: flex;
+    justify-content: space-between;
 }
 /*USERS TABLE*/
 .users-table-container,
@@ -85,7 +87,7 @@ ul.components a {
     animation-duration: 0.4s
 }
 .user-edit-success-message {
-    transform: translateY(10rem);
+
 }
 .edit-meals-success-message {
     transform: translateY(10rem);
@@ -100,4 +102,47 @@ ul.components a {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
+@media screen and (max-width: 1200px) {
+    .admin-edit-meals-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+@media screen and (max-width: 1050px) {
+    .admin-edit-meals-buttons {
+        flex-direction: column;
+        width: 50%;
+        margin: auto;
+    }
+}
 
+
+
+
+
+
+/*MANAGER*/
+.manager-users-table {
+    margin-top: 8rem;
+    width: 70%;
+}
+.manager-edit-user-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.manager-user-button {
+    width: 8rem;
+}
+@media screen and (max-width: 1180px) {
+    .manager-edit-user-buttons {
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 1050px) {
+    .manager-edit-user-buttons {
+        flex-direction: row;
+        justify-content: center;
+        padding-left: 0;
+    }
+}

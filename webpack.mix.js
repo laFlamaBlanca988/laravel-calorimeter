@@ -21,3 +21,6 @@ mix.styles([
     'resources/css/userEdit.css',
     'resources/css/welcome.css',
 ], 'public/css/app.css');
+
+
+mix.browserSync('http://calorimeter/');
