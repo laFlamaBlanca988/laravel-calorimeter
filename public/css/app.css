@@ -761,16 +761,6 @@ body {
     display: flex;
     padding: 0;
 }
-/*td {*/
-/*    text-align: center;*/
-/*}*/
-/*th {*/
-/*    text-align: center;*/
-/*}*/
-/*tr {*/
-/*    border: 1px solid black;*/
-
-/*}*/
 h4 {
     font-size: 1.17em;
     font-weight: bold;
@@ -797,8 +787,24 @@ li, a, i, span {
     text-decoration : none;
     color           : inherit;
 }
+
+.pagination > li > a,
+.pagination > li > span{
+    height:35%;
+    display:flex;
+    margin-top: 2rem;
+    align-items:center;
+}
 .page-link {
-    height: 1rem;
+    color: #000000 !important;
+    background-color: white !important;
+    border: 1px solid white !important;
+    opacity: 0.7;
+}
+.active {
+    font-size: 1.5rem;
+    text-decoration: underline;
+    opacity: 1;
 }
 
 
@@ -936,8 +942,7 @@ li, a, i, span {
     padding: 1.5rem 1.5rem 0;
     max-width: 40rem;
     border-radius: 10px;
-    background-color: rgba(234, 230, 219, 0.92);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow:  hsl(0, 0%, 0%) 0 5px 15px;
 }
 
 .reg-form label {

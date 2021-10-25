@@ -141,20 +141,11 @@ class AdminController extends Controller
         if($request->ajax()){
             $meal = new Meal;
             $meals = $meal->getAllMeals();
-            return view('pages.adminMealsPagination', compact('meals'))->render();
+            return view('pages.adminMealsPagination', compact('meals'));
         }
         return response()->json([
             'status' => 400,
             'message' => 'Something went wrong. Please try again later.'
         ]);
-    }
-
-    public function userSearch(Request $request) {
-        $users = new User;
-        $userName = $request->json()->get('name');
-        $user = $users->searchUserByName($userName);
-        if ($user) {
-            return response()->json(['status' => 200, 'user' => $user]);
-        }
     }
 }

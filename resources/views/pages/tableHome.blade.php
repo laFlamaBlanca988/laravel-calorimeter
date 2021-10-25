@@ -32,11 +32,9 @@
     @endforeach
     </tbody>
 </table>
-
 <div id="pagination_buttons" class="d-flex justify-content-center">
     {!! $data->links() !!}
 </div>
-
 <script>
     $('#pagination_buttons a').on('click', function (event) {
         event.preventDefault();
